@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Submit Project - {{ module.title }}{% endblock %}
+
+{% block content %}
+<div class="submission-page">
+    <div class="submission-header">
+        <h1>Submit Your Project</h1>
+        <h2>{{ module.project.name }}</h2>
+    </div>
+
+    <div class="project-info">
+        <div class="info-box">
+            <h3>📋 Project Requirements</h3>
+            <ul>
+                {% for req in module.project.requirements %}
+                    <li>{{ req }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>📝 Submission Guidelines</h3>
+            <ul>
+                <li>Submit a single .py file</li>
+                <li>Make sure your code runs without errors</li>
+                <li>Include comments to explain your logic</li>
+                <li>Test your code thoroughly before submission</li>
+                <li>Maximum file size: 1MB</li>
+            </ul>
+        </div>
+    </div>
+
+    {% if progress.attempts > 0 %}
+        <div class="attempts-info">
+            <p>Previous attempts: {{ progress.attempts }}</p>
+            {% if progress.get('last_submission') %}
+                <p>Last submission: {{ progress.last_submission }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="upload-section">
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="file-input-wrapper">
+                <label for="file" class="file-label">
+                    <span class="file-icon">📁</span>
+                    <span class="file-text">Choose Python File (.py)</span>
+                </label>
+                <input type="file" id="file" name="file" accept=".py" required>
+                <div id="file-name" class="file-name-display"></div>
+            </div>
+
+            <div class="submission-actions">
+                <a href="{{ url_for('module', module_id=module_id) }}" class="btn btn-secondary">
+                    Back to Module
+                </a>
+                <button type="submit" class="btn btn-primary">Submit for Testing</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="warning-box">
+        <h4>⚠️ Important</h4>
+        <p>Your submission will be automatically tested. Make sure your code:</p>
+        <ul>
+            <li>Meets all project requirements</li>
+            <li>Runs without syntax errors</li>
+            <li>Produces the expected output</li>
+            <li>Handles user input correctly</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Display selected file name
+    document.getElementById('file').addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name || 'No file selected';
+        document.getElementById('file-name').textContent = fileName;
+    });
+</script>
+{% endblock %}

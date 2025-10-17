@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Test Results - {{ module.project.name }}{% endblock %}
+
+{% block content %}
+<div class="results-page">
+    <div class="results-header">
+        <h1>Test Results</h1>
+        <h2>{{ module.project.name }}</h2>
+    </div>
+
+    <div class="results-summary {% if results.passed %}passed{% else %}failed{% endif %}">
+        <div class="result-icon">
+            {% if results.passed %}
+                <span class="success-icon">✓</span>
+            {% else %}
+                <span class="fail-icon">✗</span>
+            {% endif %}
+        </div>
+        <div class="result-text">
+            <h2>{{ "PASSED!" if results.passed else "FAILED" }}</h2>
+            <p class="score">Score: {{ results.score }} ({{ results.percentage }}%)</p>
+            <p class="message">{{ results.message }}</p>
+        </div>
+    </div>
+
+    <div class="test-details">
+        <h3>Detailed Test Results</h3>
+
+        {% for test in results.tests %}
+            <div class="test-item {% if test.passed %}test-pass{% else %}test-fail{% endif %}">
+                <div class="test-status">
+                    {% if test.passed %}
+                        <span class="test-icon">✓</span>
+                    {% else %}
+                        <span class="test-icon">✗</span>
+                    {% endif %}
+                </div>
+                <div class="test-content">
+                    <h4>{{ test.test }}</h4>
+                    <p>{{ test.message }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="results-actions">
+        {% if results.passed %}
+            <a href="{{ url_for('progress_page') }}" class="btn btn-primary">
+                View Progress
+            </a>
+            {% if module_id < 3 %}
+                <a href="{{ url_for('module', module_id=module_id + 1) }}" class="btn btn-success">
+                    Continue to Module {{ module_id + 1 }}
+                </a>
+            {% endif %}
+        {% else %}
+            <a href="{{ url_for('submission', module_id=module_id) }}" class="btn btn-primary">
+                Try Again
+            </a>
+            <a href="{{ url_for('module', module_id=module_id) }}" class="btn btn-secondary">
+                Back to Module
+            </a>
+        {% endif %}
+    </div>
+
+    {% if not results.passed %}
+        <div class="help-box">
+            <h4>💡 Tips for Success</h4>
+            <ul>
+                <li>Review the failed tests carefully</li>
+                <li>Check that all requirements are met</li>
+                <li>Test your code manually before submission</li>
+                <li>Make sure there are no syntax errors</li>
+                <li>Review the module content if needed</li>
+            </ul>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

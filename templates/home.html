@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Python Classroom{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to Python Classroom</h1>
+    <p class="subtitle">Your Journey into the World of Python</p>
+
+    <div class="welcome-text">
+        <p>Welcome. You are about to embark on a journey that is both challenging and profoundly rewarding.
+        Learning to code is like learning a new language—not a language for speaking to people, but a
+        language for instructing machines.</p>
+
+        <p>This is your hands-on bootcamp. You will write code, solve problems, and build projects from
+        the very beginning.</p>
+    </div>
+
+    <div class="modules-overview">
+        <h2>What You'll Learn</h2>
+        <div class="module-cards">
+            <div class="module-card">
+                <div class="module-number">1</div>
+                <h3>Python Fundamentals</h3>
+                <p>Variables, data types, control flow, loops, and data structures</p>
+                <div class="project-tag">Project: Number Guessing Game</div>
+            </div>
+            <div class="module-card">
+                <div class="module-number">2</div>
+                <h3>Structured Programming</h3>
+                <p>Functions, scope, error handling, and file I/O</p>
+                <div class="project-tag">Project: Contact Book App</div>
+            </div>
+            <div class="module-card">
+                <div class="module-number">3</div>
+                <h3>Advanced Concepts</h3>
+                <p>OOP, third-party libraries, and professional tools</p>
+                <div class="project-tag">Project: Web Scraper</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="start-form">
+        <h2>Ready to Begin?</h2>
+        <form method="POST" action="{{ url_for('start') }}">
+            <div class="form-group">
+                <label for="student_name">Enter your name:</label>
+                <input type="text" id="student_name" name="student_name" required
+                       placeholder="Your Name" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Start Learning</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

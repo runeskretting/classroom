@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}{{ module.title }} - Python Classroom{% endblock %}
+
+{% block content %}
+<div class="module-page">
+    <div class="module-header">
+        <div class="breadcrumb">
+            <a href="{{ url_for('progress_page') }}">My Progress</a> &gt; Module {{ module_id }}
+        </div>
+        <h1>{{ module.title }}</h1>
+        <p class="objective">{{ module.objective }}</p>
+    </div>
+
+    <div class="module-content">
+        <div class="status-badges">
+            {% if progress.quiz_passed %}
+                <span class="badge badge-success">✓ Quiz Passed</span>
+            {% else %}
+                <span class="badge badge-pending">Quiz: Not Completed</span>
+            {% endif %}
+
+            {% if progress.project_passed %}
+                <span class="badge badge-success">✓ Project Passed</span>
+            {% else %}
+                <span class="badge badge-pending">Project: Not Completed</span>
+            {% endif %}
+        </div>
+
+        <section class="topics-section">
+            <h2>📚 Topics Covered</h2>
+            <ul class="topics-list">
+                {% for topic in module.topics %}
+                    <li>{{ topic }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="project-section">
+            <h2>🎯 Capstone Project: {{ module.project.name }}</h2>
+            <p>{{ module.project.description }}</p>
+
+            <h3>Requirements:</h3>
+            <ul class="requirements-list">
+                {% for req in module.project.requirements %}
+                    <li>{{ req }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <div class="action-buttons">
+            {% if not progress.quiz_passed %}
+                <a href="{{ url_for('quiz', module_id=module_id) }}" class="btn btn-primary">
+                    Take the Quiz
+                </a>
+                <p class="help-text">Complete the quiz to unlock project submission (75% required to pass)</p>
+            {% elif not progress.project_passed %}
+                <a href="{{ url_for('submission', module_id=module_id) }}" class="btn btn-primary">
+                    Submit Your Project
+                </a>
+                <p class="help-text">Upload your Python file for automated testing</p>
+                {% if progress.attempts > 0 %}
+                    <p class="info-text">Attempts: {{ progress.attempts }}</p>
+                {% endif %}
+            {% else %}
+                <div class="completed-message">
+                    <h3>✓ Module Complete!</h3>
+                    <p>You have successfully completed all requirements for this module.</p>
+                    {% if module_id < 3 %}
+                        <a href="{{ url_for('module', module_id=module_id + 1) }}" class="btn btn-primary">
+                            Continue to Module {{ module_id + 1 }}
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('progress_page') }}" class="btn btn-primary">
+                            View Final Progress
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
