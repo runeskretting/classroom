@@ -12,7 +12,17 @@
       "mcp__chrome-devtools__click",
       "Bash(cat /home/rune/Development/Python/classroom/data/student_progress.json)",
       "mcp__chrome-devtools__take_screenshot",
-      "mcp__chrome-devtools__evaluate_script"
+      "mcp__chrome-devtools__evaluate_script",
+      "mcp__sequential-thinking__sequentialthinking",
+      "Read(///**)",
+      "Bash(source venv/bin/activate)",
+      "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(''✅ App initialized successfully''); print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 1 exists: {1 in MODULES}''); if 1 in MODULES: print(f''✅ Module 1 title: {MODULES[1].get(\"\"title\"\")}'')\")",
+      "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(''✅ App initialized successfully''); print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 1 exists: {1 in MODULES}''); print(f''✅ Module 1 title: {MODULES[1].get(\"\"title\"\")}'' if 1 in MODULES else ''❌ Module 1 not found'')\")",
+      "Bash(cat modules/module_001.json)",
+      "Bash(venv/bin/python3 testers/module001_tester.py /tmp/test_day1.py)",
+      "Bash(venv/bin/python3 testers/module002_tester.py /tmp/test_day2.py)",
+      "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(f''✅ App initialized successfully''); print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 2 exists: {2 in MODULES}''); print(f''✅ Module 2 title: {MODULES[2].get(\"\"title\"\")}'' if 2 in MODULES else ''❌ Module 2 not found'')\")",
+      "Bash(venv/bin/python3 -c \"import json; data = json.load(open(''modules/module_002.json'')); print(''✅ JSON is valid''); print(f''✅ Module ID: {data[\"\"id\"\"]}''); print(f''✅ Title: {data[\"\"title\"\"]}''); print(f''✅ Quiz questions: {len(data[\"\"quiz\"\"])}''); print(f''✅ Instructional sections: {len(data[\"\"instructional_content\"\"][\"\"sections\"\"])}''); print(f''✅ Project requirements: {len(data[\"\"project\"\"][\"\"requirements\"\"])}'')\")"
     ],
     "deny": [],
     "ask": []

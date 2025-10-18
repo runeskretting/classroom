@@ -1,0 +1,118 @@
+{
+  "id": 2,
+  "day": 2,
+  "category": "Setup & Fundamentals",
+  "title": "Day 2: Strings and Manipulation",
+  "objective": "Master string manipulation techniques including concatenation, length calculation, indexing, and slicing to work effectively with text data in Python.",
+  "topics": [
+    "String Creation and Quotes",
+    "String Concatenation",
+    "len() Function",
+    "String Indexing (Positive and Negative)",
+    "String Slicing"
+  ],
+  "core_concepts": [
+    "String Concatenation",
+    "len() Function",
+    "String Indexing",
+    "String Slicing"
+  ],
+  "instructional_content": {
+    "intro": "Welcome to Day 2! Today you'll learn one of the most important skills in programming: working with text (strings). You'll discover how to combine strings, measure their length, access specific characters, and extract portions of text. These fundamental skills are used in nearly every Python program you'll ever write.",
+    "sections": [
+      {
+        "title": "What Are Strings?",
+        "content": "A **string** is a sequence of characters - letters, numbers, symbols, spaces, or even emojis! Strings are one of the most common data types in programming because so much of what we do involves text.\n\nIn Python, you create strings by enclosing text in either single quotes ('...') or double quotes (\"...\"). Both work identically, so choose whichever you prefer or whichever makes your code clearer.\n\n**Important**: The quotes are not part of the string itself - they just tell Python where the string begins and ends.",
+        "code": "# Creating strings with single quotes\ngreeting = 'Hello, World!'\n\n# Creating strings with double quotes\nname = \"Alice\"\n\n# Both work the same way\nprint(greeting)\nprint(name)"
+      },
+      {
+        "title": "String Concatenation - Joining Strings Together",
+        "content": "**Concatenation** means joining strings together to create a new, longer string. In Python, you use the **+ operator** to concatenate strings, just like adding numbers - but instead of adding values, you're combining text.\n\nYou can concatenate as many strings as you want by chaining multiple + operations together. Just remember: Python doesn't add spaces automatically, so if you want spaces between words, you need to include them!",
+        "code": "# Basic concatenation\nfirst_name = \"John\"\nlast_name = \"Doe\"\nfull_name = first_name + \" \" + last_name\nprint(full_name)  # Output: John Doe\n\n# Concatenating multiple strings\ngreeting = \"Hello\" + \", \" + \"my name is \" + first_name\nprint(greeting)  # Output: Hello, my name is John\n\n# Building sentences\nmessage = \"Python \" + \"is \" + \"awesome!\"\nprint(message)  # Output: Python is awesome!"
+      },
+      {
+        "title": "The len() Function - Counting Characters",
+        "content": "The **len()** function tells you how many characters are in a string. This is incredibly useful for validation, formatting, and many other tasks.\n\nThe len() function counts every character, including spaces, punctuation, and even special characters. An empty string \"\" has a length of 0.",
+        "code": "# Finding the length of strings\nname = \"Alice\"\nprint(len(name))  # Output: 5\n\ncity = \"San Francisco\"\nprint(len(city))  # Output: 13 (includes the space!)\n\n# Empty string has length 0\nempty = \"\"\nprint(len(empty))  # Output: 0\n\n# Using len() in messages\npassword = \"secure123\"\nprint(\"Your password is\", len(password), \"characters long.\")"
+      },
+      {
+        "title": "String Indexing - Accessing Individual Characters",
+        "content": "Each character in a string has a position called an **index**. In Python (and most programming languages), counting starts at **0**, not 1!\n\n**Positive indices** count from the beginning:\n- Index 0 = first character\n- Index 1 = second character\n- Index 2 = third character, etc.\n\n**Negative indices** count backwards from the end:\n- Index -1 = last character\n- Index -2 = second-to-last character\n- Index -3 = third-to-last character, etc.\n\nTo access a character at a specific index, use square brackets: string[index]",
+        "code": "word = \"Python\"\n\n# Positive indexing (counting from start)\nprint(word[0])   # Output: P (first character)\nprint(word[1])   # Output: y (second character)\nprint(word[5])   # Output: n (sixth character)\n\n# Negative indexing (counting from end)\nprint(word[-1])  # Output: n (last character)\nprint(word[-2])  # Output: o (second-to-last)\nprint(word[-6])  # Output: P (first character, another way)\n\n# Practical use: getting first and last letters\nname = \"Elizabeth\"\nfirst_letter = name[0]\nlast_letter = name[-1]\nprint(\"First:\", first_letter)  # Output: First: E\nprint(\"Last:\", last_letter)    # Output: Last: h"
+      },
+      {
+        "title": "String Slicing - Extracting Substrings",
+        "content": "**Slicing** lets you extract a portion of a string (a substring) by specifying a range of indices. The syntax is:\n\n**string[start:end]**\n\nImportant rules:\n- **start** is inclusive (included in the result)\n- **end** is exclusive (NOT included in the result)\n- If you omit **start**, slicing begins at the beginning\n- If you omit **end**, slicing goes to the end\n- You can use negative indices in slices too!\n\nYou can also specify a **step** value: string[start:end:step]",
+        "code": "text = \"Python Programming\"\n\n# Basic slicing: [start:end]\nprint(text[0:6])    # Output: Python (characters 0-5)\nprint(text[7:18])   # Output: Programming\n\n# Omitting start or end\nprint(text[:6])     # Output: Python (from beginning to index 6)\nprint(text[7:])     # Output: Programming (from index 7 to end)\nprint(text[:])      # Output: Python Programming (entire string)\n\n# Using negative indices\nprint(text[-11:])   # Output: Programming (last 11 characters)\nprint(text[:-12])   # Output: Python (everything except last 12)\n\n# Using step (every 2nd character)\nprint(text[::2])    # Output: Pto rgamn\n\n# Practical examples\nsentence = \"Hello, World!\"\nfirst_word = sentence[0:5]      # \"Hello\"\nlast_word = sentence[7:12]      # \"World\"\nprint(first_word, \"and\", last_word)"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question": "What is the result of: 'Hello' + ' ' + 'World'?",
+      "options": [
+        "HelloWorld",
+        "Hello World",
+        "Hello + World",
+        "Error: cannot add strings"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "What does len('Python') return?",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "Error: len() doesn't work with strings"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "Given the string word = 'Hello', what is word[0] and word[-1]?",
+      "options": [
+        "H and o",
+        "H and l",
+        "e and o",
+        "0 and -1"
+      ],
+      "correct_answer": 0
+    },
+    {
+      "question": "What does 'Programming'[0:4] return?",
+      "options": [
+        "Prog",
+        "Progr",
+        "Program",
+        "Programming"
+      ],
+      "correct_answer": 0
+    },
+    {
+      "question": "Which of the following extracts the last 3 characters of the string text = 'Python'?",
+      "options": [
+        "text[3:6]",
+        "text[-3:]",
+        "text[3:]",
+        "All of the above"
+      ],
+      "correct_answer": 3
+    }
+  ],
+  "project": {
+    "name": "String Manipulation Showcase",
+    "description": "Create a Python program that demonstrates your understanding of string manipulation by taking user input and performing various string operations including concatenation, length calculation, indexing, and slicing.",
+    "requirements": [
+      "Use input() to get at least 2 different strings from the user (e.g., name and city, or any other text)",
+      "Use string concatenation (+) to combine strings and display a formatted message",
+      "Use len() to display the length of at least one string",
+      "Use indexing to display specific characters (such as first letter, last letter, or any specific position)",
+      "Use slicing to extract and display a substring (such as first 3 letters, last 2 letters, or middle portion)",
+      "Include at least 3 comments explaining what your code does",
+      "Display all results with clear, formatted output messages"
+    ],
+    "starter_code": "# Your Name: _______\n# Day 2 Project: String Manipulation Showcase\n\n# TODO: Get user input for at least 2 strings\n\n# TODO: Demonstrate string concatenation\n\n# TODO: Show the length of a string using len()\n\n# TODO: Display specific characters using indexing\n\n# TODO: Extract a substring using slicing\n\n# TODO: Display all results with clear formatting\n",
+    "expected_output_example": "Enter your first name: Alice\nEnter your city: Boston\n\nYour name is Alice\nYour city is Boston\nCombined: Alice from Boston\n\nName length: 5 characters\nFirst letter of name: A\nLast letter of city: n\n\nFirst 3 letters of name: Ali\nLast 3 letters of city: ton",
+    "tester_file": "module002_tester.py"
+  }
+}

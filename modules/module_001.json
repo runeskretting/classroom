@@ -1,0 +1,101 @@
+{
+  "id": 1,
+  "day": 1,
+  "category": "Setup & Fundamentals",
+  "title": "Day 1: Your First Program - Hello, World!",
+  "objective": "Learn to write and execute your first Python program, understand the print() function, and write comments.",
+  "topics": [
+    "Python Installation",
+    "IDE/Editor Setup (VS Code)",
+    "print() function",
+    "Code Execution",
+    "Comments"
+  ],
+  "core_concepts": [
+    "Python Installation",
+    "IDE/Editor Setup",
+    "print() function",
+    "Code Execution"
+  ],
+  "instructional_content": {
+    "intro": "Welcome to your first day of Python programming! Today marks the beginning of your coding journey. You'll write your first program, see it run, and understand the fundamental tools you'll use every day as a developer.",
+    "sections": [
+      {
+        "title": "Hello, World! - Your First Program",
+        "content": "Tradition dictates that the first program in any new language should display the message \"Hello, World!\". This simple act provides an immediate sense of accomplishment and confirms that your setup is working correctly. In Python, this is incredibly straightforward.\n\nThe print() function is a built-in Python command that outputs whatever you put inside the parentheses to the console. The text \"Hello, World!\" is called a **string**, which is simply a sequence of characters.",
+        "code": "print(\"Hello, World!\")"
+      },
+      {
+        "title": "Understanding Comments",
+        "content": "Comments are notes in your code that Python ignores when running your program. They're for humans to read - including your future self! Comments help explain what your code does and why you wrote it that way.\n\nIn Python, comments start with the # symbol. Everything after # on that line is a comment.",
+        "code": "# This is a comment. The computer ignores it.\n# It's for humans to read.\nprint(\"Hello, World!\")  # This is an inline comment"
+      },
+      {
+        "title": "Running Your Program",
+        "content": "To run a Python program:\n\n1. Save your code in a file with a .py extension (e.g., hello.py)\n2. Open your terminal or command prompt\n3. Navigate to the folder containing your file\n4. Type: python hello.py (or python3 hello.py on some systems)\n5. Press Enter\n\nYou should see your output displayed in the terminal!",
+        "code": "# Save this as hello.py\nprint(\"Hello, World!\")\nprint(\"I'm learning Python!\")"
+      },
+      {
+        "title": "Multiple Print Statements",
+        "content": "You can use multiple print() statements to display several lines of output. Each print() statement creates a new line by default.",
+        "code": "print(\"Welcome to Python!\")\nprint(\"This is Day 1.\")\nprint(\"Let's learn together!\")"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question": "What is the purpose of the print() function in Python?",
+      "options": [
+        "To store data in variables",
+        "To display output to the console",
+        "To create comments in code",
+        "To execute mathematical operations"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "What symbol is used to create a comment in Python?",
+      "options": [
+        "//",
+        "/*",
+        "#",
+        "--"
+      ],
+      "correct_answer": 2
+    },
+    {
+      "question": "What will this code output?\nprint(\"Hello\")\nprint(\"World\")",
+      "options": [
+        "Hello World",
+        "Hello\\nWorld (on two lines)",
+        "HelloWorld",
+        "Error"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "Which of the following is a valid Python print statement?",
+      "options": [
+        "print Hello",
+        "print(Hello)",
+        "print(\"Hello\")",
+        "print[\"Hello\"]"
+      ],
+      "correct_answer": 2
+    }
+  ],
+  "project": {
+    "name": "Personal Greeting Program",
+    "description": "Create a Python program that displays a personalized greeting message with multiple lines of output.",
+    "requirements": [
+      "Use at least 3 print() statements",
+      "Include at least 2 comments explaining what your code does",
+      "Display your name in one of the print statements",
+      "Display a fun fact about yourself in another print statement",
+      "Use proper formatting and indentation"
+    ],
+    "starter_code": "# Your Name: _______\n# Day 1 Project: Personal Greeting\n\n# TODO: Add your code below\n",
+    "expected_output_example": "Hello! My name is Alice.\nI'm learning Python programming.\nFun fact: I love solving puzzles!",
+    "tester_file": "module001_tester.py"
+  }
+}
