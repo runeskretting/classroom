@@ -27,7 +27,9 @@
       "Bash(lsof -ti:5000)",
       "Bash(xargs kill -9)",
       "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(f''✅ App initialized successfully''); print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 3 exists: {3 in MODULES}''); print(f''✅ Module 3 title: {MODULES[3].get(\"\"title\"\")}'' if 3 in MODULES else ''❌ Module 3 not found'')\")",
-      "Bash(venv/bin/python3 testers/module003_tester.py /tmp/test_day3.py)"
+      "Bash(venv/bin/python3 testers/module003_tester.py /tmp/test_day3.py)",
+      "Bash(xargs -r kill -9)",
+      "Bash(venv/bin/python3 app.py)"
     ],
     "deny": [],
     "ask": []

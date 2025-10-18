@@ -620,7 +620,7 @@ def quiz(module_id):
 
         for i, question in enumerate(module_quiz):
             student_answer = int(answers.get(f'q{i}', -1))
-            if student_answer == question['correct']:
+            if student_answer == question['correct_answer']:
                 correct_count += 1
 
         percentage = int((correct_count / len(module_quiz)) * 100)
