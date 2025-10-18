@@ -201,7 +201,12 @@ def load_progress():
     progress_file = 'data/student_progress.json'
     if os.path.exists(progress_file):
         with open(progress_file, 'r') as f:
-            return json.load(f)
+            data = json.load(f)
+            # Convert string keys back to integers for modules
+            for student in data.values():
+                if 'modules' in student and isinstance(student['modules'], dict):
+                    student['modules'] = {int(k): v for k, v in student['modules'].items()}
+            return data
     return {}
 
 
