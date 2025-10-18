@@ -1,0 +1,130 @@
+{
+  "id": 7,
+  "day": 7,
+  "category": "Control Flow",
+  "title": "Day 7: Loops - while and for",
+  "objective": "Master the art of repetition in programming by learning while loops and for loops with range(). Understand how to use break and continue statements to control loop execution, and learn common loop patterns for counting, accumulation, and iteration.",
+  "topics": [
+    "Introduction to Loops",
+    "while Loops",
+    "Loop Control: break and continue",
+    "for Loops with range()",
+    "Counting and Accumulation Patterns",
+    "Avoiding Infinite Loops"
+  ],
+  "core_concepts": [
+    "while Loops",
+    "for Loops",
+    "Loop Control Statements",
+    "Iteration Patterns"
+  ],
+  "instructional_content": {
+    "intro": "Welcome to Day 7! Today you'll learn one of the most powerful concepts in programming: loops. Loops allow you to repeat code multiple times without writing it over and over. Whether you need to process a list of items, validate user input until it's correct, or count from 1 to 100, loops make it possible. By the end of this lesson, you'll understand both while loops (which repeat as long as a condition is true) and for loops (which repeat a specific number of times), plus how to control their execution with break and continue.",
+    "sections": [
+      {
+        "title": "What Are Loops? - The Power of Repetition",
+        "content": "**Loops** are programming constructs that repeat a block of code multiple times. Instead of writing the same code over and over, you write it once and let the loop repeat it.\n\n**Why Loops Matter:**\n- They save time and reduce code duplication\n- They make your code more maintainable (change once, affects all iterations)\n- They allow you to process collections of data\n- They enable interactive programs that run until a condition is met\n- They're essential for almost every real-world program\n\n**Two Main Types of Loops:**\n\n1. **while loop**: Repeats as long as a condition is True\n   - Use when you don't know how many times to repeat\n   - Example: Keep asking for input until user enters valid data\n\n2. **for loop**: Repeats a specific number of times\n   - Use when you know how many iterations you need\n   - Example: Print numbers from 1 to 10\n\n**Real-World Analogies:**\n- While loop: \"Keep stirring the sauce while it's not thick enough\"\n- For loop: \"Do 20 jumping jacks\" (you know the exact count)",
+        "code": "# Without loops - repetitive and inflexible\nprint(\"Hello 1\")\nprint(\"Hello 2\")\nprint(\"Hello 3\")\nprint(\"Hello 4\")\nprint(\"Hello 5\")\n# What if you need to print 100 times? Terrible approach!\n\n# With a for loop - elegant and flexible\nfor i in range(1, 6):\n    print(f\"Hello {i}\")\n# Same result, but can easily change to 100 iterations\n\n# While loop example - repeats until condition is False\ncount = 1\nwhile count <= 5:\n    print(f\"Count: {count}\")\n    count += 1\n# Output: Count: 1, Count: 2, Count: 3, Count: 4, Count: 5"
+      },
+      {
+        "title": "while Loops - Repeat While a Condition is True",
+        "content": "A **while loop** repeats a block of code as long as its condition is True. It checks the condition before each iteration.\n\n**Syntax:**\n```python\nwhile condition:\n    # Code to repeat\n    # Must eventually make condition False!\n```\n\n**How it works:**\n1. Check if condition is True\n2. If True: Execute the indented code block\n3. Go back to step 1\n4. If False: Skip the loop and continue with the rest of the program\n\n**Critical: Avoid Infinite Loops!**\nYou MUST change something inside the loop that eventually makes the condition False. Otherwise, your program will run forever.\n\n**Common Uses:**\n- Input validation (repeat until user enters valid data)\n- Game loops (play until player quits or loses)\n- Countdown timers\n- Processing data until a specific condition is met\n\n**Loop Counter Pattern:**\nOften you'll use a counter variable that you increment or decrement each iteration.",
+        "code": "# Basic while loop with counter\ncount = 1\nwhile count <= 5:\n    print(f\"Iteration {count}\")\n    count += 1  # CRUCIAL: increment or loop runs forever!\n# Output: Iteration 1, 2, 3, 4, 5\n\n# Countdown timer\ncountdown = 5\nwhile countdown > 0:\n    print(f\"T-minus {countdown}...\")\n    countdown -= 1\nprint(\"Blast off!\")\n# Output: T-minus 5, 4, 3, 2, 1, Blast off!\n\n# User input validation\npassword = \"\"\nwhile password != \"secret\":\n    password = input(\"Enter password: \")\n    if password != \"secret\":\n        print(\"Wrong password! Try again.\")\nprint(\"Access granted!\")\n# Keeps asking until user enters \"secret\"\n\n# Accumulation pattern - sum numbers\ntotal = 0\nnum = 1\nwhile num <= 10:\n    total += num  # Add current number to total\n    num += 1\nprint(f\"Sum of 1-10: {total}\")  # Output: 55\n\n# Condition based on calculation\nbalance = 1000\nyear = 0\ninterest_rate = 0.05\n\nwhile balance < 2000:\n    balance += balance * interest_rate\n    year += 1\nprint(f\"It takes {year} years to double your money\")\n\n# User-controlled loop\nplaying = True\nwhile playing:\n    choice = input(\"Do you want to continue? (yes/no): \")\n    if choice.lower() == \"no\":\n        playing = False  # Exit condition\nprint(\"Thanks for playing!\")\n\n# DANGER: Infinite loop example (don't run this!)\n# count = 1\n# while count <= 5:\n#     print(count)\n#     # Forgot to increment count! Infinite loop!\n\n# Processing items until we find what we're looking for\nnumbers = [3, 7, 2, 9, 14, 5]\nindex = 0\nfound = False\n\nwhile index < len(numbers) and not found:\n    if numbers[index] > 10:\n        print(f\"Found number greater than 10: {numbers[index]}\")\n        found = True\n    index += 1"
+      },
+      {
+        "title": "Loop Control: break and continue",
+        "content": "**break** and **continue** are special statements that give you fine-grained control over loop execution.\n\n**break Statement:**\n- Immediately exits the loop completely\n- No more iterations happen\n- Program continues after the loop\n- Use when you've found what you're looking for or need to stop early\n\n**continue Statement:**\n- Skips the rest of the current iteration\n- Jumps back to the start of the loop for the next iteration\n- The loop continues running\n- Use when you want to skip certain cases\n\n**When to Use Each:**\n- **break**: Search loops (found what you need), error conditions, user wants to quit\n- **continue**: Skip invalid data, skip certain values, filter items\n\n**Best Practice:**\nUse break and continue sparingly. Often you can restructure your code to avoid them, making it more readable. But they're very useful in specific situations.",
+        "code": "# break - exit loop early\ncount = 1\nwhile count <= 10:\n    if count == 5:\n        print(\"Found 5! Breaking out.\")\n        break  # Exit loop immediately\n    print(count)\n    count += 1\nprint(\"Loop ended\")\n# Output: 1, 2, 3, 4, Found 5! Breaking out., Loop ended\n# Never prints 6-10\n\n# break - search example\nnumbers = [3, 7, 12, 5, 18, 9]\nfor num in numbers:\n    if num > 10:\n        print(f\"First number > 10: {num}\")\n        break  # Found it, no need to continue\n# Output: First number > 10: 12\n\n# break - user wants to quit\nwhile True:  # Infinite loop!\n    command = input(\"Enter command (or 'quit' to exit): \")\n    if command == \"quit\":\n        break  # Exit the infinite loop\n    print(f\"You entered: {command}\")\nprint(\"Goodbye!\")\n\n# continue - skip certain iterations\nfor num in range(1, 11):\n    if num % 2 == 0:  # If even\n        continue  # Skip the rest, go to next iteration\n    print(num)  # Only prints odd numbers\n# Output: 1, 3, 5, 7, 9\n\n# continue - skip invalid data\nscores = [85, -1, 92, 0, 78, 150, 88]  # Some invalid scores\n\nfor score in scores:\n    if score < 0 or score > 100:  # Invalid score\n        print(f\"Skipping invalid score: {score}\")\n        continue  # Skip this iteration\n    print(f\"Valid score: {score}\")\n# Output: 85, skip -1, 92, 0, skip 150, 88\n\n# continue vs break difference\nprint(\"\\n=== With continue ===\")\nfor i in range(1, 6):\n    if i == 3:\n        continue  # Skip 3, but keep looping\n    print(i)\n# Output: 1, 2, 4, 5 (skips 3 but continues)\n\nprint(\"\\n=== With break ===\")\nfor i in range(1, 6):\n    if i == 3:\n        break  # Stop completely at 3\n    print(i)\n# Output: 1, 2 (stops at 3)\n\n# Practical: input validation with break\nattempts = 0\nmax_attempts = 3\n\nwhile attempts < max_attempts:\n    password = input(\"Enter password: \")\n    if password == \"secret123\":\n        print(\"Login successful!\")\n        break  # Exit loop on success\n    else:\n        attempts += 1\n        remaining = max_attempts - attempts\n        if remaining > 0:\n            print(f\"Wrong password. {remaining} attempts remaining.\")\n        else:\n            print(\"Too many failed attempts. Account locked.\")\n\n# Nested loops with break\nfor i in range(1, 4):\n    for j in range(1, 4):\n        if i == 2 and j == 2:\n            print(\"Breaking inner loop\")\n            break  # Only breaks inner loop\n        print(f\"i={i}, j={j}\")\n    print(f\"Outer loop i={i} completed\")"
+      },
+      {
+        "title": "for Loops with range() - Counting Made Easy",
+        "content": "**for loops** are perfect when you know how many times you want to repeat something. In Python, we use `for` with the `range()` function to create loops that count.\n\n**Basic Syntax:**\n```python\nfor variable in range(start, stop, step):\n    # Code to repeat\n```\n\n**The range() Function:**\n- `range(stop)`: Counts from 0 to stop-1\n- `range(start, stop)`: Counts from start to stop-1\n- `range(start, stop, step)`: Counts from start to stop-1, incrementing by step\n\n**Important: range() is exclusive of the stop value!**\n- `range(5)` gives: 0, 1, 2, 3, 4 (not 5!)\n- `range(1, 6)` gives: 1, 2, 3, 4, 5\n- `range(0, 10, 2)` gives: 0, 2, 4, 6, 8\n\n**When to use for vs while:**\n- **for**: When you know the number of iterations\n- **while**: When you repeat until a condition changes\n\n**The Loop Variable:**\nThe variable (often named `i`, `num`, or something descriptive) takes on each value from range() in sequence.",
+        "code": "# Basic for loop - range(stop)\nfor i in range(5):\n    print(i)\n# Output: 0, 1, 2, 3, 4 (starts at 0, stops before 5)\n\n# for loop - range(start, stop)\nfor num in range(1, 6):\n    print(f\"Number: {num}\")\n# Output: Number: 1, 2, 3, 4, 5\n\n# for loop - range(start, stop, step)\nfor i in range(0, 11, 2):  # Count by 2s\n    print(i)\n# Output: 0, 2, 4, 6, 8, 10\n\n# Counting backwards with negative step\nfor i in range(10, 0, -1):  # Countdown\n    print(i)\nprint(\"Liftoff!\")\n# Output: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, Liftoff!\n\n# Using the loop variable in calculations\nfor i in range(1, 6):\n    square = i ** 2\n    print(f\"{i} squared is {square}\")\n# Output: 1 squared is 1, 2 squared is 4, etc.\n\n# Accumulation pattern - sum numbers\ntotal = 0\nfor num in range(1, 11):\n    total += num\nprint(f\"Sum of 1-10: {total}\")  # Output: 55\n\n# Multiplication table\nnumber = 7\nfor i in range(1, 11):\n    result = number * i\n    print(f\"{number} x {i} = {result}\")\n\n# Nested for loops - multiplication table\nprint(\"\\nMultiplication Table (1-5):\")\nfor i in range(1, 6):\n    for j in range(1, 6):\n        product = i * j\n        print(f\"{product:3}\", end=\" \")  # :3 for alignment\n    print()  # New line after each row\n\n# Printing patterns\nprint(\"\\nTriangle Pattern:\")\nfor i in range(1, 6):\n    print(\"*\" * i)\n# Output:\n# *\n# **\n# ***\n# ****\n# *****\n\n# Processing a range of values\nprint(\"\\nEven numbers from 0-20:\")\nfor num in range(0, 21, 2):\n    print(num, end=\" \")\nprint()  # New line\n\n# Factorial calculation\nn = 5\nfactorial = 1\nfor i in range(1, n + 1):\n    factorial *= i\nprint(f\"{n}! = {factorial}\")  # Output: 5! = 120\n\n# Using range() with len() to iterate by index\nitems = [\"apple\", \"banana\", \"cherry\"]\nfor i in range(len(items)):\n    print(f\"Item {i}: {items[i]}\")\n# Output: Item 0: apple, Item 1: banana, Item 2: cherry\n\n# When you don't need the loop variable\nprint(\"\\nPrinting 5 times:\")\nfor _ in range(5):  # _ indicates we don't use the variable\n    print(\"Hello!\")"
+      },
+      {
+        "title": "Common Loop Patterns - Counting, Accumulating, and More",
+        "content": "Certain patterns appear repeatedly when using loops. Learning these patterns will make you a more efficient programmer.\n\n**1. Counter Pattern:**\nCount how many items meet a condition.\n\n**2. Accumulator Pattern:**\nBuild up a total by adding/multiplying values.\n\n**3. Min/Max Finder:**\nFind the smallest or largest value.\n\n**4. Flag Pattern:**\nUse a boolean to track if something was found.\n\n**5. Input Validation:**\nRepeat until user provides valid input.\n\n**6. Menu Loop:**\nDisplay menu, process choice, repeat until user quits.\n\n**7. Sentinel Loop:**\nRepeat until a special value (sentinel) is entered.\n\nThese patterns are the building blocks of many programs. Once you recognize them, you'll use them constantly.",
+        "code": "# Pattern 1: Counter - count even numbers\ncount = 0\nfor num in range(1, 21):\n    if num % 2 == 0:\n        count += 1\nprint(f\"There are {count} even numbers between 1-20\")  # Output: 10\n\n# Pattern 2: Accumulator - sum of squares\ntotal = 0\nfor num in range(1, 6):\n    total += num ** 2\nprint(f\"Sum of squares 1-5: {total}\")  # Output: 55\n\n# Pattern 3: Finding maximum\nnumbers = [45, 23, 67, 12, 89, 34]\nmax_value = numbers[0]  # Start with first number\n\nfor num in numbers:\n    if num > max_value:\n        max_value = num\nprint(f\"Maximum value: {max_value}\")  # Output: 89\n\n# Pattern 4: Flag pattern - check if prime\nnumber = 17\nis_prime = True\n\nfor i in range(2, number):\n    if number % i == 0:\n        is_prime = False\n        break  # Found a divisor, not prime\n\nif is_prime:\n    print(f\"{number} is prime\")\nelse:\n    print(f\"{number} is not prime\")\n\n# Pattern 5: Input validation\nwhile True:\n    age_str = input(\"Enter your age (1-120): \")\n    if not age_str.isdigit():\n        print(\"Please enter a number!\")\n        continue\n    \n    age = int(age_str)\n    if age < 1 or age > 120:\n        print(\"Age must be between 1 and 120!\")\n        continue\n    \n    # Valid input!\n    print(f\"Age {age} accepted.\")\n    break\n\n# Pattern 6: Menu loop\nwhile True:\n    print(\"\\n=== Calculator Menu ===\")\n    print(\"1. Add\")\n    print(\"2. Subtract\")\n    print(\"3. Multiply\")\n    print(\"4. Divide\")\n    print(\"5. Quit\")\n    \n    choice = input(\"Enter choice (1-5): \")\n    \n    if choice == \"5\":\n        print(\"Goodbye!\")\n        break\n    \n    if choice not in [\"1\", \"2\", \"3\", \"4\"]:\n        print(\"Invalid choice!\")\n        continue\n    \n    # Get numbers and perform operation\n    num1 = float(input(\"Enter first number: \"))\n    num2 = float(input(\"Enter second number: \"))\n    \n    if choice == \"1\":\n        print(f\"Result: {num1 + num2}\")\n    elif choice == \"2\":\n        print(f\"Result: {num1 - num2}\")\n    elif choice == \"3\":\n        print(f\"Result: {num1 * num2}\")\n    elif choice == \"4\":\n        if num2 != 0:\n            print(f\"Result: {num1 / num2}\")\n        else:\n            print(\"Cannot divide by zero!\")\n\n# Pattern 7: Sentinel loop - sum numbers until 0 entered\nprint(\"\\nEnter numbers to sum (0 to stop):\")\ntotal = 0\n\nwhile True:\n    num = float(input(\"Enter number: \"))\n    if num == 0:  # Sentinel value\n        break\n    total += num\n\nprint(f\"Total: {total}\")\n\n# Multiple accumulators\npositive_count = 0\nnegative_count = 0\nzero_count = 0\n\nnumbers = [5, -3, 0, 8, -2, 0, 7, -1]\n\nfor num in numbers:\n    if num > 0:\n        positive_count += 1\n    elif num < 0:\n        negative_count += 1\n    else:\n        zero_count += 1\n\nprint(f\"Positive: {positive_count}, Negative: {negative_count}, Zero: {zero_count}\")"
+      },
+      {
+        "title": "Avoiding Infinite Loops and Debugging Tips",
+        "content": "**Infinite loops** occur when a loop's condition never becomes False. They're one of the most common bugs for beginners.\n\n**Common Causes of Infinite Loops:**\n\n1. **Forgot to update the loop variable**\n   - Solution: Always increment/decrement your counter\n\n2. **Wrong comparison operator**\n   - Using > instead of <, or vice versa\n   - Solution: Double-check your condition\n\n3. **Updating the wrong variable**\n   - Changing a different variable than the one in the condition\n   - Solution: Make sure you're modifying the right variable\n\n4. **Logic error in the condition**\n   - Condition that can never be False\n   - Solution: Test your condition with sample values\n\n**How to Detect Infinite Loops:**\n- Program never finishes running\n- Same output repeats forever\n- CPU usage spikes to 100%\n\n**How to Stop an Infinite Loop:**\n- Press Ctrl+C in the terminal\n- Close the terminal/program\n\n**Debugging Loop Problems:**\n1. Add print statements inside the loop to see what's happening\n2. Print the loop variable each iteration\n3. Add a safety counter to limit iterations during testing\n4. Use a debugger to step through code\n5. Test your loop condition with pen and paper first",
+        "code": "# INFINITE LOOP EXAMPLES (commented out - don't run!)\n\n# Problem 1: Forgot to update counter\n# count = 1\n# while count <= 5:\n#     print(count)\n#     # Missing: count += 1\n#     # Loop runs forever because count is always 1!\n\n# Fix:\ncount = 1\nwhile count <= 5:\n    print(count)\n    count += 1  # MUST update the counter!\n\n# Problem 2: Wrong operator\n# count = 10\n# while count < 5:  # Already False! Loop never runs\n#     print(count)\n#     count -= 1\n\n# Fix:\ncount = 10\nwhile count > 5:  # Correct operator\n    print(count)\n    count -= 1\n\n# Problem 3: Updating wrong variable\n# target = 10\n# current = 0\n# while current < target:\n#     print(current)\n#     target += 1  # Wrong! Should update current\n#     # As current grows, so does target - never catches up!\n\n# Fix:\ntarget = 10\ncurrent = 0\nwhile current < target:\n    print(current)\n    current += 1  # Update the right variable\n\n# Problem 4: Condition that's always True\n# while True:\n#     print(\"This runs forever!\")\n#     # No break statement!\n\n# Fix: Add a break condition\ncount = 0\nwhile True:\n    print(\"Loop iteration\", count)\n    count += 1\n    if count >= 5:\n        break  # Exit condition\n\n# DEBUGGING TECHNIQUE 1: Add print statements\nprint(\"\\n=== Debugging Example ===\")\ncount = 1\ntarget = 5\nprint(f\"Starting: count={count}, target={target}\")\n\nwhile count <= target:\n    print(f\"Inside loop: count={count}\")\n    count += 1\n    print(f\"After increment: count={count}\")\n\nprint(\"Loop finished!\")\n\n# DEBUGGING TECHNIQUE 2: Safety counter\nprint(\"\\n=== With Safety Counter ===\")\ncount = 1\nsafety = 0\nmax_iterations = 10\n\nwhile count <= 100:  # Potentially long loop\n    print(f\"Count: {count}\")\n    count += 1\n    \n    # Safety check\n    safety += 1\n    if safety >= max_iterations:\n        print(\"Safety limit reached! Check your loop logic.\")\n        break\n\n# DEBUGGING TECHNIQUE 3: Check condition manually\nn = 10\nprint(f\"\\nTesting loop condition: n > 0 is {n > 0}\")\nwhile n > 0:\n    print(n)\n    n -= 1\n    print(f\"After decrement: n={n}, condition is now {n > 0}\")\n    if n == 5:  # Early exit for demo\n        break\n\n# Common mistake: Modifying loop variable incorrectly\nprint(\"\\n=== Common Mistake: Reset in Loop ===\")\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 1\n    # count = 0  # DON'T DO THIS! Resets counter every time\n\n# Correct: Don't reset the loop variable\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 1  # Only increment, don't reset\n\n# Testing loop logic before coding\nprint(\"\\n=== Test Your Logic First ===\")\n# Question: Does range(1, 10) include 10?\nfor i in range(1, 10):\n    print(i, end=\" \")\nprint(\"\\n(Answer: No, stops at 9)\")\n\n# If you want to include 10:\nfor i in range(1, 11):  # Go one higher\n    print(i, end=\" \")\nprint()"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question": "What is the main difference between a while loop and a for loop?",
+      "options": [
+        "while loops are faster than for loops",
+        "while loops repeat as long as a condition is True; for loops repeat a specific number of times",
+        "for loops can't use break statements",
+        "while loops can only count backwards"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "What will this code print?\n\nfor i in range(3):\n    print(i)",
+      "options": [
+        "1 2 3",
+        "0 1 2",
+        "0 1 2 3",
+        "1 2"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "What does the break statement do in a loop?",
+      "options": [
+        "Skips the current iteration and continues with the next one",
+        "Exits the loop completely",
+        "Pauses the loop for 1 second",
+        "Restarts the loop from the beginning"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "What will this code print?\n\ncount = 5\nwhile count > 0:\n    print(count)\n    count -= 1",
+      "options": [
+        "5 4 3 2 1",
+        "5 4 3 2 1 0",
+        "4 3 2 1 0",
+        "Infinite loop"
+      ],
+      "correct_answer": 0
+    },
+    {
+      "question": "What does continue do in a loop?",
+      "options": [
+        "Exits the loop completely",
+        "Skips the rest of the current iteration and moves to the next one",
+        "Makes the loop run forever",
+        "Continues from where break left off"
+      ],
+      "correct_answer": 1
+    }
+  ],
+  "project": {
+    "name": "Interactive Number Game",
+    "description": "Create an interactive number guessing game that uses both while loops and for loops. The game should allow multiple rounds, keep track of scores, and provide the player with limited attempts per round.",
+    "requirements": [
+      "Print a welcome message explaining the game",
+      "Use a while loop to allow the player to play multiple rounds",
+      "In each round, generate or choose a target number between 1 and 100",
+      "Use a for loop to give the player exactly 5 attempts to guess the number",
+      "For each guess, tell the player if their guess is too high, too low, or correct",
+      "Use break to exit the for loop early if the player guesses correctly",
+      "Keep track of the number of rounds won using a counter variable",
+      "After each round, ask if the player wants to play again (use this to control the while loop)",
+      "Use continue at least once (e.g., to skip invalid input)",
+      "Display a final score when the player quits showing total rounds played and rounds won",
+      "Use input validation to ensure guesses are numbers between 1 and 100",
+      "Include at least 5 comments explaining your loop logic",
+      "Use descriptive variable names (rounds_won, attempts_left, etc.)"
+    ],
+    "starter_code": "# Your Name: _______\n# Day 7 Project: Interactive Number Game\n\n# TODO: Import random module to generate random numbers\n# import random\n\n# TODO: Print welcome message\n\n# TODO: Initialize score tracking variables\n\n# TODO: Main game loop (while loop for multiple rounds)\n\n# TODO: Generate random target number for this round\n\n# TODO: Give player 5 attempts using a for loop\n\n# TODO: Get and validate player's guess\n\n# TODO: Check if guess is correct, too high, or too low\n\n# TODO: Use break if correct guess\n\n# TODO: Update score if player won\n\n# TODO: Ask if player wants another round\n\n# TODO: Display final statistics\n",
+    "expected_output_example": "=== NUMBER GUESSING GAME ===\nI'm thinking of a number between 1 and 100.\nYou have 5 attempts to guess it!\n\n--- Round 1 ---\nAttempt 1/5 - Enter your guess: 50\nToo low! Try again.\n\nAttempt 2/5 - Enter your guess: 75\nToo high! Try again.\n\nAttempt 3/5 - Enter your guess: 62\nCongratulations! You guessed it in 3 attempts!\n\nPlay another round? (yes/no): yes\n\n--- Round 2 ---\nAttempt 1/5 - Enter your guess: abc\nInvalid input! Please enter a number.\n\nAttempt 1/5 - Enter your guess: 150\nPlease guess between 1 and 100!\n\nAttempt 1/5 - Enter your guess: 45\nToo low! Try again.\n\n[... more attempts ...]\n\nSorry, you didn't guess it. The number was 89.\n\nPlay another round? (yes/no): no\n\n=== GAME OVER ===\nRounds played: 2\nRounds won: 1\nWin rate: 50.0%\nThanks for playing!",
+    "tester_file": "module007_tester.py"
+  }
+}
