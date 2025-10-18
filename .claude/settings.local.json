@@ -33,7 +33,17 @@
       "Bash(venv/bin/python3 testers/module004_tester.py /tmp/test_day4.py)",
       "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(f''✅ App initialized successfully''); print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 4 exists: {4 in MODULES}''); print(f''✅ Module 4 title: {MODULES[4].get(\"\"title\"\")}'' if 4 in MODULES else ''❌ Module 4 not found'')\")",
       "Bash(venv/bin/python3 -c \"import json; data = json.load(open(''modules/module_004.json'')); print(''✅ JSON is valid''); print(f''✅ Module ID: {data[\"\"id\"\"]}''); print(f''✅ Title: {data[\"\"title\"\"]}''); print(f''✅ Quiz questions: {len(data[\"\"quiz\"\"])}''); print(f''✅ Instructional sections: {len(data[\"\"instructional_content\"\"][\"\"sections\"\"])}''); print(f''✅ Project requirements: {len(data[\"\"project\"\"][\"\"requirements\"\"])}'')\")",
-      "mcp__chrome-devtools__upload_file"
+      "mcp__chrome-devtools__upload_file",
+      "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(f''✅ App initialized successfully''); print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 5 exists: {5 in MODULES}''); print(f''✅ Module 5 title: {MODULES[5].get(\"\"title\"\")}'' if 5 in MODULES else ''❌ Module 5 not found'')\")",
+      "Bash(venv/bin/python3 -c \"import json; data = json.load(open(''modules/module_005.json'')); print(''✅ JSON is valid''); print(f''✅ Module ID: {data[\"\"id\"\"]}''); print(f''✅ Title: {data[\"\"title\"\"]}''); print(f''✅ Quiz questions: {len(data[\"\"quiz\"\"])}''); print(f''✅ Instructional sections: {len(data[\"\"instructional_content\"\"][\"\"sections\"\"])}''); print(f''✅ Project requirements: {len(data[\"\"project\"\"][\"\"requirements\"\"])}'')\")",
+      "Bash(venv/bin/python3 testers/module005_tester.py /tmp/test_day5.py)",
+      "Bash(for file in modules/module_00{1,2,3,4}.json)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(jq -r '\"\"\\(.day): \\(.title)\"\"' \"$file\")",
+      "Bash(done)",
+      "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(f''✅ App initialized successfully''); print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 6 exists: {6 in MODULES}''); print(f''✅ Module 6 title: {MODULES[6].get(\"\"title\"\")}'' if 6 in MODULES else ''❌ Module 6 not found'')\")",
+      "Bash(venv/bin/python3 testers/module006_tester.py /tmp/test_day6.py)",
+      "Bash(venv/bin/python3 -c \"import json; data = json.load(open(''modules/module_006.json'')); print(''✅ JSON is valid''); print(f''✅ Module ID: {data[\"\"id\"\"]}''); print(f''✅ Title: {data[\"\"title\"\"]}''); print(f''✅ Quiz questions: {len(data[\"\"quiz\"\"])}''); print(f''✅ Instructional sections: {len(data[\"\"instructional_content\"\"][\"\"sections\"\"])}''); print(f''✅ Project requirements: {len(data[\"\"project\"\"][\"\"requirements\"\"])}'')\")"
     ],
     "deny": [],
     "ask": []

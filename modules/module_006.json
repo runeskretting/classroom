@@ -1,0 +1,129 @@
+{
+  "id": 6,
+  "day": 6,
+  "category": "Setup & Fundamentals",
+  "title": "Day 6: Conditional Logic - if/elif/else",
+  "objective": "Master conditional statements to make your programs intelligent and responsive. Learn to use if, elif, and else to create programs that make decisions based on different conditions.",
+  "topics": [
+    "Basic if Statements",
+    "if/else Statements",
+    "elif for Multiple Conditions",
+    "Nested Conditionals",
+    "Indentation and Code Blocks",
+    "Common Conditional Patterns"
+  ],
+  "core_concepts": [
+    "Conditional Statements",
+    "Decision Making",
+    "Program Flow Control",
+    "Code Blocks and Indentation"
+  ],
+  "instructional_content": {
+    "intro": "Welcome to Day 6! Today you'll learn one of the most powerful concepts in programming: conditional logic. Up until now, your programs have executed line by line, top to bottom. But real programs need to make decisions - to do different things based on different situations. That's where if/elif/else statements come in. By the end of this lesson, you'll be able to write programs that think, decide, and respond intelligently to different inputs and conditions.",
+    "sections": [
+      {
+        "title": "The if Statement - Making Your First Decision",
+        "content": "The **if statement** is the foundation of decision-making in programming. It allows your program to execute code ONLY when a certain condition is True.\n\n**Basic Syntax:**\n```python\nif condition:\n    # Code to execute if condition is True\n```\n\n**How it works:**\n1. Python evaluates the condition (must result in True or False)\n2. If True, the indented code block runs\n3. If False, the indented code block is skipped\n4. Program continues with the next non-indented line\n\n**Critical: Indentation Matters!**\nPython uses indentation (4 spaces or 1 tab) to define code blocks. Everything indented under the if statement is part of that conditional block. This is different from many other languages that use curly braces {}.\n\n**The colon (:) is required** at the end of the if line. It tells Python that a code block is coming.",
+        "code": "# Basic if statement\nage = 20\n\nif age >= 18:\n    print(\"You are an adult.\")  # This runs because age >= 18 is True\n\nprint(\"This always runs.\")  # Not indented, so always executes\n\n# Multiple statements in the if block\nscore = 95\n\nif score >= 90:\n    print(\"Excellent work!\")  # Runs if score >= 90\n    print(\"You got an A!\")    # Also runs if score >= 90\n    print(\"Keep it up!\")      # Also runs if score >= 90\n\nprint(\"End of program\")  # Always runs\n\n# Using comparison operators\ntemperature = 75\n\nif temperature > 80:\n    print(\"It's hot outside!\")\n\nif temperature < 60:\n    print(\"It's cold outside!\")\n\nif 60 <= temperature <= 80:\n    print(\"Perfect weather!\")  # This runs\n\n# Using logical operators\nhas_ticket = True\nhas_id = True\n\nif has_ticket and has_id:\n    print(\"You can enter the concert.\")  # Runs because both are True\n\n# Checking string equality\npassword = \"secret123\"\n\nif password == \"secret123\":\n    print(\"Access granted!\")  # Runs because strings match\n\n# Common pattern: checking if something exists or is valid\nusername = \"alice\"\n\nif username:  # Non-empty strings are truthy\n    print(f\"Welcome, {username}!\")\n\nif len(username) >= 3:\n    print(\"Username is valid length.\")"
+      },
+      {
+        "title": "if/else - Choosing Between Two Paths",
+        "content": "The **else statement** provides an alternative path when the if condition is False. Think of it as \"if this happens, do A, otherwise do B.\"\n\n**Syntax:**\n```python\nif condition:\n    # Code if True\nelse:\n    # Code if False\n```\n\n**How it works:**\n- If condition is True, the if block runs and else block is skipped\n- If condition is False, the if block is skipped and else block runs\n- One or the other ALWAYS runs, never both, never neither\n\n**Key Points:**\n- else doesn't have a condition - it's the \"catch-all\" for when if is False\n- else must come after an if (can't have else without if)\n- else also requires a colon (:) and indented code block\n\n**When to use if/else:**\n- When you need to handle both True and False cases\n- When you want to ensure something always happens\n- When there are exactly two possible outcomes",
+        "code": "# Basic if/else\nage = 15\n\nif age >= 18:\n    print(\"You can vote.\")\nelse:\n    print(\"You cannot vote yet.\")  # This runs because age < 18\n\n# Number comparison\nnumber = 7\n\nif number % 2 == 0:\n    print(f\"{number} is even.\")\nelse:\n    print(f\"{number} is odd.\")  # This runs\n\n# User authentication\nusername = \"admin\"\npassword = \"pass123\"\n\nif username == \"admin\" and password == \"admin123\":\n    print(\"Login successful!\")\nelse:\n    print(\"Invalid credentials.\")  # This runs\n\n# Temperature response\ntemp = 85\n\nif temp > 80:\n    print(\"Turn on the air conditioning.\")\nelse:\n    print(\"Temperature is comfortable.\")\n\n# Store hours\nhour = 22  # 10 PM in 24-hour format\n\nif 9 <= hour < 21:  # Store open 9 AM to 9 PM\n    print(\"Store is open!\")\nelse:\n    print(\"Store is closed.\")  # This runs\n\n# Discount eligibility\nage = 67\n\nif age >= 65:\n    print(\"You qualify for senior discount!\")\n    discount = 0.15\nelse:\n    print(\"Standard pricing applies.\")\n    discount = 0.0\n\nprint(f\"Your discount: {discount:.0%}\")\n\n# Boolean flag\nis_raining = True\n\nif is_raining:\n    print(\"Bring an umbrella.\")\nelse:\n    print(\"No umbrella needed.\")"
+      },
+      {
+        "title": "elif - Handling Multiple Conditions",
+        "content": "**elif** (short for \"else if\") allows you to check multiple conditions in sequence. It's used when you have more than two possible outcomes.\n\n**Syntax:**\n```python\nif condition1:\n    # Code if condition1 is True\nelif condition2:\n    # Code if condition1 is False AND condition2 is True\nelif condition3:\n    # Code if condition1 and condition2 are False AND condition3 is True\nelse:\n    # Code if all conditions are False\n```\n\n**How it works:**\n1. Python checks if condition first\n2. If True, runs that block and skips the rest\n3. If False, moves to first elif and checks that condition\n4. Continues through elif statements until one is True\n5. If none are True, runs else block (if present)\n6. Only ONE block ever executes\n\n**Important:**\n- elif must come after if and before else\n- You can have as many elif statements as needed\n- Once a condition is True, all remaining elif/else are skipped\n- The order matters! Conditions are checked top to bottom",
+        "code": "# Grade calculator\nscore = 85\n\nif score >= 90:\n    print(\"Grade: A\")\nelif score >= 80:\n    print(\"Grade: B\")  # This runs\nelif score >= 70:\n    print(\"Grade: C\")\nelif score >= 60:\n    print(\"Grade: D\")\nelse:\n    print(\"Grade: F\")\n\n# Age categories\nage = 35\n\nif age < 13:\n    print(\"You are a child.\")\nelif age < 20:\n    print(\"You are a teenager.\")\nelif age < 65:\n    print(\"You are an adult.\")  # This runs\nelse:\n    print(\"You are a senior.\")\n\n# Traffic light response\nlight_color = \"yellow\"\n\nif light_color == \"red\":\n    print(\"STOP\")\nelif light_color == \"yellow\":\n    print(\"SLOW DOWN\")  # This runs\nelif light_color == \"green\":\n    print(\"GO\")\nelse:\n    print(\"Invalid light color\")\n\n# BMI categories\nbmi = 22.5\n\nif bmi < 18.5:\n    print(\"Underweight\")\nelif bmi < 25:\n    print(\"Normal weight\")  # This runs\nelif bmi < 30:\n    print(\"Overweight\")\nelse:\n    print(\"Obese\")\n\n# Ticket pricing with multiple factors\nage = 25\nis_student = True\n\nif age < 12:\n    price = 5\n    print(\"Child ticket: $5\")\nelif age >= 65:\n    price = 7\n    print(\"Senior ticket: $7\")\nelif is_student:\n    price = 8\n    print(\"Student ticket: $8\")  # This runs\nelse:\n    price = 12\n    print(\"Adult ticket: $12\")\n\nprint(f\"Total: ${price}\")\n\n# Order of conditions matters!\nvalue = 50\n\n# Wrong order - will never print \"Greater than 50\"\nif value > 0:\n    print(\"Positive\")  # This runs and skips the rest!\nelif value > 50:\n    print(\"Greater than 50\")  # Never reached even if true\n\n# Correct order - check specific conditions first\nif value > 50:\n    print(\"Greater than 50\")\nelif value > 0:\n    print(\"Positive but not greater than 50\")  # This would run for value=50"
+      },
+      {
+        "title": "Nested Conditionals - Decisions Within Decisions",
+        "content": "**Nested conditionals** are if statements inside other if statements. They allow you to check additional conditions only after an outer condition is True.\n\n**When to use nested conditionals:**\n- When you need to check a second condition that only makes sense if the first is True\n- To create more complex decision trees\n- To make your code more efficient by avoiding unnecessary checks\n\n**Syntax:**\n```python\nif outer_condition:\n    if inner_condition:\n        # Code if both are True\n    else:\n        # Code if outer is True but inner is False\nelse:\n    # Code if outer is False\n```\n\n**Important:**\n- Each nested level adds 4 more spaces of indentation\n- Too much nesting (more than 3 levels) can make code hard to read\n- Sometimes you can use logical operators (and, or) instead of nesting\n\n**Best Practice:**\nIf you can combine conditions with `and` or `or`, do that instead of nesting. Nested conditionals should be used when the inner check only makes sense if the outer condition is True.",
+        "code": "# Basic nested conditional\nage = 25\nhas_license = True\n\nif age >= 18:\n    if has_license:\n        print(\"You can drive!\")  # This runs\n    else:\n        print(\"You're old enough but need a license.\")\nelse:\n    print(\"You're too young to drive.\")\n\n# Movie theater admission\nage = 16\nhas_parent = False\nhas_id = True\n\nif age >= 17:\n    if has_id:\n        print(\"You can watch R-rated movies.\")\n    else:\n        print(\"Need ID to verify age.\")\nelse:\n    if has_parent:\n        print(\"You can watch with parental supervision.\")\n    else:\n        print(\"You cannot watch R-rated movies.\")  # This runs\n\n# Scholarship eligibility\ngpa = 3.8\nincome = 35000\n\nif gpa >= 3.5:\n    print(\"GPA requirement met.\")\n    if income < 40000:\n        print(\"Income requirement met.\")\n        print(\"You qualify for the scholarship!\")  # This runs\n    else:\n        print(\"Income too high for this scholarship.\")\nelse:\n    print(\"GPA too low for this scholarship.\")\n\n# Login system with multiple checks\nusername = \"alice\"\npassword = \"secure123\"\nis_account_active = True\n\nif username == \"alice\":\n    if password == \"secure123\":\n        if is_account_active:\n            print(\"Login successful!\")  # This runs\n        else:\n            print(\"Account is deactivated.\")\n    else:\n        print(\"Incorrect password.\")\nelse:\n    print(\"Username not found.\")\n\n# Can often be simplified with 'and'\n# This is equivalent to the above:\nif username == \"alice\" and password == \"secure123\" and is_account_active:\n    print(\"Login successful!\")\nelse:\n    print(\"Login failed.\")\n\n# When nesting is better than 'and'\n# This checks payment method only if cart has items\ncart_items = 5\nhas_payment_method = True\n\nif cart_items > 0:\n    if has_payment_method:\n        print(\"Proceeding to checkout...\")\n    else:\n        print(\"Please add a payment method.\")\nelse:\n    print(\"Your cart is empty!\")  # Better than checking payment for empty cart\n\n# Complex decision tree\ntemperature = 75\nis_sunny = True\n\nif temperature >= 70:\n    if is_sunny:\n        print(\"Perfect beach day!\")  # This runs\n        print(\"Don't forget sunscreen!\")\n    else:\n        print(\"Warm but cloudy - good for a walk.\")\nelse:\n    if temperature < 32:\n        print(\"Freezing! Stay inside.\")\n    else:\n        print(\"Cool weather - bring a jacket.\")"
+      },
+      {
+        "title": "Common Patterns and Best Practices",
+        "content": "**Boolean Flags:**\nUse descriptive boolean variables to make conditions readable. Instead of complex expressions, store the result in a well-named variable.\n\n**Guard Clauses:**\nHandle error cases or special conditions first, then handle the normal case. This keeps your main logic cleaner.\n\n**Avoid Redundant Conditions:**\nIf you've already checked a condition, you don't need to check it again in elif or else.\n\n**Use Comparison Operators Correctly:**\n- Use `==` for equality comparison, not `=` (assignment)\n- Remember strings are case-sensitive: \"hello\" != \"Hello\"\n- For range checks, use chained comparisons: `18 <= age < 65`\n\n**Truthiness:**\nPython treats certain values as True or False in conditions:\n- False: False, None, 0, 0.0, \"\", [], {}\n- True: Everything else\n\n**Keep It Simple:**\n- If logic gets too complex, consider breaking it into functions\n- Use meaningful variable names for conditions\n- Add comments for complex conditional logic\n- Avoid nesting more than 2-3 levels deep",
+        "code": "# Good: Using boolean flags for readability\nage = 25\nincome = 45000\ncredit_score = 720\n\n# Instead of one giant condition, break it down:\nmeets_age_requirement = age >= 21\nmeets_income_requirement = income >= 30000\nmeets_credit_requirement = credit_score >= 650\n\nif meets_age_requirement and meets_income_requirement and meets_credit_requirement:\n    print(\"Loan approved!\")\nelse:\n    print(\"Loan denied.\")\n\n# Guard clauses - handle special cases first\ndef process_order(items, payment):\n    # Check for problems first\n    if not items:\n        print(\"Error: Cart is empty\")\n        return\n    \n    if not payment:\n        print(\"Error: No payment method\")\n        return\n    \n    # Main logic only runs if checks pass\n    print(\"Processing order...\")\n    print(\"Order complete!\")\n\nprocess_order([], \"credit_card\")  # Handles error first\n\n# Avoid redundant conditions\nscore = 75\n\n# Bad - redundant checks\nif score >= 90:\n    grade = \"A\"\nelif score >= 80 and score < 90:  # score < 90 is redundant!\n    grade = \"B\"\n\n# Good - elif already means \"if previous was False\"\nif score >= 90:\n    grade = \"A\"\nelif score >= 80:  # We know it's < 90 already\n    grade = \"B\"\nelif score >= 70:\n    grade = \"C\"\nelse:\n    grade = \"F\"\n\nprint(f\"Grade: {grade}\")\n\n# Using truthiness\nusername = \"\"\n\nif username:  # Empty string is falsy\n    print(f\"Hello, {username}\")\nelse:\n    print(\"Please enter a username\")  # This runs\n\nitems = [1, 2, 3]\n\nif items:  # Non-empty list is truthy\n    print(f\"You have {len(items)} items\")  # This runs\n\n# Common mistake: = vs ==\nx = 10\n\n# Wrong - assigns 5 to x (always True!)\n# if x = 5:  # SyntaxError\n#     print(\"This won't work\")\n\n# Correct - compares x to 5\nif x == 5:\n    print(\"x equals 5\")\nelse:\n    print(\"x does not equal 5\")  # This runs\n\n# String comparison is case-sensitive\nuser_input = \"yes\"\n\n# Good: handle different cases\nif user_input.lower() == \"yes\":  # Convert to lowercase first\n    print(\"Confirmed!\")\n\n# Chained comparisons for ranges\ntemperature = 72\n\n# Readable and Pythonic\nif 68 <= temperature <= 78:\n    print(\"Comfortable temperature\")  # This runs\n\n# Same as: if temperature >= 68 and temperature <= 78:\n\n# Complex logic made clear with variables\nage = 17\nhas_permission = True\nis_weekend = True\n\nold_enough = age >= 16\ncan_go_out = (old_enough and has_permission) or (age >= 18)\nright_time = is_weekend or (9 <= hour <= 17)  # Assuming hour is defined\n\nif can_go_out and right_time:\n    print(\"You can go to the party!\")\n\n# Breaking down complex decisions\nscore = 88\nattempts = 2\nbonus_completed = True\n\n# Calculate final score with all factors\nfinal_score = score\nif bonus_completed:\n    final_score += 5\nif attempts == 1:\n    final_score += 10\n\n# Then make decision based on final score\nif final_score >= 90:\n    print(f\"Grade: A (Final score: {final_score})\")\nelif final_score >= 80:\n    print(f\"Grade: B (Final score: {final_score})\")\nelse:\n    print(f\"Grade: C (Final score: {final_score})\")"
+      },
+      {
+        "title": "Common Pitfalls and Debugging Tips",
+        "content": "**Indentation Errors:**\nPython is strict about indentation. Mixing tabs and spaces causes errors. Always use 4 spaces (most editors can auto-convert tabs).\n\n**Missing Colons:**\nEvery if, elif, and else line must end with a colon (:). Forgetting it is a common mistake.\n\n**Using = Instead of ==:**\nThe = operator assigns values; == compares them. Using = in a condition causes errors.\n\n**Unreachable Code:**\nIf you check a specific condition after a general one, the specific check may never run.\n\n**Logic Errors:**\nYour code runs without errors but doesn't do what you expect. Use print() to debug and check which branches execute.\n\n**Floating Point Comparisons:**\nBe careful comparing floats with ==. Due to precision issues, use a range instead.\n\n**Debugging Strategy:**\n1. Add print statements before conditionals to check values\n2. Print inside each branch to see which executes\n3. Check your indentation carefully\n4. Test edge cases (boundary values, empty inputs, etc.)",
+        "code": "# Indentation error example\n# age = 20\n# if age >= 18:\n# print(\"Adult\")  # IndentationError - must be indented!\n\n# Correct indentation\nage = 20\nif age >= 18:\n    print(\"Adult\")  # Properly indented\n\n# Missing colon error\n# if age >= 18  # SyntaxError - missing colon!\n#     print(\"Adult\")\n\n# Correct syntax\nif age >= 18:\n    print(\"Adult\")\n\n# Using = instead of == error\n# if age = 18:  # SyntaxError - should be ==\n#     print(\"Exactly 18\")\n\n# Correct comparison\nif age == 18:\n    print(\"Exactly 18\")\n\n# Unreachable code problem\nscore = 95\n\n# Bad - second condition never runs!\nif score > 0:\n    print(\"You have points\")  # Always runs for positive scores\nelif score > 90:\n    print(\"Excellent score!\")  # Never reached!\n\n# Good - check specific first\nif score > 90:\n    print(\"Excellent score!\")  # This runs\nelif score > 0:\n    print(\"You have points\")\n\n# Debugging with print statements\nusername = \"alice\"\npassword = \"wrong\"\n\nprint(f\"Checking login for: {username}\")  # Debug output\nprint(f\"Password entered: {password}\")    # Debug output\n\nif username == \"alice\":\n    print(\"Username correct\")  # Debug: which branch?\n    if password == \"secret123\":\n        print(\"Login successful\")\n    else:\n        print(\"Password incorrect\")  # This runs\nelse:\n    print(\"Username not found\")\n\n# Floating point comparison issue\nprice1 = 0.1 + 0.2\nprice2 = 0.3\n\nprint(f\"price1: {price1}\")  # Might be 0.30000000000000004\nprint(f\"price2: {price2}\")  # 0.3\n\n# Bad - might not work due to floating point precision\nif price1 == price2:\n    print(\"Prices match\")\nelse:\n    print(\"Prices don't match\")  # Might run unexpectedly!\n\n# Good - check if difference is very small\nif abs(price1 - price2) < 0.0001:\n    print(\"Prices match (close enough)\")  # This runs\n\n# Testing edge cases\ndef check_age(age):\n    \"\"\"Categorize age - test with edge cases\"\"\"\n    print(f\"Testing with age: {age}\")  # Debug output\n    \n    if age < 0:\n        print(\"Invalid age!\")\n    elif age < 13:\n        print(\"Child\")\n    elif age < 20:\n        print(\"Teenager\")\n    elif age < 65:\n        print(\"Adult\")\n    else:\n        print(\"Senior\")\n\n# Test boundary values\ncheck_age(12)   # Child (edge of range)\ncheck_age(13)   # Teenager (boundary)\ncheck_age(19)   # Teenager (edge)\ncheck_age(20)   # Adult (boundary)\ncheck_age(-5)   # Invalid (error case)\ncheck_age(0)    # Child (edge case)\n\n# Logic error example\ngrade = 85\npassed = False  # Should be True but forgot to set it\n\nif grade >= 60:\n    # Forgot to set: passed = True\n    print(\"You passed!\")\n\nif passed:\n    print(\"Congratulations!\")\nelse:\n    print(\"Better luck next time\")  # Runs even though grade >= 60!\n\n# Fixed version\nif grade >= 60:\n    passed = True  # Set the flag\n    print(\"You passed!\")\n\nif passed:\n    print(\"Congratulations!\")  # Now this runs correctly"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question": "What will this code print?\n\nage = 15\nif age >= 18:\n    print(\"Adult\")\nelse:\n    print(\"Minor\")",
+      "options": [
+        "Adult",
+        "Minor",
+        "Both Adult and Minor",
+        "Nothing (error)"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "What is the purpose of elif in Python?",
+      "options": [
+        "To check multiple conditions in sequence",
+        "To repeat code multiple times",
+        "To define a function",
+        "To end an if statement"
+      ],
+      "correct_answer": 0
+    },
+    {
+      "question": "What will this code print?\n\nscore = 85\nif score >= 90:\n    print(\"A\")\nelif score >= 80:\n    print(\"B\")\nelif score >= 70:\n    print(\"C\")\nprint(\"Done\")",
+      "options": [
+        "A\nDone",
+        "B\nDone",
+        "C\nDone",
+        "A\nB\nC\nDone"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "Which of the following is TRUE about if/elif/else statements?",
+      "options": [
+        "All blocks always execute",
+        "Only one block ever executes",
+        "Multiple blocks can execute if conditions are True",
+        "The else block always executes"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "What is wrong with this code?\n\nif x > 10\n    print(\"Big number\")",
+      "options": [
+        "Missing parentheses around condition",
+        "Missing colon after the condition",
+        "Wrong indentation",
+        "Nothing, it's correct"
+      ],
+      "correct_answer": 1
+    }
+  ],
+  "project": {
+    "name": "Adventure Game Decision Maker",
+    "description": "Create an interactive adventure game that uses conditional logic to guide the player through different paths based on their choices. The program should use if/elif/else statements to create a branching story where each decision leads to different outcomes.",
+    "requirements": [
+      "Print a welcome message introducing the adventure",
+      "Ask the user for their character's name and store it in a variable",
+      "Present the first choice (e.g., go left, right, or straight) using input()",
+      "Use if/elif/else to create at least 3 different paths based on the first choice",
+      "For each path from the first choice, present a second decision with at least 2 options",
+      "Use nested if/elif/else statements to handle the second level of choices (at least 6 total endpoints)",
+      "Include at least one scenario that uses 'and' or 'or' to combine multiple conditions",
+      "Each ending should print a different outcome message (win, lose, treasure found, etc.)",
+      "Use the character's name in the output messages using f-strings",
+      "Include at least one scenario where a numeric comparison is made (e.g., if player has enough gold, if health > 50)",
+      "Add comments explaining the logic of your conditional statements",
+      "Make sure all your indentation is correct and consistent (4 spaces per level)"
+    ],
+    "starter_code": "# Your Name: _______\n# Day 6 Project: Adventure Game Decision Maker\n\n# TODO: Print welcome message\n\n# TODO: Get character name from player\n\n# TODO: Present first choice (e.g., which path to take)\n\n# TODO: Use if/elif/else for first decision\n\n# TODO: Inside each branch, present second choice\n\n# TODO: Use nested if/elif/else for second decisions\n\n# TODO: Print different outcomes based on choices\n\n# TODO: Include at least one numeric comparison\n\n# TODO: Use character name in outputs with f-strings\n",
+    "expected_output_example": "=== THE MYSTERIOUS CAVE ADVENTURE ===\n\nEnter your character's name: Alex\n\nWelcome, Alex! You stand at the entrance of a dark cave.\nYou see three paths:\n  1. A bright tunnel to the LEFT\n  2. A dark tunnel to the RIGHT  \n  3. A narrow passage STRAIGHT ahead\n\nWhich path do you choose? (left/right/straight): left\n\nYou walk down the bright tunnel and find a treasure chest!\nDo you want to OPEN it or LEAVE it? (open/leave): open\n\nYou open the chest and find 100 gold coins!\nCongratulations, Alex! You've won the adventure!\n\n=== GAME OVER ===",
+    "tester_file": "module006_tester.py"
+  }
+}
