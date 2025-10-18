@@ -242,7 +242,21 @@ def update_student_progress(student_name, updates):
 @app.route('/')
 def index():
     """Home page."""
-    return render_template('home.html')
+    # Check if student is logged in and get their current module
+    current_module_id = 1
+    student_name = session.get('student_name')
+
+    if student_name:
+        progress = get_student_progress(student_name)
+        current_module_id = progress['current_module']
+
+    # Get the current module data to display
+    current_module = MODULES[current_module_id]
+
+    return render_template('home.html',
+                         current_module=current_module,
+                         current_module_id=current_module_id,
+                         student_name=student_name)
 
 
 @app.route('/start', methods=['GET', 'POST'])
@@ -376,14 +390,21 @@ def submission(module_id):
             progress['modules'][module_id]['test_results'] = test_result
 
             if test_result['passed']:
-                # Unlock next module
-                if module_id < 3:
-                    progress['current_module'] = module_id + 1
-                    flash(f'Congratulations! Module {module_id} completed. Module {module_id + 1} unlocked!', 'success')
+                # Check if BOTH quiz and project are now passed
+                quiz_passed = progress['modules'][module_id]['quiz_passed']
+                project_passed = progress['modules'][module_id]['project_passed']
+
+                if quiz_passed and project_passed:
+                    # Unlock next module only when both requirements are met
+                    if module_id < 3:
+                        progress['current_module'] = module_id + 1
+                        flash(f'Congratulations! Module {module_id} completed. Module {module_id + 1} unlocked!', 'success')
+                    else:
+                        progress['completed'] = True
+                        progress['completed_at'] = datetime.now().isoformat()
+                        flash('Congratulations! You have completed all modules!', 'success')
                 else:
-                    progress['completed'] = True
-                    progress['completed_at'] = datetime.now().isoformat()
-                    flash('Congratulations! You have completed all modules!', 'success')
+                    flash(f'Project passed! Great work on the {MODULES[module_id]["project"]["name"]}!', 'success')
             else:
                 flash(f'Tests failed. Score: {test_result["score"]}. Please review and try again.', 'warning')
 

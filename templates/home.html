@@ -17,27 +17,20 @@
     </div>
 
     <div class="modules-overview">
-        <h2>What You'll Learn</h2>
+        <h2>{% if student_name %}Your Current Class{% else %}What You'll Learn{% endif %}</h2>
         <div class="module-cards">
             <div class="module-card">
-                <div class="module-number">1</div>
-                <h3>Python Fundamentals</h3>
-                <p>Variables, data types, control flow, loops, and data structures</p>
-                <div class="project-tag">Project: Number Guessing Game</div>
-            </div>
-            <div class="module-card">
-                <div class="module-number">2</div>
-                <h3>Structured Programming</h3>
-                <p>Functions, scope, error handling, and file I/O</p>
-                <div class="project-tag">Project: Contact Book App</div>
-            </div>
-            <div class="module-card">
-                <div class="module-number">3</div>
-                <h3>Advanced Concepts</h3>
-                <p>OOP, third-party libraries, and professional tools</p>
-                <div class="project-tag">Project: Web Scraper</div>
+                <div class="module-number">{{ current_module_id }}</div>
+                <h3>{{ current_module.title.replace('Module ' + current_module_id|string + ': ', '') }}</h3>
+                <p>{{ current_module.topics|join(', ') }}</p>
+                <div class="project-tag">Project: {{ current_module.project.name }}</div>
             </div>
         </div>
+        {% if student_name %}
+        <div class="current-module-info">
+            <p class="info-text">Complete this module to unlock the next one. You can view your overall progress on the <a href="{{ url_for('progress_page') }}">Progress Dashboard</a>.</p>
+        </div>
+        {% endif %}
     </div>
 
     <div class="start-form">
