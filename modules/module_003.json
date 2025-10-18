@@ -1,0 +1,125 @@
+{
+  "id": 3,
+  "day": 3,
+  "category": "Setup & Fundamentals",
+  "title": "Day 3: Variables and Data Types",
+  "objective": "Understand how to create and use variables to store different types of data, including integers, floats, strings, and booleans, while learning about type conversion and variable naming best practices.",
+  "topics": [
+    "What Are Variables?",
+    "Variable Assignment",
+    "Data Types: int, float, str, bool",
+    "Type Checking with type()",
+    "Type Conversion (Casting)",
+    "Variable Naming Conventions"
+  ],
+  "core_concepts": [
+    "Variable Assignment",
+    "Data Types",
+    "Type Conversion",
+    "Variable Naming"
+  ],
+  "instructional_content": {
+    "intro": "Welcome to Day 3! Today you'll learn about variables - the fundamental building blocks of programming. Variables are containers that store data, and understanding them is essential for every program you'll ever write. You'll also learn about different data types and how to convert between them.",
+    "sections": [
+      {
+        "title": "What Are Variables?",
+        "content": "A **variable** is like a labeled box that holds a value. You give the box a name (the variable name), and you can put different things inside it (the value).\n\nThink of variables as storage containers in your computer's memory. When you create a variable, you're reserving a space in memory and giving it a name so you can access that space later.\n\n**Why do we need variables?**\n- To store information that changes during program execution\n- To make our code readable and maintainable\n- To reuse values without retyping them\n- To perform calculations and operations on data",
+        "code": "# Creating a variable\nname = \"Alice\"\n\n# The variable 'name' now stores the value \"Alice\"\nprint(name)  # Output: Alice\n\n# You can change what's stored in a variable\nname = \"Bob\"\nprint(name)  # Output: Bob\n\n# Variables can store results of calculations\nage = 25\nage_next_year = age + 1\nprint(age_next_year)  # Output: 26"
+      },
+      {
+        "title": "Variable Assignment - Storing Values",
+        "content": "**Assignment** is the process of storing a value in a variable. In Python, we use the **equals sign (=)** as the assignment operator.\n\nThe syntax is always: **variable_name = value**\n\nImportant: The equals sign in programming is NOT the same as in mathematics! It means \"assign the value on the right to the variable on the left\" - it's not testing equality.\n\nYou can also assign multiple variables in one line:",
+        "code": "# Basic assignment\nx = 10\nprint(x)  # Output: 10\n\n# Assigning different types of values\nage = 30           # Integer\nprice = 19.99      # Float\nname = \"Charlie\"   # String\nis_student = True  # Boolean\n\n# Multiple assignment in one line\na, b, c = 1, 2, 3\nprint(a, b, c)  # Output: 1 2 3\n\n# Assigning the same value to multiple variables\nx = y = z = 0\nprint(x, y, z)  # Output: 0 0 0"
+      },
+      {
+        "title": "Data Types: The Four Fundamental Types",
+        "content": "Python has several built-in data types, but four are fundamental:\n\n**1. Integer (int)**: Whole numbers, positive or negative, without decimals\n   - Examples: 5, -17, 0, 1000\n\n**2. Float (float)**: Numbers with decimal points\n   - Examples: 3.14, -0.5, 2.0, 99.99\n\n**3. String (str)**: Text data, enclosed in quotes\n   - Examples: \"Hello\", 'Python', \"123\" (yes, this is text, not a number!)\n\n**4. Boolean (bool)**: Truth values - can only be True or False\n   - Used for logic and decision-making\n   - Note: T and F must be capitalized!",
+        "code": "# Integer (int) - whole numbers\nage = 25\ntemperature = -5\ncount = 0\n\n# Float (float) - decimal numbers\nheight = 5.9\nprice = 19.99\npi = 3.14159\n\n# String (str) - text\nname = \"Alice\"\ngreeting = 'Hello, World!'\nstreet_number = \"123\"  # This is text, not a number!\n\n# Boolean (bool) - True or False\nis_raining = True\nhas_license = False\nis_adult = age >= 18  # This evaluates to True or False\n\n# Printing different types\nprint(age, height, name, is_raining)"
+      },
+      {
+        "title": "Type Checking with type()",
+        "content": "Python provides the **type()** function to check what data type a variable holds. This is extremely useful for debugging and understanding your code.\n\nThe type() function returns the type of the value, such as <class 'int'>, <class 'float'>, <class 'str'>, or <class 'bool'>.\n\n**Why is this important?**\n- Different types support different operations\n- You can't always mix types in operations\n- Understanding types helps prevent errors",
+        "code": "# Checking types with type()\nage = 25\nprint(type(age))        # Output: <class 'int'>\n\nheight = 5.9\nprint(type(height))     # Output: <class 'float'>\n\nname = \"Alice\"\nprint(type(name))       # Output: <class 'str'>\n\nis_student = True\nprint(type(is_student)) # Output: <class 'bool'>\n\n# Surprising example - be careful!\nnumber_as_string = \"123\"\nprint(type(number_as_string))  # Output: <class 'str'> (not int!)\n\n# Using type() in comparisons\nif type(age) == int:\n    print(\"age is an integer\")"
+      },
+      {
+        "title": "Type Conversion (Casting) - Changing Data Types",
+        "content": "**Type conversion** (also called **casting**) is the process of converting a value from one data type to another. This is essential when working with user input or performing mixed operations.\n\n**Common conversion functions:**\n- **int()**: Converts to integer\n- **float()**: Converts to float\n- **str()**: Converts to string\n- **bool()**: Converts to boolean\n\n**Important rules:**\n- You can't convert text like \"hello\" to a number (it will cause an error)\n- Converting a float to int removes the decimal part (doesn't round!)\n- input() always returns a string, so you often need to convert it",
+        "code": "# Converting between types\n\n# String to integer\nage_str = \"25\"\nage_int = int(age_str)\nprint(age_int + 5)  # Output: 30 (now we can do math!)\n\n# String to float\nprice_str = \"19.99\"\nprice_float = float(price_str)\nprint(price_float * 2)  # Output: 39.98\n\n# Integer to string\ncount = 100\ncount_str = str(count)\nmessage = \"You have \" + count_str + \" points\"\nprint(message)  # Output: You have 100 points\n\n# Float to integer (decimal part is removed!)\npi = 3.14159\npi_int = int(pi)\nprint(pi_int)  # Output: 3 (not 4!)\n\n# Integer to float\nwhole_number = 10\nfloat_number = float(whole_number)\nprint(float_number)  # Output: 10.0\n\n# Practical example: user input\nuser_age = input(\"Enter your age: \")  # Returns string\nage = int(user_age)  # Convert to integer\nnext_year = age + 1\nprint(\"Next year you will be\", next_year)"
+      },
+      {
+        "title": "Variable Naming Conventions - Best Practices",
+        "content": "Choosing good variable names is crucial for writing clean, maintainable code. Here are the rules and best practices:\n\n**Rules (must follow):**\n- Must start with a letter or underscore (_)\n- Can only contain letters, numbers, and underscores\n- Cannot use Python keywords (like if, while, for, etc.)\n- Case-sensitive: age, Age, and AGE are different variables\n\n**Best Practices (should follow):**\n- Use **snake_case**: lowercase words separated by underscores\n- Use descriptive names: user_age instead of x\n- Avoid single letters (except in loops: i, j, k are common)\n- Keep names concise but meaningful\n- Constants (values that never change) use ALL_CAPS",
+        "code": "# Good variable names\nuser_age = 25\ntotal_price = 99.99\nis_logged_in = True\nfirst_name = \"Alice\"\nMAX_ATTEMPTS = 3  # Constant\n\n# Valid but not recommended\nx = 25        # Too vague\na = \"Alice\"   # Not descriptive\nuserage = 25  # Hard to read without underscores\n\n# Invalid variable names (will cause errors)\n# 2nd_place = \"Bob\"    # Can't start with number\n# user-name = \"Alice\"  # Can't use hyphens\n# for = 10             # Can't use Python keywords\n\n# Demonstrating case sensitivity\nname = \"Alice\"\nName = \"Bob\"\nNAME = \"Charlie\"\nprint(name, Name, NAME)  # Output: Alice Bob Charlie\n\n# Good practice: descriptive names make code self-documenting\nstudent_count = 30\naverage_score = 85.5\nhas_passed_exam = average_score >= 60\nprint(f\"Pass status: {has_passed_exam}\")  # Output: Pass status: True"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question": "Which of the following is a valid variable name in Python?",
+      "options": [
+        "2nd_place",
+        "user-name",
+        "user_age",
+        "for"
+      ],
+      "correct_answer": 2
+    },
+    {
+      "question": "What is the data type of the value True?",
+      "options": [
+        "str",
+        "int",
+        "bool",
+        "float"
+      ],
+      "correct_answer": 2
+    },
+    {
+      "question": "What does int('25') + 5 evaluate to?",
+      "options": [
+        "255",
+        "30",
+        "Error",
+        "'255'"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "What is the result of int(3.99)?",
+      "options": [
+        "4",
+        "3",
+        "3.99",
+        "Error"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "Given age = 25, what is type(age)?",
+      "options": [
+        "'int'",
+        "<class 'int'>",
+        "int",
+        "integer"
+      ],
+      "correct_answer": 1
+    }
+  ],
+  "project": {
+    "name": "Personal Information Calculator",
+    "description": "Create a Python program that asks the user for various pieces of information, stores them in appropriately-typed variables, performs calculations and conversions, and displays results in a formatted manner.",
+    "requirements": [
+      "Use input() to get the user's name (string), age (convert to int), height in meters (convert to float), and whether they are a student (you decide how to handle this)",
+      "Store each piece of information in a variable with a descriptive name using snake_case",
+      "Calculate the user's age in 5 years and store it in a variable",
+      "Calculate the user's birth year (you can use 2024 as the current year) and store it",
+      "Use type() to display the data type of at least 2 different variables",
+      "Use string concatenation or f-strings to display a personalized summary message",
+      "Include at least 5 comments explaining what your code does",
+      "Demonstrate at least one type conversion besides converting the input"
+    ],
+    "starter_code": "# Your Name: _______\n# Day 3 Project: Personal Information Calculator\n\n# TODO: Get user input for name, age, height, and student status\n\n# TODO: Convert input to appropriate data types\n\n# TODO: Calculate age in 5 years\n\n# TODO: Calculate birth year (assume current year is 2024)\n\n# TODO: Display the data type of at least 2 variables\n\n# TODO: Display a formatted summary with all information\n\n# TODO: Demonstrate an additional type conversion\n",
+    "expected_output_example": "Enter your name: Alice\nEnter your age: 25\nEnter your height in meters: 1.65\nAre you a student? (yes/no): yes\n\n=== Personal Information Summary ===\nName: Alice\nAge: 25\nHeight: 1.65 meters\nStudent Status: yes\n\nIn 5 years, you will be 30 years old.\nYou were born in 1999.\n\nData type of age: <class 'int'>\nData type of height: <class 'float'>\n\nAge as string: '25' (type: <class 'str'>)",
+    "tester_file": "module003_tester.py"
+  }
+}

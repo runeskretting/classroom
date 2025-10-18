@@ -22,7 +22,12 @@
       "Bash(venv/bin/python3 testers/module001_tester.py /tmp/test_day1.py)",
       "Bash(venv/bin/python3 testers/module002_tester.py /tmp/test_day2.py)",
       "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(f''✅ App initialized successfully''); print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 2 exists: {2 in MODULES}''); print(f''✅ Module 2 title: {MODULES[2].get(\"\"title\"\")}'' if 2 in MODULES else ''❌ Module 2 not found'')\")",
-      "Bash(venv/bin/python3 -c \"import json; data = json.load(open(''modules/module_002.json'')); print(''✅ JSON is valid''); print(f''✅ Module ID: {data[\"\"id\"\"]}''); print(f''✅ Title: {data[\"\"title\"\"]}''); print(f''✅ Quiz questions: {len(data[\"\"quiz\"\"])}''); print(f''✅ Instructional sections: {len(data[\"\"instructional_content\"\"][\"\"sections\"\"])}''); print(f''✅ Project requirements: {len(data[\"\"project\"\"][\"\"requirements\"\"])}'')\")"
+      "Bash(venv/bin/python3 -c \"import json; data = json.load(open(''modules/module_002.json'')); print(''✅ JSON is valid''); print(f''✅ Module ID: {data[\"\"id\"\"]}''); print(f''✅ Title: {data[\"\"title\"\"]}''); print(f''✅ Quiz questions: {len(data[\"\"quiz\"\"])}''); print(f''✅ Instructional sections: {len(data[\"\"instructional_content\"\"][\"\"sections\"\"])}''); print(f''✅ Project requirements: {len(data[\"\"project\"\"][\"\"requirements\"\"])}'')\")",
+      "Bash(pkill -f \"venv/bin/python3 app.py\")",
+      "Bash(lsof -ti:5000)",
+      "Bash(xargs kill -9)",
+      "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(f''✅ App initialized successfully''); print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 3 exists: {3 in MODULES}''); print(f''✅ Module 3 title: {MODULES[3].get(\"\"title\"\")}'' if 3 in MODULES else ''❌ Module 3 not found'')\")",
+      "Bash(venv/bin/python3 testers/module003_tester.py /tmp/test_day3.py)"
     ],
     "deny": [],
     "ask": []
