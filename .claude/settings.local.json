@@ -10,7 +10,9 @@
       "mcp__chrome-devtools__take_snapshot",
       "mcp__chrome-devtools__fill",
       "mcp__chrome-devtools__click",
-      "Bash(cat /home/rune/Development/Python/classroom/data/student_progress.json)"
+      "Bash(cat /home/rune/Development/Python/classroom/data/student_progress.json)",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__evaluate_script"
     ],
     "deny": [],
     "ask": []

@@ -10,15 +10,16 @@
     </div>
 
     <form method="POST" class="quiz-form">
-        {% for i, question in enumerate(module.quiz) %}
+        {% for question in module.quiz %}
+            {% set question_index = loop.index0 %}
             <div class="question-card">
-                <div class="question-number">Question {{ i + 1 }} of {{ module.quiz|length }}</div>
+                <div class="question-number">Question {{ loop.index }} of {{ module.quiz|length }}</div>
                 <h3 class="question-text">{{ question.question }}</h3>
 
                 <div class="options">
-                    {% for j, option in enumerate(question.options) %}
+                    {% for option in question.options %}
                         <label class="option-label">
-                            <input type="radio" name="q{{ i }}" value="{{ j }}" required>
+                            <input type="radio" name="q{{ question_index }}" value="{{ loop.index0 }}" required>
                             <span class="option-text">{{ option }}</span>
                         </label>
                     {% endfor %}
@@ -27,6 +28,9 @@
         {% endfor %}
 
         <div class="quiz-actions">
+            <button type="button" onclick="openLearningModal()" class="btn btn-info">
+                📖 Review Materials
+            </button>
             <a href="{{ url_for('module', module_id=module_id) }}" class="btn btn-secondary">
                 Back to Module
             </a>
@@ -34,4 +38,8 @@
         </div>
     </form>
 </div>
+
+<!-- Include Learning Materials Modal -->
+{% include 'learning_modal.html' %}
+
 {% endblock %}

@@ -52,6 +52,9 @@
             </div>
 
             <div class="submission-actions">
+                <button type="button" onclick="openLearningModal()" class="btn btn-info">
+                    📖 Review Materials
+                </button>
                 <a href="{{ url_for('module', module_id=module_id) }}" class="btn btn-secondary">
                     Back to Module
                 </a>
@@ -71,6 +74,9 @@
         </ul>
     </div>
 </div>
+
+<!-- Include Learning Materials Modal -->
+{% include 'learning_modal.html' %}
 
 <script>
     // Display selected file name

@@ -49,6 +49,11 @@
         </section>
 
         <div class="action-buttons">
+            <!-- Study Materials Button - always visible -->
+            <button onclick="openLearningModal()" class="btn btn-info study-materials-btn">
+                📖 Study Materials
+            </button>
+
             {% if not progress.quiz_passed %}
                 <a href="{{ url_for('quiz', module_id=module_id) }}" class="btn btn-primary">
                     Take the Quiz
@@ -80,4 +85,8 @@
         </div>
     </div>
 </div>
+
+<!-- Include Learning Materials Modal -->
+{% include 'learning_modal.html' %}
+
 {% endblock %}
