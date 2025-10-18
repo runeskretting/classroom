@@ -1,0 +1,125 @@
+{
+  "id": 4,
+  "day": 4,
+  "category": "Setup & Fundamentals",
+  "title": "Day 4: Operators and Expressions",
+  "objective": "Master Python operators including arithmetic, comparison, logical, and assignment operators, and learn how to build complex expressions to perform calculations and make comparisons.",
+  "topics": [
+    "Arithmetic Operators",
+    "Order of Operations (PEMDAS)",
+    "Comparison Operators",
+    "Logical Operators (and, or, not)",
+    "Assignment Operators",
+    "Operator Precedence"
+  ],
+  "core_concepts": [
+    "Arithmetic Operations",
+    "Comparisons",
+    "Logical Operations",
+    "Expressions"
+  ],
+  "instructional_content": {
+    "intro": "Welcome to Day 4! Today you'll learn about operators - the symbols that perform operations on values and variables. Operators are the building blocks of expressions, allowing you to perform calculations, make comparisons, and combine conditions. Understanding operators is essential for writing programs that can process data and make decisions.",
+    "sections": [
+      {
+        "title": "Arithmetic Operators - Performing Calculations",
+        "content": "**Arithmetic operators** perform mathematical operations on numbers. Python supports all the basic math operations you'd expect, plus a few powerful extras.\n\n**Basic Arithmetic Operators:**\n- **Addition (+)**: Adds two numbers\n- **Subtraction (-)**: Subtracts one number from another\n- **Multiplication (*)**: Multiplies two numbers\n- **Division (/)**: Divides and always returns a float\n- **Floor Division (//)**: Divides and rounds down to nearest integer\n- **Modulus (%)**: Returns the remainder after division\n- **Exponentiation (**)**: Raises a number to a power\n\n**Important notes:**\n- Division (/) always returns a float, even if dividing evenly (10 / 2 = 5.0)\n- Floor division (//) is useful when you need whole numbers\n- Modulus (%) is great for checking if numbers are even/odd or divisible",
+        "code": "# Basic arithmetic\nprint(10 + 5)   # Output: 15 (addition)\nprint(10 - 5)   # Output: 5 (subtraction)\nprint(10 * 5)   # Output: 50 (multiplication)\nprint(10 / 5)   # Output: 2.0 (division - always float!)\n\n# Special division operators\nprint(10 // 3)  # Output: 3 (floor division - rounds down)\nprint(10 % 3)   # Output: 1 (modulus - remainder)\n\n# Exponentiation\nprint(2 ** 3)   # Output: 8 (2 to the power of 3)\nprint(5 ** 2)   # Output: 25 (5 squared)\n\n# Practical examples\n# Check if a number is even\nnum = 42\nif num % 2 == 0:\n    print(f\"{num} is even\")\n\n# Calculate area of a circle\nimport math\nradius = 5\narea = math.pi * (radius ** 2)\nprint(f\"Area: {area:.2f}\")\n\n# Split items evenly\ntotal_items = 17\npeople = 5\nitems_per_person = total_items // people\nleftover = total_items % people\nprint(f\"Each person gets {items_per_person} items\")\nprint(f\"Leftover: {leftover} items\")"
+      },
+      {
+        "title": "Order of Operations (PEMDAS)",
+        "content": "Python follows the standard mathematical **order of operations**, often remembered by the acronym **PEMDAS**:\n\n1. **P**arentheses - () are evaluated first\n2. **E**xponents - ** is next\n3. **M**ultiplication and **D**ivision - * / // % (left to right)\n4. **A**ddition and **S**ubtraction - + - (left to right)\n\n**Why this matters:**\nWithout understanding operator precedence, you might get unexpected results. For example, `2 + 3 * 4` equals 14, not 20, because multiplication happens before addition.\n\n**Best practice:** Use parentheses to make your intentions clear, even when not strictly necessary. It makes code more readable.",
+        "code": "# Order of operations examples\nresult1 = 2 + 3 * 4\nprint(result1)  # Output: 14 (not 20!)\n# Explanation: 3 * 4 = 12, then 2 + 12 = 14\n\nresult2 = (2 + 3) * 4\nprint(result2)  # Output: 20\n# Explanation: (2 + 3) = 5, then 5 * 4 = 20\n\n# More complex example\nresult3 = 10 + 2 ** 3 * 2 - 5\nprint(result3)  # Output: 21\n# Step by step:\n# 1. 2 ** 3 = 8 (exponent first)\n# 2. 8 * 2 = 16 (multiplication)\n# 3. 10 + 16 = 26 (addition left to right)\n# 4. 26 - 5 = 21 (subtraction)\n\n# Using parentheses for clarity\nprice = 100\ntax_rate = 0.08\ndiscount = 10\n\n# Without parentheses - might be confusing\ntotal1 = price - discount + price * tax_rate\nprint(f\"Total 1: ${total1}\")  # Output: 98.0\n\n# With parentheses - crystal clear\ntotal2 = (price - discount) + (price * tax_rate)\nprint(f\"Total 2: ${total2}\")  # Output: 98.0\n\n# Calculate with different grouping\ntotal3 = price - (discount + price * tax_rate)\nprint(f\"Total 3: ${total3}\")  # Output: 82.0 (different result!)"
+      },
+      {
+        "title": "Comparison Operators - Making Comparisons",
+        "content": "**Comparison operators** compare two values and return a Boolean result (True or False). These are essential for decision-making in programs.\n\n**Comparison Operators:**\n- **Equal to (==)**: Checks if two values are equal\n- **Not equal to (!=)**: Checks if two values are different\n- **Greater than (>)**: Checks if left value is greater than right\n- **Less than (<)**: Checks if left value is less than right\n- **Greater than or equal (>=)**: Checks if left >= right\n- **Less than or equal (<=)**: Checks if left <= right\n\n**Common mistakes:**\n- Using = (assignment) instead of == (comparison)\n- Comparing different types can give unexpected results\n- Remember: comparison operators return True or False, not the values themselves",
+        "code": "# Basic comparisons\nprint(5 == 5)   # Output: True\nprint(5 == 6)   # Output: False\nprint(5 != 6)   # Output: True\nprint(5 > 3)    # Output: True\nprint(5 < 3)    # Output: False\nprint(5 >= 5)   # Output: True\nprint(5 <= 4)   # Output: False\n\n# Comparing variables\nage = 18\nmin_age = 18\nprint(age >= min_age)  # Output: True\n\n# String comparisons (alphabetical order)\nprint(\"apple\" < \"banana\")   # Output: True\nprint(\"apple\" == \"Apple\")   # Output: False (case sensitive!)\n\n# Practical examples\nscore = 85\nif score >= 90:\n    print(\"Grade: A\")\nelif score >= 80:\n    print(\"Grade: B\")  # This will execute\n\n# Chaining comparisons (Python special feature!)\nx = 5\nprint(1 < x < 10)  # Output: True\n# This is equivalent to: (1 < x) and (x < 10)\n\n# Temperature range check\ntemp = 72\ncomfortable = 68 <= temp <= 78\nprint(f\"Temperature is comfortable: {comfortable}\")  # Output: True\n\n# Common mistake - don't confuse = with ==\n# x = 5    # This ASSIGNS 5 to x\n# x == 5   # This COMPARES x to 5 and returns True/False"
+      },
+      {
+        "title": "Logical Operators - Combining Conditions",
+        "content": "**Logical operators** allow you to combine multiple conditions. They work with Boolean values (True/False) and are essential for complex decision-making.\n\n**The Three Logical Operators:**\n\n1. **and**: Returns True only if BOTH conditions are True\n   - Think: \"I need my keys AND my wallet to leave\"\n   - True and True = True\n   - Everything else = False\n\n2. **or**: Returns True if AT LEAST ONE condition is True\n   - Think: \"I can pay with cash OR card\"\n   - False or False = False\n   - Everything else = True\n\n3. **not**: Reverses the Boolean value\n   - not True = False\n   - not False = True\n\n**Short-circuit evaluation:**\nPython stops evaluating as soon as it knows the answer. With `and`, if the first condition is False, it doesn't check the second. With `or`, if the first is True, it doesn't check the second.",
+        "code": "# AND operator - both must be True\nage = 25\nhas_license = True\n\ncan_drive = age >= 18 and has_license\nprint(can_drive)  # Output: True\n\n# All combinations of AND\nprint(True and True)    # Output: True\nprint(True and False)   # Output: False\nprint(False and True)   # Output: False\nprint(False and False)  # Output: False\n\n# OR operator - at least one must be True\nis_weekend = True\nis_holiday = False\n\ncan_sleep_in = is_weekend or is_holiday\nprint(can_sleep_in)  # Output: True\n\n# All combinations of OR\nprint(True or True)     # Output: True\nprint(True or False)    # Output: True\nprint(False or True)    # Output: True\nprint(False or False)   # Output: False\n\n# NOT operator - reverses the value\nis_raining = False\nprint(not is_raining)   # Output: True\n\nis_sunny = True\nprint(not is_sunny)     # Output: False\n\n# Complex conditions\ntemperature = 75\nis_sunny = True\nhas_sunscreen = False\n\n# Can go to beach?\ncan_go_to_beach = (temperature >= 70 and is_sunny) and has_sunscreen\nprint(f\"Can go to beach: {can_go_to_beach}\")  # Output: False\n\n# Eligibility check with multiple conditions\nage = 25\nincome = 45000\ncredit_score = 720\n\neligible = (age >= 21 and income >= 30000) and (credit_score >= 650)\nprint(f\"Loan eligible: {eligible}\")  # Output: True\n\n# Using NOT with other operators\npassword = \"secret123\"\nis_valid = len(password) >= 8 and not (password.isalpha())\nprint(f\"Password valid: {is_valid}\")  # Output: True"
+      },
+      {
+        "title": "Assignment Operators - Shortcuts for Updates",
+        "content": "**Assignment operators** assign values to variables. The basic one is `=`, but Python provides shorthand operators that combine assignment with arithmetic operations.\n\n**Basic Assignment:**\n- `x = 5` assigns the value 5 to variable x\n\n**Compound Assignment Operators:**\n- `+=` : Add and assign (x += 3 means x = x + 3)\n- `-=` : Subtract and assign\n- `*=` : Multiply and assign\n- `/=` : Divide and assign\n- `//=` : Floor divide and assign\n- `%=` : Modulus and assign\n- `**=` : Exponent and assign\n\n**Why use these?**\n- They make code more concise and readable\n- They're faster to type\n- They clearly show you're updating an existing variable\n- They're a common pattern in professional Python code",
+        "code": "# Basic assignment\nx = 10\nprint(x)  # Output: 10\n\n# Addition assignment\nx += 5  # Same as: x = x + 5\nprint(x)  # Output: 15\n\n# Subtraction assignment\nx -= 3  # Same as: x = x - 3\nprint(x)  # Output: 12\n\n# Multiplication assignment\nx *= 2  # Same as: x = x * 2\nprint(x)  # Output: 24\n\n# Division assignment\nx /= 4  # Same as: x = x / 4\nprint(x)  # Output: 6.0\n\n# Floor division assignment\ny = 17\ny //= 5  # Same as: y = y // 5\nprint(y)  # Output: 3\n\n# Modulus assignment\nz = 17\nz %= 5  # Same as: z = z % 5\nprint(z)  # Output: 2\n\n# Exponent assignment\na = 2\na **= 3  # Same as: a = a ** 3\nprint(a)  # Output: 8\n\n# Practical examples\n\n# Counter increment\npage_views = 0\npage_views += 1  # Increment by 1\npage_views += 1\npage_views += 1\nprint(f\"Total page views: {page_views}\")  # Output: 3\n\n# Bank account\nbalance = 1000\nbalance += 500   # Deposit\nbalance -= 200   # Withdrawal\nbalance *= 1.02  # 2% interest\nprint(f\"Balance: ${balance:.2f}\")  # Output: $1326.00\n\n# Game score multiplier\nscore = 100\nscore *= 2  # Double points power-up\nprint(f\"Score: {score}\")  # Output: 200\n\n# String concatenation also works!\ngreeting = \"Hello\"\ngreeting += \" World\"  # Same as: greeting = greeting + \" World\"\nprint(greeting)  # Output: Hello World"
+      },
+      {
+        "title": "Operator Precedence - The Complete Picture",
+        "content": "**Operator precedence** determines the order in which operations are performed in complex expressions. Understanding this prevents bugs and makes your code predictable.\n\n**Precedence Order (Highest to Lowest):**\n\n1. **Parentheses**: `()`\n2. **Exponentiation**: `**`\n3. **Unary operators**: `+x`, `-x`, `not x`\n4. **Multiplication, Division, Modulus**: `*`, `/`, `//`, `%`\n5. **Addition, Subtraction**: `+`, `-`\n6. **Comparison operators**: `==`, `!=`, `<`, `>`, `<=`, `>=`\n7. **Logical NOT**: `not`\n8. **Logical AND**: `and`\n9. **Logical OR**: `or`\n10. **Assignment**: `=`, `+=`, `-=`, etc.\n\n**Important rules:**\n- Operators at the same level are evaluated left to right\n- When in doubt, use parentheses!\n- Parentheses make code more readable even when not required",
+        "code": "# Precedence example 1: Arithmetic and comparison\nresult = 5 + 3 > 7\nprint(result)  # Output: True\n# Explanation: 5 + 3 = 8, then 8 > 7 = True\n\n# Precedence example 2: Multiple operators\nresult = 10 > 5 and 15 < 20\nprint(result)  # Output: True\n# Explanation: Comparisons first, then 'and'\n# 10 > 5 = True, 15 < 20 = True, True and True = True\n\n# Precedence example 3: With NOT\nresult = not 10 > 5\nprint(result)  # Output: False\n# Explanation: 10 > 5 = True, then not True = False\n\n# Complex example\nx = 5\ny = 10\nz = 15\n\nresult = x + y * 2 > z and not z < y\nprint(result)  # Output: True\n# Step by step:\n# 1. y * 2 = 20\n# 2. x + 20 = 25\n# 3. 25 > 15 = True\n# 4. 15 < 10 = False\n# 5. not False = True\n# 6. True and True = True\n\n# Using parentheses for clarity\n# Without parentheses (relies on precedence)\nresult1 = 5 + 3 * 2 > 10 and 7 < 9\nprint(result1)  # Output: True\n\n# With parentheses (clearer intent)\nresult2 = ((5 + (3 * 2)) > 10) and (7 < 9)\nprint(result2)  # Output: True\n\n# Practical example: Eligibility check\nage = 25\nincome = 50000\nhas_job = True\ncredit_score = 700\n\n# Complex eligibility without parentheses\neligible1 = age >= 21 and income >= 30000 or has_job and credit_score >= 650\n\n# Same logic with parentheses for clarity\neligible2 = ((age >= 21) and (income >= 30000)) or (has_job and (credit_score >= 650))\n\nprint(f\"Eligible: {eligible1}\")  # Output: True\nprint(f\"Eligible (clear): {eligible2}\")  # Output: True\n\n# Pro tip: When mixing 'and' and 'or', always use parentheses!\ncan_enter = (age >= 18 and has_ticket) or is_vip  # Much clearer!"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question": "What is the result of: 10 // 3",
+      "options": [
+        "3.33",
+        "3",
+        "4",
+        "1"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "What does the expression (5 > 3 and 10 < 8) evaluate to?",
+      "options": [
+        "True",
+        "False",
+        "5",
+        "Error"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "What is the value of x after: x = 10; x += 5; x *= 2",
+      "options": [
+        "20",
+        "25",
+        "30",
+        "15"
+      ],
+      "correct_answer": 2
+    },
+    {
+      "question": "What is the result of: 2 + 3 * 4",
+      "options": [
+        "20",
+        "14",
+        "24",
+        "11"
+      ],
+      "correct_answer": 1
+    },
+    {
+      "question": "Which operator returns the remainder after division?",
+      "options": [
+        "/",
+        "//",
+        "%",
+        "**"
+      ],
+      "correct_answer": 2
+    }
+  ],
+  "project": {
+    "name": "Simple Calculator with Comparisons",
+    "description": "Create a Python program that acts as a calculator, taking two numbers from the user and performing various operations. The program should demonstrate arithmetic operators, comparisons, and logical operations.",
+    "requirements": [
+      "Use input() to get two numbers from the user (convert to float)",
+      "Calculate and display: sum, difference, product, quotient (regular division), floor division, modulus, and exponentiation",
+      "Use comparison operators to check: if first number is greater than second, if they are equal, if first number is even",
+      "Calculate the average of the two numbers",
+      "Use logical operators to check: if both numbers are positive, if at least one number is greater than 100",
+      "Use compound assignment operators (+=, -=, *=, etc.) in at least 2 calculations",
+      "Display results in a clear, formatted way",
+      "Include at least 5 comments explaining your operations"
+    ],
+    "starter_code": "# Your Name: _______\n# Day 4 Project: Simple Calculator with Comparisons\n\n# TODO: Get two numbers from user input\n\n# TODO: Perform all arithmetic operations\n\n# TODO: Perform comparisons\n\n# TODO: Calculate average\n\n# TODO: Use logical operators for checks\n\n# TODO: Use compound assignment operators\n\n# TODO: Display all results in a formatted way\n",
+    "expected_output_example": "Enter first number: 15\nEnter second number: 4\n\n=== Arithmetic Operations ===\nSum: 15.0 + 4.0 = 19.0\nDifference: 15.0 - 4.0 = 11.0\nProduct: 15.0 * 4.0 = 60.0\nQuotient: 15.0 / 4.0 = 3.75\nFloor Division: 15.0 // 4.0 = 3.0\nModulus: 15.0 % 4.0 = 3.0\nExponentiation: 15.0 ** 4.0 = 50625.0\n\n=== Comparisons ===\nIs 15.0 > 4.0? True\nAre they equal? False\nIs 15.0 even? False\n\n=== Statistics ===\nAverage: 9.5\n\n=== Logical Checks ===\nBoth numbers positive? True\nAt least one > 100? False",
+    "tester_file": "module004_tester.py"
+  }
+}
