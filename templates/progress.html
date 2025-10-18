@@ -12,23 +12,23 @@
     {% if progress.completed %}
         <div class="completion-banner">
             <h2>🎉 Congratulations!</h2>
-            <p>You have successfully completed all three modules of the Python Classroom!</p>
+            <p>You have successfully completed all modules of the Python Classroom!</p>
             <p class="completion-date">Completed: {{ progress.completed_at }}</p>
         </div>
     {% else %}
         <div class="current-progress">
-            <h3>Currently on: Module {{ progress.current_module }}</h3>
+            <h3>Currently on: Day {{ progress.current_module }}</h3>
             <div class="progress-bar">
-                <div class="progress-fill" style="width: {{ (progress.current_module - 1) / 3 * 100 }}%"></div>
+                <div class="progress-fill" style="width: {{ (progress.current_module - 1) / 100 * 100 }}%"></div>
             </div>
-            <p class="progress-text">{{ progress.current_module - 1 }} of 3 modules completed</p>
+            <p class="progress-text">{{ progress.current_module - 1 }} of 100 days completed</p>
         </div>
     {% endif %}
 
     <div class="modules-progress">
-        {% for module_id in [1, 2, 3] %}
+        {% for module_id in modules.keys()|sort %}
             {% set module = modules[module_id] %}
-            {% set module_progress = progress.modules[module_id] %}
+            {% set module_progress = progress.modules.get(module_id, {'quiz_passed': False, 'project_passed': False, 'quiz_score': 0, 'attempts': 0}) %}
             {% set is_accessible = module_id <= progress.current_module %}
             {% set is_complete = module_progress.quiz_passed and module_progress.project_passed %}
 
@@ -101,26 +101,39 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number">{{ progress.current_module - 1 }}</div>
-                <div class="stat-label">Modules Completed</div>
+                <div class="stat-label">Days Completed</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">
-                    {% set total_attempts = progress.modules[1].attempts + progress.modules[2].attempts + progress.modules[3].attempts %}
-                    {{ total_attempts }}
+                    {% set total_attempts = namespace(value=0) %}
+                    {% for module_id, module_data in progress.modules.items() %}
+                        {% set total_attempts.value = total_attempts.value + module_data.attempts %}
+                    {% endfor %}
+                    {{ total_attempts.value }}
                 </div>
                 <div class="stat-label">Total Attempts</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">
-                    {% set quizzes_passed = [progress.modules[1].quiz_passed, progress.modules[2].quiz_passed, progress.modules[3].quiz_passed]|select|list|length %}
-                    {{ quizzes_passed }}
+                    {% set quizzes_passed = namespace(value=0) %}
+                    {% for module_id, module_data in progress.modules.items() %}
+                        {% if module_data.quiz_passed %}
+                            {% set quizzes_passed.value = quizzes_passed.value + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ quizzes_passed.value }}
                 </div>
                 <div class="stat-label">Quizzes Passed</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">
-                    {% set projects_passed = [progress.modules[1].project_passed, progress.modules[2].project_passed, progress.modules[3].project_passed]|select|list|length %}
-                    {{ projects_passed }}
+                    {% set projects_passed = namespace(value=0) %}
+                    {% for module_id, module_data in progress.modules.items() %}
+                        {% if module_data.project_passed %}
+                            {% set projects_passed.value = projects_passed.value + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ projects_passed.value }}
                 </div>
                 <div class="stat-label">Projects Passed</div>
             </div>
