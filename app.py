@@ -17,6 +17,10 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'testers'))
 # Import module loader
 from module_loader import get_all_modules, get_module, get_module_count
 
+# Import database manager (replaces JSON-based progress storage)
+from db_manager import get_student_progress, update_student_progress
+from migrate_to_sqlite import auto_migrate
+
 app = Flask(__name__)
 app.secret_key = 'python_classroom_secret_key_2024'  # Change in production
 app.config['UPLOAD_FOLDER'] = 'data/submissions'
@@ -27,6 +31,9 @@ app.config['ALLOWED_EXTENSIONS'] = {'py'}
 # Old hardcoded MODULES dictionary has been replaced with dynamic loading
 # Modules are now stored in modules/module_XXX.json files
 MODULES = get_all_modules()
+
+# Auto-migrate from JSON to SQLite on first run
+auto_migrate()
 
 # Legacy MODULES dictionary (kept for reference, not used)
 # MODULES_OLD = {
@@ -489,55 +496,8 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 
-def load_progress():
-    """Load student progress from JSON file."""
-    progress_file = 'data/student_progress.json'
-    if os.path.exists(progress_file):
-        with open(progress_file, 'r') as f:
-            data = json.load(f)
-            # Convert string keys back to integers for modules
-            for student in data.values():
-                if 'modules' in student and isinstance(student['modules'], dict):
-                    student['modules'] = {int(k): v for k, v in student['modules'].items()}
-            return data
-    return {}
-
-
-def save_progress(progress):
-    """Save student progress to JSON file."""
-    progress_file = 'data/student_progress.json'
-    os.makedirs('data', exist_ok=True)
-    with open(progress_file, 'w') as f:
-        json.dump(progress, f, indent=2)
-
-
-def get_student_progress(student_name):
-    """Get progress for a specific student."""
-    all_progress = load_progress()
-    if student_name not in all_progress:
-        # Initialize progress for all 100 modules
-        module_count = get_module_count()
-        modules_dict = {
-            i: {'quiz_passed': False, 'project_passed': False, 'quiz_score': 0, 'attempts': 0}
-            for i in range(1, module_count + 1)
-        }
-
-        all_progress[student_name] = {
-            'current_module': 1,
-            'modules': modules_dict,
-            'completed': False,
-            'started_at': datetime.now().isoformat()
-        }
-        save_progress(all_progress)
-    return all_progress[student_name]
-
-
-def update_student_progress(student_name, updates):
-    """Update and save student progress."""
-    all_progress = load_progress()
-    if student_name in all_progress:
-        all_progress[student_name].update(updates)
-        save_progress(all_progress)
+# Progress management functions are now imported from db_manager.py
+# get_student_progress() and update_student_progress() are available
 
 
 @app.route('/')

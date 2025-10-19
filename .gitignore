@@ -29,6 +29,12 @@ instance/
 
 # Data files
 data/student_progress.json
+data/student_progress.json.backup*
+data/*.db
+data/*.db-journal
+data/*.db-shm
+data/*.db-wal
+data/backups/
 data/submissions/**/*.py
 !data/.gitkeep
 
