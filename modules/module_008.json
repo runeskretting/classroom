@@ -1,0 +1,142 @@
+{
+  "id": 8,
+  "day": 8,
+  "title": "Day 8: Error Handling and Exception Management",
+  "objectives": [
+    "Understand what exceptions are and why they occur",
+    "Learn to use try/except blocks to handle errors gracefully",
+    "Handle specific exception types (ValueError, ZeroDivisionError, FileNotFoundError)",
+    "Use else and finally clauses for complete error handling",
+    "Raise custom exceptions when needed",
+    "Write robust programs that don't crash on invalid input"
+  ],
+  "topics": [
+    "Exceptions and Error Types",
+    "try/except Blocks",
+    "Catching Specific Exceptions",
+    "else and finally Clauses",
+    "Raising Exceptions",
+    "Error Handling Best Practices"
+  ],
+  "instructional_content": {
+    "sections": [
+      {
+        "title": "Introduction to Errors and Exceptions",
+        "content": "When you write programs, errors are inevitable. You've likely encountered them already - perhaps a `NameError` when you misspelled a variable, or a `TypeError` when you tried to add a string and a number. These are called **exceptions**.\n\nThere are two main types of errors:\n\n**Syntax Errors:** Mistakes in the code structure that prevent Python from running at all. For example:\n```python\nif x == 5  # Missing colon\n    print(\"Five\")\n```\n\n**Exceptions:** Errors that occur while the program is running. These can be handled gracefully so your program doesn't crash. For example:\n```python\nx = int(\"abc\")  # ValueError - can't convert \"abc\" to integer\ny = 10 / 0      # ZeroDivisionError - can't divide by zero\n```\n\n**Why Handle Exceptions?**\n- Your program won't crash when something goes wrong\n- You can provide helpful error messages to users\n- You can recover from errors and continue running\n- Your code becomes more robust and professional\n\n**Common Exception Types:**\n- `ValueError`: Invalid value for an operation (e.g., int(\"abc\"))\n- `TypeError`: Wrong type for an operation (e.g., \"hello\" + 5)\n- `ZeroDivisionError`: Division by zero\n- `FileNotFoundError`: File doesn't exist\n- `IndexError`: List index out of range\n- `KeyError`: Dictionary key doesn't exist"
+      },
+      {
+        "title": "The try/except Block - Basic Exception Handling",
+        "content": "The `try/except` block is your primary tool for handling exceptions. It allows you to \"try\" some code, and if an error occurs, \"catch\" it and handle it gracefully instead of crashing.\n\n**Basic Syntax:**\n```python\ntry:\n    # Code that might raise an exception\n    risky_code()\nexcept:\n    # Code that runs if ANY exception occurs\n    print(\"An error occurred!\")\n```\n\n**Example - Converting User Input:**\n```python\ntry:\n    age = int(input(\"Enter your age: \"))\n    print(f\"You are {age} years old.\")\nexcept:\n    print(\"Invalid input! Please enter a number.\")\n```\n\nWithout try/except, entering \"twenty\" would crash the program. With try/except, you can show a friendly message instead.\n\n**How It Works:**\n1. Python executes the code in the `try` block\n2. If no error occurs, the `except` block is skipped\n3. If an error occurs, Python immediately jumps to the `except` block\n4. The program continues after the try/except block\n\n**Example - Safe Division:**\n```python\ntry:\n    x = 10\n    y = 0\n    result = x / y\n    print(result)\nexcept:\n    print(\"Cannot divide by zero!\")\n\nprint(\"Program continues...\")\n```\n\nOutput:\n```\nCannot divide by zero!\nProgram continues...\n```\n\nThe program doesn't crash - it handles the error and keeps running!"
+      },
+      {
+        "title": "Handling Specific Exceptions",
+        "content": "Catching all exceptions with a bare `except:` is sometimes too broad. You often want to handle different errors differently. Python lets you catch specific exception types.\n\n**Catching Specific Exceptions:**\n```python\ntry:\n    num = int(input(\"Enter a number: \"))\n    result = 100 / num\n    print(f\"100 divided by {num} is {result}\")\nexcept ValueError:\n    print(\"That's not a valid number!\")\nexcept ZeroDivisionError:\n    print(\"You can't divide by zero!\")\n```\n\nNow different errors get different messages:\n- Entering \"abc\" → \"That's not a valid number!\"\n- Entering \"0\" → \"You can't divide by zero!\"\n- Entering \"5\" → \"100 divided by 5 is 20.0\"\n\n**Multiple Exceptions in One Block:**\nYou can catch multiple exception types with one except block:\n```python\ntry:\n    # Some risky code\n    value = data[key] / count\nexcept (KeyError, ZeroDivisionError):\n    print(\"Either the key doesn't exist or you're dividing by zero!\")\n```\n\n**Catching the Exception Object:**\nYou can access the exception details using `as`:\n```python\ntry:\n    with open(\"missing_file.txt\", \"r\") as file:\n        content = file.read()\nexcept FileNotFoundError as e:\n    print(f\"Error: {e}\")\n    print(\"The file doesn't exist!\")\n```\n\nOutput:\n```\nError: [Errno 2] No such file or directory: 'missing_file.txt'\nThe file doesn't exist!\n```\n\n**Best Practice - Specific Before General:**\n```python\ntry:\n    risky_operation()\nexcept ValueError:\n    print(\"Value error occurred\")\nexcept TypeError:\n    print(\"Type error occurred\")\nexcept Exception:\n    print(\"Some other error occurred\")\n```\n\nAlways catch specific exceptions first, then more general ones."
+      },
+      {
+        "title": "The else and finally Clauses",
+        "content": "Python's try/except can be extended with `else` and `finally` clauses for more control over execution flow.\n\n**The else Clause:**\nThe `else` block runs only if NO exception occurred in the try block.\n\n```python\ntry:\n    num = int(input(\"Enter a number: \"))\nexcept ValueError:\n    print(\"Invalid input!\")\nelse:\n    print(f\"You entered: {num}\")\n    print(\"This only runs if no error occurred!\")\n```\n\n**Why use else?** It makes your code clearer by separating:\n- Code that might raise exceptions (in `try`)\n- Code that should only run on success (in `else`)\n\n**The finally Clause:**\nThe `finally` block ALWAYS runs, whether an exception occurred or not. It's perfect for cleanup operations.\n\n```python\ntry:\n    file = open(\"data.txt\", \"r\")\n    content = file.read()\n    print(content)\nexcept FileNotFoundError:\n    print(\"File not found!\")\nfinally:\n    print(\"This always runs!\")\n    # Cleanup code here\n```\n\n**Complete Structure - All Together:**\n```python\ntry:\n    print(\"Trying to open file...\")\n    file = open(\"data.txt\", \"r\")\n    data = file.read()\n    number = int(data)\nexcept FileNotFoundError:\n    print(\"File doesn't exist!\")\nexcept ValueError:\n    print(\"File content is not a number!\")\nelse:\n    print(f\"Successfully read number: {number}\")\n    result = number * 2\n    print(f\"Double that is: {result}\")\nfinally:\n    print(\"Cleanup: Closing file if it was opened\")\n    try:\n        file.close()\n    except:\n        pass  # File was never opened\n```\n\n**Execution Flow:**\n1. `try` block executes\n2. If error: appropriate `except` block runs\n3. If no error: `else` block runs\n4. `finally` block ALWAYS runs last\n\n**Common Use Cases for finally:**\n- Closing files\n- Releasing resources (database connections, network sockets)\n- Cleanup operations\n- Logging"
+      },
+      {
+        "title": "Raising Exceptions",
+        "content": "Sometimes you want to create your own errors when something goes wrong in your program. This is called **raising an exception**.\n\n**The raise Keyword:**\n```python\ndef divide(a, b):\n    if b == 0:\n        raise ValueError(\"Cannot divide by zero!\")\n    return a / b\n\ntry:\n    result = divide(10, 0)\nexcept ValueError as e:\n    print(f\"Error: {e}\")\n```\n\nOutput:\n```\nError: Cannot divide by zero!\n```\n\n**Why Raise Exceptions?**\n- Enforce business rules in your code\n- Signal that something invalid has occurred\n- Provide clear error messages\n- Force calling code to handle error conditions\n\n**Validating Function Input:**\n```python\ndef set_age(age):\n    if not isinstance(age, int):\n        raise TypeError(\"Age must be an integer\")\n    if age < 0:\n        raise ValueError(\"Age cannot be negative\")\n    if age > 150:\n        raise ValueError(\"Age seems unrealistic\")\n    return age\n\ntry:\n    user_age = set_age(-5)\nexcept ValueError as e:\n    print(f\"Invalid age: {e}\")\n```\n\nOutput:\n```\nInvalid age: Age cannot be negative\n```\n\n**Re-raising Exceptions:**\nSometimes you want to catch an exception, do something, then raise it again:\n\n```python\ndef process_file(filename):\n    try:\n        with open(filename, 'r') as f:\n            return f.read()\n    except FileNotFoundError:\n        print(f\"Logging: File {filename} not found\")\n        raise  # Re-raise the same exception\n\ntry:\n    data = process_file(\"missing.txt\")\nexcept FileNotFoundError:\n    print(\"Handling the error at a higher level\")\n```\n\n**Custom Exception Types:**\nYou can create your own exception classes:\n\n```python\nclass InsufficientFundsError(Exception):\n    pass\n\ndef withdraw(balance, amount):\n    if amount > balance:\n        raise InsufficientFundsError(\"Not enough money!\")\n    return balance - amount\n\ntry:\n    new_balance = withdraw(100, 150)\nexcept InsufficientFundsError as e:\n    print(f\"Transaction failed: {e}\")\n```\n\nCustom exceptions make your code more readable and maintainable."
+      },
+      {
+        "title": "Error Handling Best Practices",
+        "content": "Writing good exception handling code is an art. Here are the best practices to follow:\n\n**1. Be Specific - Don't Catch Everything**\n\n❌ Bad:\n```python\ntry:\n    result = complex_operation()\nexcept:\n    print(\"Something went wrong!\")\n```\n\n✅ Good:\n```python\ntry:\n    result = complex_operation()\nexcept ValueError:\n    print(\"Invalid value provided\")\nexcept FileNotFoundError:\n    print(\"Required file is missing\")\n```\n\n**2. Don't Use Exceptions for Flow Control**\n\n❌ Bad:\n```python\ntry:\n    while True:\n        item = get_next_item()\n        process(item)\nexcept EndOfItems:\n    pass  # Using exception to exit loop\n```\n\n✅ Good:\n```python\nwhile has_more_items():\n    item = get_next_item()\n    process(item)\n```\n\n**3. Keep try Blocks Small**\n\n❌ Bad:\n```python\ntry:\n    # 50 lines of code\n    # Only line 48 might raise ValueError\nexcept ValueError:\n    handle_error()\n```\n\n✅ Good:\n```python\n# Lines 1-47 here\ntry:\n    risky_operation()  # Only the risky part\nexcept ValueError:\n    handle_error()\n```\n\n**4. Provide Helpful Error Messages**\n\n❌ Bad:\n```python\nexcept ValueError:\n    print(\"Error\")\n```\n\n✅ Good:\n```python\nexcept ValueError as e:\n    print(f\"Invalid input: {e}\")\n    print(\"Please enter a number between 1 and 100\")\n```\n\n**5. Clean Up Resources**\n\n❌ Bad:\n```python\nfile = open(\"data.txt\", \"w\")\nfile.write(data)  # If this fails, file stays open\nfile.close()\n```\n\n✅ Good:\n```python\ntry:\n    file = open(\"data.txt\", \"w\")\n    file.write(data)\nfinally:\n    file.close()\n```\n\n✅ Better - Use Context Manager:\n```python\nwith open(\"data.txt\", \"w\") as file:\n    file.write(data)  # Automatically closes even if error occurs\n```\n\n**6. Log Errors for Debugging**\n\n```python\nimport logging\n\ntry:\n    risky_operation()\nexcept Exception as e:\n    logging.error(f\"Operation failed: {e}\")\n    # Then handle or re-raise\n```\n\n**7. Don't Silence Errors Completely**\n\n❌ Bad:\n```python\ntry:\n    important_operation()\nexcept:\n    pass  # Error disappears - hard to debug!\n```\n\n✅ Good:\n```python\ntry:\n    important_operation()\nexcept Exception as e:\n    print(f\"Warning: {e}\")\n    # Or log it, or handle it properly\n```\n\n**When to Use Exception Handling:**\n- File operations (files might not exist)\n- User input (users make mistakes)\n- Network operations (connections can fail)\n- Database operations (queries can fail)\n- Type conversions (data might be invalid)\n\n**When NOT to Use:**\n- For normal control flow (use if/else instead)\n- When you can prevent the error with validation\n- To hide bugs in your code\n\nException handling makes your programs robust and user-friendly when used correctly!"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question": "What happens when an exception is raised but not caught with a try/except block?",
+      "options": [
+        "The program continues running normally",
+        "The program crashes and displays an error message",
+        "Python automatically fixes the error",
+        "The error is logged but ignored"
+      ],
+      "correct_answer": 1,
+      "explanation": "When an exception is not caught, the program terminates and Python displays a traceback showing where the error occurred."
+    },
+    {
+      "question": "Which block executes ONLY if no exception occurred in the try block?",
+      "options": [
+        "except",
+        "finally",
+        "else",
+        "catch"
+      ],
+      "correct_answer": 2,
+      "explanation": "The 'else' block executes only when the try block completes without raising any exceptions."
+    },
+    {
+      "question": "How do you catch a specific type of exception, such as ValueError?",
+      "options": [
+        "except ValueError:",
+        "catch ValueError:",
+        "if exception == ValueError:",
+        "except (ValueError):"
+      ],
+      "correct_answer": 0,
+      "explanation": "Use 'except ValueError:' to catch only ValueError exceptions. This is more specific than catching all exceptions."
+    },
+    {
+      "question": "What does the 'raise' keyword do?",
+      "options": [
+        "It fixes an error automatically",
+        "It creates and throws an exception",
+        "It catches an exception",
+        "It prints an error message"
+      ],
+      "correct_answer": 1,
+      "explanation": "The 'raise' keyword is used to manually create and throw an exception, allowing you to signal error conditions in your code."
+    },
+    {
+      "question": "When should you use the 'finally' block?",
+      "options": [
+        "Only when an exception occurs",
+        "Only when no exception occurs",
+        "When you need code to run regardless of whether an exception occurred",
+        "Never, it's deprecated"
+      ],
+      "correct_answer": 2,
+      "explanation": "The 'finally' block always executes, making it perfect for cleanup code like closing files or releasing resources."
+    }
+  ],
+  "project": {
+    "title": "Safe Calculator with Logging",
+    "description": "Build a calculator program that handles errors gracefully and logs all operations to a file. The program should never crash, regardless of what the user enters.",
+    "requirements": [
+      "Create a calculator that performs basic operations: addition (+), subtraction (-), multiplication (*), and division (/)",
+      "Get two numbers and an operation from the user using input()",
+      "Handle ValueError when user enters non-numeric input (e.g., 'abc' instead of a number)",
+      "Handle ZeroDivisionError when user tries to divide by zero",
+      "Display appropriate error messages for each type of error",
+      "Log every calculation attempt to a file called 'calculator_log.txt'",
+      "The log should include: timestamp, operation, numbers, and result (or error message)",
+      "Handle potential file I/O errors when writing to the log file",
+      "Use try/except blocks appropriately - don't catch all exceptions with bare except",
+      "The program should perform ONE calculation and exit (don't loop for multiple calculations)",
+      "Display the result clearly to the user",
+      "Never crash - handle all possible errors gracefully"
+    ],
+    "hints": [
+      "Use try/except around the int() or float() conversion of user input",
+      "Use a separate try/except for the calculation itself (to catch division by zero)",
+      "Use try/except when opening/writing to the log file",
+      "You can use the datetime module to get timestamps: from datetime import datetime",
+      "Open the log file in append mode ('a') so you don't overwrite previous logs",
+      "Test your program with invalid inputs to make sure it doesn't crash!",
+      "Remember: specific exceptions before general ones"
+    ],
+    "sample_output": "Enter first number: 10\nEnter operation (+, -, *, /): /\nEnter second number: 0\nError: Cannot divide by zero!\nOperation logged to calculator_log.txt",
+    "test_cases": [
+      "Valid addition: 5 + 3 = 8",
+      "Valid division: 10 / 2 = 5.0",
+      "Invalid input: 'abc' for a number should show error, not crash",
+      "Division by zero: 10 / 0 should show error, not crash",
+      "Invalid operation: 10 % 5 could show error for unsupported operation",
+      "File logging: calculator_log.txt should be created and contain entries"
+    ]
+  }
+}

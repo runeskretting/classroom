@@ -4,7 +4,13 @@
       "Bash(venv/bin/python3 -c \"from app import app; from db_manager import get_student_progress; progress = get_student_progress(''rune''); print(''✅ Retrieved student progress from database''); print(f''Current module: {progress[\"\"current_module\"\"]}''); print(f''Module 1 quiz passed: {progress[\"\"modules\"\"][1][\"\"quiz_passed\"\"]}'')\")",
       "Bash(venv/bin/python3 -c \"\nfrom app import app\nfrom db_manager import get_student_progress, update_student_progress\n\n# Create a new test student\nprogress = get_student_progress(''test_student'')\nprint(f''✅ Created new student: test_student'')\nprint(f''Current module: {progress[\"\"current_module\"\"]}'')\n\n# Update progress\nupdate_student_progress(''test_student'', {\n    ''current_module'': 3,\n    ''modules'': {\n        1: {''quiz_passed'': True, ''quiz_score'': 90, ''project_passed'': True, ''attempts'': 1}\n    }\n})\nprint(''✅ Updated student progress'')\n\n# Verify update\nprogress = get_student_progress(''test_student'')\nprint(f''Updated current module: {progress[\"\"current_module\"\"]}'')\nprint(f''Module 1 quiz passed: {progress[\"\"modules\"\"][1][\"\"quiz_passed\"\"]}'')\nprint(f''Module 1 quiz score: {progress[\"\"modules\"\"][1][\"\"quiz_score\"\"]}'')\n\")",
       "Bash(venv/bin/python3 student_admin.py delete test_student --yes)",
-      "Bash(venv/bin/python3 student_admin.py import /tmp/rune_export.json --overwrite)"
+      "Bash(venv/bin/python3 student_admin.py import /tmp/rune_export.json --overwrite)",
+      "Bash(curl -s http://localhost:500)",
+      "Bash(venv/bin/python3 student_admin.py export NewStudent /tmp/newstudent_export.json)",
+      "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 7 exists: {7 in MODULES}''); print(f''✅ Module 7 title: {MODULES[7].get(\"\"title\"\")}'' if 7 in MODULES else ''❌ Module 7 not found'')\")",
+      "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(f''✅ App initialized successfully''); print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 8 exists: {8 in MODULES}''); print(f''✅ Module 8 title: {MODULES[8].get(\"\"title\"\")}'' if 8 in MODULES else ''❌ Module 8 not found'')\")",
+      "Bash(curl -s http://localhost:5000/module/8)",
+      "Bash(venv/bin/python3 -c \"from app import app, MODULES; print(f''✅ MODULES loaded: {len(MODULES)} module(s)''); print(f''✅ Module 8 exists: {8 in MODULES}''); print(f''✅ Module 8 title: {MODULES[8].get(\"\"title\"\")}'' if 8 in MODULES else ''❌ Module 8 not found'')\")"
     ],
     "deny": [],
     "ask": []

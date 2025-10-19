@@ -67,6 +67,10 @@
                 {% if progress.attempts > 0 %}
                     <p class="info-text">Attempts: {{ progress.attempts }}</p>
                 {% endif %}
+                <!-- Show retake quiz option -->
+                <a href="{{ url_for('quiz', module_id=module_id) }}" class="btn btn-secondary" style="margin-top: 10px;">
+                    🔄 Retake Quiz (Current: {{ progress.quiz_score }}%)
+                </a>
             {% else %}
                 <div class="completed-message">
                     <h3>✓ Module Complete!</h3>
@@ -80,6 +84,10 @@
                             View Final Progress
                         </a>
                     {% endif %}
+                    <!-- Show retake quiz option even after completing module -->
+                    <a href="{{ url_for('quiz', module_id=module_id) }}" class="btn btn-secondary" style="margin-top: 10px;">
+                        🔄 Retake Quiz (Current: {{ progress.quiz_score }}%)
+                    </a>
                 </div>
             {% endif %}
         </div>
