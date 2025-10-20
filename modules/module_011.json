@@ -1,0 +1,165 @@
+{
+  "id": 11,
+  "day": 11,
+  "category": "Fundamentals",
+  "title": "Day 11: Project - The Rollercoaster Ride Checker",
+  "objective": "Build a complete program that applies conditional logic with multiple elif statements and logical operators to determine ride eligibility.",
+  "topics": [
+    "Combining Conditional Logic (if/elif/else)",
+    "Using Logical Operators (and, or, not)",
+    "User Input Validation",
+    "Type Casting with int()",
+    "Decision Trees in Code",
+    "Real-World Application of Conditionals"
+  ],
+  "core_concepts": [
+    "Multi-branch Conditionals",
+    "Logical Operators",
+    "User Input",
+    "Type Casting"
+  ],
+  "instructional_content": {
+    "intro": "Welcome to Day 11! You've learned about conditional logic (if/elif/else) on Day 8-9 and logical operators (and, or, not) on Day 10. Today, you'll combine all these skills to build a complete, real-world program: a rollercoaster ride eligibility checker. This project simulates a ticket booth system that determines if a visitor can ride based on multiple criteria and calculates their ticket price based on various conditions.",
+    "sections": [
+      {
+        "title": "The Rollercoaster Ride Scenario",
+        "content": "Imagine you're building software for an amusement park's most popular attraction - the Thunder Mountain Rollercoaster. The ride has specific safety requirements:\n\n**Eligibility Requirements:**\n- Riders must be at least 120 cm tall to ride\n- Different age groups pay different prices\n- Additional options are available (like ride photos)\n\n**Pricing Structure:**\n- Ages under 12: $5\n- Ages 12-17: $7  \n- Ages 18 and over: $12\n- Ages 45-55 get a special midlife crisis discount: Ride for free!\n\nYour program will ask for the visitor's height and age, determine if they can ride, calculate the ticket price, and offer optional add-ons.\n\n**Why This Project Matters:**\nThis is a perfect example of how programming solves real business problems. Every amusement park, movie theater, airline, and venue needs systems that check eligibility, calculate prices, and handle different customer categories. You're learning to build decision-making systems that power the real world."
+      },
+      {
+        "title": "Breaking Down the Problem",
+        "content": "Before writing code, let's break this problem into logical steps. This is how professional developers approach any programming task.\n\n**Step 1: Get User Input**\n- Ask for height in cm\n- Ask for age in years\n- Convert string inputs to integers\n\n**Step 2: Check Eligibility (Height Requirement)**\n- If height < 120 cm → Cannot ride, exit program\n- If height >= 120 cm → Continue to pricing\n\n**Step 3: Calculate Base Price (Age-Based)**\n- Use if/elif/else to determine price tier\n- Check special cases (like the midlife crisis discount)\n\n**Step 4: Optional Add-Ons**\n- Ask if they want a ride photo (+$3)\n- Add to total if yes\n\n**Step 5: Display Final Bill**\n- Show itemized costs\n- Display total amount\n\n**Decision Tree Visualization:**\n```\nStart\n  |\n  v\nGet height & age input\n  |\n  v\nIs height >= 120? --- NO --> \"Sorry, too short\"\n  |\n YES\n  v\nDetermine age category:\n  ├─ Age < 12 → $5\n  ├─ Age 12-17 → $7\n  ├─ Age 45-55 → $0 (free!)\n  └─ Age 18+ → $12\n  |\n  v\nWant photo? (yes/no)\n  ├─ yes → Add $3\n  └─ no → No change\n  |\n  v\nDisplay total bill\n```\n\nThis is called a **decision tree** - a flowchart showing all possible paths through your program."
+      },
+      {
+        "title": "Key Programming Concepts Used",
+        "content": "This project combines everything you've learned in Days 1-10:\n\n**1. User Input and Type Casting (Days 3-5)**\n```python\nheight = int(input(\"Enter your height in cm: \"))\nage = int(input(\"Enter your age: \"))\n```\nRemember: input() always returns a string, so we use int() to convert it to a number we can compare.\n\n**2. Comparison Operators (Day 7)**\n```python\nif height >= 120:\n    print(\"You can ride!\")\n```\nThe >= operator checks if height is greater than or equal to 120.\n\n**3. Multi-Branch Conditionals with elif (Day 9)**\n```python\nif age < 12:\n    price = 5\nelif age < 18:\n    price = 7\nelif age >= 45 and age <= 55:\n    price = 0\nelse:\n    price = 12\n```\nNotice how we check conditions in order. Once one condition is True, Python skips the rest.\n\n**4. Logical Operators (Day 10)**\n```python\nif age >= 45 and age <= 55:\n    print(\"Midlife crisis discount! Ride for free!\")\n```\nThe 'and' operator ensures BOTH conditions must be true (age is at least 45 AND at most 55).\n\nYou could also write this as:\n```python\nif 45 <= age <= 55:\n    print(\"Midlife crisis discount! Ride for free!\")\n```\nPython allows \"chained comparisons\" which is very readable!\n\n**5. Nested Conditionals (Day 9)**\n```python\nif height >= 120:\n    # Inside this block, we know they're tall enough\n    if age < 12:\n        price = 5\n    elif age < 18:\n        price = 7\n    # ... more conditions\nelse:\n    print(\"Sorry, you must be at least 120cm tall.\")\n```\nWe only check age-based pricing if they meet the height requirement first."
+      },
+      {
+        "title": "Building the Complete Program",
+        "content": "Here's how you might structure the complete Rollercoaster Ride Checker:\n\n**Program Structure:**\n```python\n# Step 1: Welcome message\nprint(\"Welcome to Thunder Mountain Rollercoaster!\")\n\n# Step 2: Get user input\nheight = int(input(\"Enter your height in cm: \"))\n\n# Step 3: Check height eligibility\nif height >= 120:\n    print(\"You can ride!\\n\")\n    \n    # Step 4: Get age for pricing\n    age = int(input(\"Enter your age: \"))\n    \n    # Step 5: Determine ticket price\n    if age < 12:\n        price = 5\n        print(\"Child ticket: $5\")\n    elif age <= 17:\n        price = 7\n        print(\"Youth ticket: $7\")\n    elif 45 <= age <= 55:\n        price = 0\n        print(\"Midlife crisis discount: FREE!\")\n    else:\n        price = 12\n        print(\"Adult ticket: $12\")\n    \n    # Step 6: Optional photo\n    photo = input(\"Do you want a ride photo? (yes/no): \")\n    if photo == \"yes\":\n        price += 3  # Same as: price = price + 3\n        print(\"Photo added: +$3\")\n    \n    # Step 7: Final bill\n    print(f\"\\nYour total bill is: ${price}\")\n    \nelse:\n    print(\"Sorry, you must be at least 120cm tall to ride.\")\n```\n\n**Code Walkthrough:**\n\n1. **Line 5**: We get height first because it's the primary eligibility requirement\n2. **Line 8**: The main if checks height - everything else is inside this block\n3. **Lines 14-24**: The elif chain for age-based pricing. Notice the order matters!\n4. **Line 27-30**: We ask about the photo add-on and use += to add to the existing price\n5. **Line 33**: We use an f-string to display the final bill\n6. **Line 35-36**: The else block only runs if height < 120\n\n**Important Details:**\n- We only ask for age if they're tall enough (efficient - why get age if they can't ride?)\n- The elif chain for age is ordered from youngest to oldest\n- The special midlife discount (45-55) is checked as a separate elif\n- We use += operator to add the photo cost to the existing price\n- String comparison (photo == \"yes\") is case-sensitive"
+      },
+      {
+        "title": "Common Mistakes and How to Avoid Them",
+        "content": "**Mistake #1: Wrong Order of elif Statements**\n```python\n# WRONG - This doesn't work as intended!\nif age < 18:\n    price = 7\nelif age < 12:\n    price = 5  # This will NEVER run!\n```\nProblem: If age is 10, the first condition (age < 18) is True, so Python sets price to 7 and skips the rest. It never checks the second condition.\n\n**Solution**: Order your conditions from most specific to most general:\n```python\n# CORRECT\nif age < 12:\n    price = 5\nelif age < 18:\n    price = 7\n```\n\n**Mistake #2: Forgetting to Convert Input**\n```python\n# WRONG\nheight = input(\"Enter height: \")  # This is a string!\nif height >= 120:  # ERROR: Can't compare string to int\n```\n\n**Solution**: Always use int() or float() when you need numbers:\n```python\n# CORRECT\nheight = int(input(\"Enter height: \"))\nif height >= 120:  # Now it works!\n```\n\n**Mistake #3: Case-Sensitive String Comparison**\n```python\nphoto = input(\"Want photo? (yes/no): \")\nif photo == \"yes\":  # What if user types \"Yes\" or \"YES\"?\n    price += 3\n```\n\n**Solution**: Convert to lowercase before comparing:\n```python\nphoto = input(\"Want photo? (yes/no): \").lower()\nif photo == \"yes\":  # Now \"Yes\", \"YES\", \"yes\" all work\n    price += 3\n```\n\n**Mistake #4: Using Assignment (=) Instead of Comparison (==)**\n```python\nif age = 18:  # WRONG - This assigns 18 to age, doesn't compare!\n```\n\n**Solution**: Use == for comparison:\n```python\nif age == 18:  # CORRECT - Checks if age equals 18\n```\n\n**Mistake #5: Not Handling the Midlife Discount Properly**\n```python\n# WRONG - This puts the discount in the wrong place\nif age < 12:\n    price = 5\nelif age < 18:\n    price = 7\nelse:\n    price = 12\nelif age >= 45 and age <= 55:  # ERROR: elif after else!\n    price = 0\n```\n\n**Solution**: Put the special case check before the general else:\n```python\n# CORRECT\nif age < 12:\n    price = 5\nelif age < 18:\n    price = 7\nelif 45 <= age <= 55:  # Check special case before general adult\n    price = 0\nelse:  # All other adults (18-44 and 56+)\n    price = 12\n```"
+      },
+      {
+        "title": "Extensions and Challenges",
+        "content": "Once you have the basic rollercoaster checker working, try these extensions to deepen your understanding:\n\n**Challenge 1: Add More Options**\nAdd additional purchasable items:\n- Fast pass (skip the line): +$10\n- Souvenir keychain: +$5\n- Combo deal: Photo + keychain for $6 (save $2)\n\nThis requires more complex logic:\n```python\nif photo == \"yes\" and keychain == \"yes\":\n    price += 6  # Combo deal\nelse:\n    if photo == \"yes\":\n        price += 3\n    if keychain == \"yes\":\n        price += 5\n```\n\n**Challenge 2: Group Discounts**\nIf riding with 3+ people, give everyone a 10% discount:\n```python\ngroup_size = int(input(\"How many in your group? \"))\nif group_size >= 3:\n    price = price * 0.9  # 10% discount\n    print(\"Group discount applied! -10%\")\n```\n\n**Challenge 3: Weight Restriction**\nAdd a maximum weight limit of 150 kg for safety:\n```python\nweight = int(input(\"Enter your weight in kg: \"))\nif height >= 120 and weight <= 150:\n    # Continue with pricing\nelse:\n    print(\"Sorry, you don't meet the safety requirements.\")\n```\n\nNotice the use of 'and' to combine multiple safety checks!\n\n**Challenge 4: Senior Discount**\nPeople 65+ ride for half price:\n```python\nelif age >= 65:\n    price = 6  # Half of $12\n    print(\"Senior discount: $6\")\n```\n\nRemember to add this before the general else for adults!\n\n**Challenge 5: Better User Experience**\nProvide more detailed feedback:\n```python\nprint(\"\\n========== TICKET SUMMARY ==========\")\nprint(f\"Height: {height}cm ✓\")\nprint(f\"Age: {age} years\")\nprint(f\"Category: {'Child' if age < 12 else 'Youth' if age < 18 else 'Adult'}\")\nprint(f\"Base Price: ${price}\")\nprint(\"====================================\")\n```\n\nThis uses the **ternary operator** (conditional expression) - an advanced technique!"
+      },
+      {
+        "title": "Real-World Applications",
+        "content": "The logic you're practicing in this project applies to countless real-world systems:\n\n**1. E-commerce Pricing Systems**\n- Different prices for different customer tiers (regular, premium, VIP)\n- Seasonal discounts\n- Bulk purchase discounts\n- Coupon code logic\n\n**2. Access Control Systems**\n- Age-restricted content (movies, games, websites)\n- Membership levels and privileges\n- Geographic restrictions\n- Time-based access (business hours)\n\n**3. Financial Applications**\n- Loan eligibility (Day 10 project!)\n- Credit card approval\n- Interest rate calculations based on credit score\n- Tax bracket calculations\n\n**4. Healthcare Systems**\n- Medication dosage based on age and weight\n- Appointment scheduling based on urgency\n- Insurance coverage determination\n\n**5. Transportation & Booking**\n- Airline pricing (age, class, timing, route)\n- Hotel room rates (season, occupancy, membership)\n- Ride-sharing surge pricing\n\nEvery time you encounter different prices, restrictions, or tiers in the real world, there's conditional logic like this running behind the scenes!\n\n**The Pattern You're Learning:**\n1. Collect relevant information (input)\n2. Check eligibility/requirements (if statements)\n3. Categorize into groups (elif chains)\n4. Calculate based on category (assignment)\n5. Offer options/add-ons (more conditionals)\n6. Present final result (output)\n\nThis pattern repeats across thousands of applications. Master it here, and you'll recognize it everywhere."
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question": "In the rollercoaster program, why do we check height BEFORE asking for age?",
+      "options": [
+        "It doesn't matter what order we check them",
+        "Because height determines eligibility first - if they're too short, age doesn't matter",
+        "Because input() only works in that order",
+        "To make the code run faster"
+      ],
+      "correct_answer": 1,
+      "explanation": "We check height first because it's the primary eligibility requirement. If someone is too short, there's no point asking their age or calculating prices - they can't ride regardless of age. This is more efficient and provides better user experience."
+    },
+    {
+      "question": "What's wrong with this code?\n\nif age < 18:\n    price = 7\nelif age < 12:\n    price = 5",
+      "options": [
+        "Nothing, it works correctly",
+        "The second condition (age < 12) will never be reached because it's already caught by the first condition (age < 18)",
+        "You can't use elif twice in a row",
+        "You need an else statement at the end"
+      ],
+      "correct_answer": 1,
+      "explanation": "If age is 10 (which is less than 12), it's also less than 18, so the first condition is True and price is set to 7. Python then skips all remaining elif and else blocks. The second condition never gets checked. You must order conditions from most specific to most general."
+    },
+    {
+      "question": "Which of these correctly checks if someone qualifies for the midlife crisis discount (ages 45-55 inclusive)?",
+      "options": [
+        "if age >= 45 or age <= 55:",
+        "if age >= 45 and age <= 55:",
+        "if age == 45 or age == 55:",
+        "if 45 >= age >= 55:"
+      ],
+      "correct_answer": 1,
+      "explanation": "We need BOTH conditions to be true: age must be at least 45 AND at most 55. The 'and' operator ensures both conditions are met. Option A with 'or' would be true for everyone (every number is either >= 45 or <= 55). Option C only checks exactly 45 or 55, missing 46-54. Option D has the comparison backwards."
+    },
+    {
+      "question": "What does 'price += 3' do?",
+      "options": [
+        "Sets price equal to 3",
+        "Compares price to 3",
+        "Adds 3 to the current value of price",
+        "Causes an error"
+      ],
+      "correct_answer": 2,
+      "explanation": "The += operator is shorthand for 'price = price + 3'. It adds 3 to whatever the current value of price is. If price was 7, after 'price += 3', price will be 10. This is very useful for adding optional charges to a running total."
+    },
+    {
+      "question": "When should you use .lower() with user input?",
+      "options": [
+        "Always, for every input() call",
+        "Never, it's not necessary",
+        "When comparing string inputs to handle different capitalizations (\"yes\", \"Yes\", \"YES\")",
+        "Only for numeric inputs"
+      ],
+      "correct_answer": 2,
+      "explanation": "Use .lower() when you're comparing string inputs and want to accept different capitalizations. For example, 'input(\"yes/no: \").lower()' converts \"Yes\", \"YES\", \"yes\" all to \"yes\", making your comparison work reliably. You don't need it for numeric inputs (which you convert with int() anyway)."
+    }
+  ],
+  "project": {
+    "title": "Rollercoaster Ride Checker",
+    "description": "Build a complete ticket booth system for the Thunder Mountain Rollercoaster that checks eligibility, determines ticket prices based on age categories, offers optional add-ons, and calculates the total bill.",
+    "requirements": [
+      "Display a welcome message: 'Welcome to Thunder Mountain Rollercoaster!'",
+      "Get the user's height in cm (as an integer)",
+      "Check height requirement:",
+      "  - If height < 120: Print 'Sorry, you must be at least 120cm tall to ride.' and end program",
+      "  - If height >= 120: Continue to pricing",
+      "If eligible, get the user's age (as an integer)",
+      "Determine ticket price based on age using if/elif/else:",
+      "  - Age < 12: $5 (child ticket)",
+      "  - Age 12-17: $7 (youth ticket)",
+      "  - Age 45-55: $0 FREE (midlife crisis discount)",
+      "  - Age 18+ (excluding 45-55): $12 (adult ticket)",
+      "Display the appropriate ticket type and price",
+      "Ask if the user wants a ride photo (yes/no)",
+      "If 'yes', add $3 to the total and display 'Photo added: +$3'",
+      "Display the final total bill in the format: 'Your total bill is: $X'",
+      "Handle the photo input case-insensitively (accept 'yes', 'Yes', 'YES')",
+      "Use the += operator to add the photo cost to the ticket price",
+      "Use at least one chained comparison (e.g., 45 <= age <= 55) OR logical and operator",
+      "Your program must use elif to handle the different age categories"
+    ],
+    "hints": [
+      "Use int() to convert height and age inputs from strings to integers",
+      "Check height first with an if statement - everything else goes inside that if block",
+      "Order your elif conditions for age from youngest to oldest (< 12, then < 18, etc.)",
+      "The midlife crisis discount (45-55) needs its own elif before the general adult else",
+      "Use .lower() method on the photo input to handle case: photo = input(...).lower()",
+      "Remember: input() returns a string, so convert numbers with int()",
+      "Use f-strings for clean output: f'Your total bill is: ${price}'",
+      "The += operator adds to existing value: price += 3 means price = price + 3",
+      "Test your program with different ages: 10, 15, 25, 50, 70 to verify all paths work"
+    ],
+    "sample_output": "Welcome to Thunder Mountain Rollercoaster!\nEnter your height in cm: 145\nYou can ride!\n\nEnter your age: 50\nMidlife crisis discount: FREE!\nDo you want a ride photo? (yes/no): yes\nPhoto added: +$3\n\nYour total bill is: $3",
+    "test_cases": [
+      "Height 100 (too short): Should print sorry message and end",
+      "Height 120, Age 10: $5 child ticket",
+      "Height 130, Age 10, Photo yes: $5 + $3 = $8 total",
+      "Height 150, Age 15: $7 youth ticket",
+      "Height 160, Age 15, Photo yes: $7 + $3 = $10 total",
+      "Height 170, Age 25: $12 adult ticket",
+      "Height 180, Age 25, Photo no: $12 total",
+      "Height 175, Age 50: $0 (free midlife discount)",
+      "Height 175, Age 50, Photo yes: $0 + $3 = $3 total",
+      "Height 165, Age 45: $0 (free - start of midlife range)",
+      "Height 165, Age 55: $0 (free - end of midlife range)",
+      "Height 170, Age 44: $12 (just before midlife discount)",
+      "Height 170, Age 56: $12 (just after midlife discount)",
+      "Height 180, Age 70: $12 adult ticket (seniors pay full price)",
+      "Photo input 'YES', 'Yes', 'yes' should all work (case insensitive)"
+    ]
+  }
+}
