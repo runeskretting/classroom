@@ -552,7 +552,13 @@ def module(module_id):
         return redirect(url_for('module', module_id=progress['current_module']))
 
     module_data = MODULES[module_id]
-    module_progress = progress['modules'][module_id]
+    # Get module progress, or use default if module entry doesn't exist yet
+    module_progress = progress['modules'].get(module_id, {
+        'quiz_passed': False,
+        'project_passed': False,
+        'quiz_score': 0,
+        'attempts': 0
+    })
 
     return render_template('module.html',
                          module_id=module_id,
@@ -722,9 +728,9 @@ def logout():
 
 
 if __name__ == '__main__':
-    # Create necessary directories
-    os.makedirs('data/submissions/module1', exist_ok=True)
-    os.makedirs('data/submissions/module2', exist_ok=True)
-    os.makedirs('data/submissions/module3', exist_ok=True)
+    # Create necessary directories for all modules dynamically
+    for module_id in MODULES.keys():
+        module_dir = os.path.join('data/submissions', f'module{module_id:03d}')
+        os.makedirs(module_dir, exist_ok=True)
 
     app.run(debug=True, host='0.0.0.0', port=5000)

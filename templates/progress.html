@@ -26,74 +26,159 @@
     {% endif %}
 
     <div class="modules-progress">
+        {# Separate modules into categories #}
+        {% set completed_modules = [] %}
+        {% set locked_modules = [] %}
+        {% set current_module_id = progress.current_module %}
+
         {% for module_id in modules.keys()|sort %}
-            {% set module = modules[module_id] %}
             {% set module_progress = progress.modules.get(module_id, {'quiz_passed': False, 'project_passed': False, 'quiz_score': 0, 'attempts': 0}) %}
-            {% set is_accessible = module_id <= progress.current_module %}
             {% set is_complete = module_progress.quiz_passed and module_progress.project_passed %}
 
-            <div class="module-progress-card {% if is_complete %}completed{% elif not is_accessible %}locked{% endif %}">
-                <div class="module-progress-header">
-                    <div class="module-number-badge">
-                        {% if is_complete %}
-                            <span class="checkmark">✓</span>
-                        {% elif not is_accessible %}
-                            <span class="lock">🔒</span>
-                        {% else %}
-                            {{ module_id }}
-                        {% endif %}
-                    </div>
-                    <div>
-                        <h3>{{ module.title }}</h3>
-                        <p class="module-objective">{{ module.objective }}</p>
-                    </div>
-                </div>
+            {% if is_complete %}
+                {% set _ = completed_modules.append(module_id) %}
+            {% elif module_id > current_module_id %}
+                {% set _ = locked_modules.append(module_id) %}
+            {% endif %}
+        {% endfor %}
 
-                <div class="module-progress-details">
-                    <div class="progress-item">
-                        <span class="progress-label">Quiz:</span>
-                        {% if module_progress.quiz_passed %}
-                            <span class="badge badge-success">✓ Passed ({{ module_progress.quiz_score }}%)</span>
-                        {% elif is_accessible %}
-                            <span class="badge badge-pending">Not Completed</span>
-                        {% else %}
-                            <span class="badge badge-locked">Locked</span>
-                        {% endif %}
+        {# Current Module - Always visible and highlighted #}
+        {% if current_module_id in modules %}
+            {% set module = modules[current_module_id] %}
+            {% set module_progress = progress.modules.get(current_module_id, {'quiz_passed': False, 'project_passed': False, 'quiz_score': 0, 'attempts': 0}) %}
+
+            <div class="current-module-section">
+                <h2 class="section-title">Current Day</h2>
+                <div class="module-progress-card current-module">
+                    <div class="module-progress-header">
+                        <div class="module-number-badge">
+                            {{ current_module_id }}
+                        </div>
+                        <div>
+                            <h3>{{ module.title }}</h3>
+                            <p class="module-objective">{{ module.objective }}</p>
+                        </div>
                     </div>
 
-                    <div class="progress-item">
-                        <span class="progress-label">Project:</span>
-                        {% if module_progress.project_passed %}
-                            <span class="badge badge-success">✓ Passed</span>
-                        {% elif module_progress.attempts > 0 %}
-                            <span class="badge badge-warning">{{ module_progress.attempts }} attempt(s)</span>
-                        {% elif is_accessible %}
-                            <span class="badge badge-pending">Not Submitted</span>
-                        {% else %}
-                            <span class="badge badge-locked">Locked</span>
-                        {% endif %}
-                    </div>
-                </div>
+                    <div class="module-progress-details">
+                        <div class="progress-item">
+                            <span class="progress-label">Quiz:</span>
+                            {% if module_progress.quiz_passed %}
+                                <span class="badge badge-success">✓ Passed ({{ module_progress.quiz_score }}%)</span>
+                            {% else %}
+                                <span class="badge badge-pending">Not Completed</span>
+                            {% endif %}
+                        </div>
 
-                <div class="module-progress-actions">
-                    {% if is_accessible %}
-                        {% if not is_complete %}
-                            <a href="{{ url_for('module', module_id=module_id) }}" class="btn btn-primary btn-small">
-                                {% if module_progress.quiz_passed %}
-                                    Submit Project
-                                {% else %}
-                                    Start Module
-                                {% endif %}
-                            </a>
-                        {% else %}
-                            <a href="{{ url_for('module', module_id=module_id) }}" class="btn btn-secondary btn-small">
-                                Review
-                            </a>
-                        {% endif %}
-                    {% endif %}
+                        <div class="progress-item">
+                            <span class="progress-label">Project:</span>
+                            {% if module_progress.project_passed %}
+                                <span class="badge badge-success">✓ Passed</span>
+                            {% elif module_progress.attempts > 0 %}
+                                <span class="badge badge-warning">{{ module_progress.attempts }} attempt(s)</span>
+                            {% else %}
+                                <span class="badge badge-pending">Not Submitted</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="module-progress-actions">
+                        <a href="{{ url_for('module', module_id=current_module_id) }}" class="btn btn-primary btn-small">
+                            {% if module_progress.quiz_passed %}
+                                Submit Project
+                            {% else %}
+                                Start Day
+                            {% endif %}
+                        </a>
+                    </div>
                 </div>
             </div>
-        {% endfor %}
+        {% endif %}
+
+        {# Completed Modules - Collapsible #}
+        {% if completed_modules|length > 0 %}
+            <details class="module-group">
+                <summary class="section-title">
+                    <span class="expand-icon">▶</span>
+                    Completed Days ({{ completed_modules|length }})
+                </summary>
+                <div class="module-group-content">
+                    {% for module_id in completed_modules|reverse %}
+                        {% set module = modules[module_id] %}
+                        {% set module_progress = progress.modules.get(module_id, {'quiz_passed': False, 'project_passed': False, 'quiz_score': 0, 'attempts': 0}) %}
+
+                        <div class="module-progress-card completed">
+                            <div class="module-progress-header">
+                                <div class="module-number-badge">
+                                    <span class="checkmark">✓</span>
+                                </div>
+                                <div>
+                                    <h3>{{ module.title }}</h3>
+                                    <p class="module-objective">{{ module.objective }}</p>
+                                </div>
+                            </div>
+
+                            <div class="module-progress-details">
+                                <div class="progress-item">
+                                    <span class="progress-label">Quiz:</span>
+                                    <span class="badge badge-success">✓ Passed ({{ module_progress.quiz_score }}%)</span>
+                                </div>
+
+                                <div class="progress-item">
+                                    <span class="progress-label">Project:</span>
+                                    <span class="badge badge-success">✓ Passed</span>
+                                </div>
+                            </div>
+
+                            <div class="module-progress-actions">
+                                <a href="{{ url_for('module', module_id=module_id) }}" class="btn btn-secondary btn-small">
+                                    Review
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </details>
+        {% endif %}
+
+        {# Locked Modules - Collapsible #}
+        {% if locked_modules|length > 0 %}
+            <details class="module-group">
+                <summary class="section-title">
+                    <span class="expand-icon">▶</span>
+                    Locked Days ({{ locked_modules|length }})
+                </summary>
+                <div class="module-group-content">
+                    {% for module_id in locked_modules %}
+                        {% set module = modules[module_id] %}
+
+                        <div class="module-progress-card locked">
+                            <div class="module-progress-header">
+                                <div class="module-number-badge">
+                                    <span class="lock">🔒</span>
+                                </div>
+                                <div>
+                                    <h3>{{ module.title }}</h3>
+                                    <p class="module-objective">{{ module.objective }}</p>
+                                </div>
+                            </div>
+
+                            <div class="module-progress-details">
+                                <div class="progress-item">
+                                    <span class="progress-label">Quiz:</span>
+                                    <span class="badge badge-locked">Locked</span>
+                                </div>
+
+                                <div class="progress-item">
+                                    <span class="progress-label">Project:</span>
+                                    <span class="badge badge-locked">Locked</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </details>
+        {% endif %}
     </div>
 
     <div class="stats-section">

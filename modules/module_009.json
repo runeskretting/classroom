@@ -1,0 +1,144 @@
+{
+  "id": 9,
+  "day": 9,
+  "title": "Day 9: Nested if and elif Statements",
+  "objectives": [
+    "Understand how to nest if statements inside other if statements",
+    "Learn when nested conditionals are more appropriate than simple if/elif chains",
+    "Practice writing complex decision trees with multiple levels of conditions",
+    "Improve code readability when working with nested logic",
+    "Apply nested conditionals to solve real-world problems"
+  ],
+  "topics": [
+    "Nested if Statements",
+    "Combining Nested if with elif and else",
+    "Multiple Levels of Nesting",
+    "Code Readability and Indentation",
+    "Decision Trees and Logical Flow",
+    "Practical Applications of Nested Conditionals"
+  ],
+  "instructional_content": {
+    "sections": [
+      {
+        "title": "Introduction to Nested Conditionals",
+        "content": "So far, you've learned to use `if`, `elif`, and `else` statements to make decisions in your code. These work great for simple, linear choices. But what happens when you need to make a decision *within* a decision? That's where **nested conditionals** come in.\n\n**What are Nested Conditionals?**\nA nested conditional is simply an if statement placed inside another if statement. This allows you to create more complex decision-making logic where certain conditions are only checked if other conditions are true first.\n\n**Why Use Nested Conditionals?**\n- To handle complex, multi-layered decision making\n- When the relevance of some conditions depends on others\n- To create decision trees with multiple branches\n- To improve code organization for related checks\n\n**Simple Example:**\n```python\nage = 25\nhas_license = True\n\nif age >= 18:\n    print(\"You are old enough to drive.\")\n    if has_license:\n        print(\"You can legally drive!\")\n    else:\n        print(\"But you need to get a license first.\")\nelse:\n    print(\"You are too young to drive.\")\n```\n\nIn this example, we only check for a license *if* the person is 18 or older. The license check is nested inside the age check.\n\n**Key Concept - Order Matters:**\nNested conditionals are evaluated from the outside in. The outer condition must be true before Python even looks at the inner condition."
+      },
+      {
+        "title": "Basic Nested if Syntax",
+        "content": "Understanding the syntax and indentation of nested if statements is crucial. Python uses indentation to determine which code belongs to which block.\n\n**Basic Structure:**\n```python\nif outer_condition:\n    # This code runs if outer_condition is True\n    if inner_condition:\n        # This code runs if BOTH outer_condition AND inner_condition are True\n        print(\"Both conditions are true\")\n    else:\n        # This code runs if outer_condition is True but inner_condition is False\n        print(\"Only outer condition is true\")\nelse:\n    # This code runs if outer_condition is False\n    print(\"Outer condition is false\")\n```\n\n**Real Example - Weather and Activities:**\n```python\nweather = \"sunny\"\ntemperature = 75\n\nif weather == \"sunny\":\n    print(\"It's a beautiful day!\")\n    if temperature > 80:\n        print(\"It's hot! Let's go swimming.\")\n    elif temperature > 60:\n        print(\"Perfect weather for a picnic!\")\n    else:\n        print(\"It's a bit cool, bring a jacket.\")\nelse:\n    print(\"Not sunny today.\")\n    if weather == \"rainy\":\n        print(\"Don't forget your umbrella!\")\n```\n\n**Indentation Rules:**\n- Each nested level adds one more indentation (usually 4 spaces)\n- All code at the same indentation level belongs to the same block\n- Python will give an `IndentationError` if you mess this up\n- Use consistent spacing (don't mix tabs and spaces!)\n\n**Common Mistake:**\n```python\n# WRONG - Incorrect indentation\nif age >= 18:\nif has_license:  # This should be indented!\n    print(\"Can drive\")\n\n# RIGHT - Proper indentation\nif age >= 18:\n    if has_license:\n        print(\"Can drive\")\n```"
+      },
+      {
+        "title": "Nested if with elif and else",
+        "content": "You can combine nested if statements with `elif` and `else` to create sophisticated decision trees. This allows you to handle many different scenarios efficiently.\n\n**Example - Movie Ticket Pricing:**\n```python\nage = int(input(\"Enter your age: \"))\nday = input(\"Enter the day (weekday/weekend): \")\n\nif day == \"weekend\":\n    print(\"Weekend pricing applies.\")\n    if age < 12:\n        price = 8\n        print(\"Child ticket: $8\")\n    elif age >= 65:\n        price = 8\n        print(\"Senior ticket: $8\")\n    else:\n        price = 15\n        print(\"Adult ticket: $15\")\nelse:  # weekday\n    print(\"Weekday pricing applies.\")\n    if age < 12:\n        price = 6\n        print(\"Child ticket: $6\")\n    elif age >= 65:\n        price = 6\n        print(\"Senior ticket: $6\")\n    else:\n        price = 10\n        print(\"Adult ticket: $10\")\n\nprint(f\"Total: ${price}\")\n```\n\nThis example checks the day first, then based on that, applies different pricing rules for different age groups.\n\n**Example - Student Grade Eligibility:**\n```python\ngrade = int(input(\"Enter your grade (1-12): \"))\ngpa = float(input(\"Enter your GPA (0.0-4.0): \"))\n\nif grade >= 9:  # High school\n    print(\"You are in high school.\")\n    if gpa >= 3.5:\n        print(\"Eligible for Honor Society!\")\n        if gpa >= 3.8:\n            print(\"Eligible for Presidential Honor Roll!\")\n    elif gpa >= 3.0:\n        print(\"Eligible for Merit List.\")\n    else:\n        print(\"Keep working hard!\")\nelse:  # Middle school or elementary\n    print(\"You are in middle/elementary school.\")\n    if gpa >= 3.5:\n        print(\"Outstanding student!\")\n    elif gpa >= 3.0:\n        print(\"Good job!\")\n    else:\n        print(\"Keep trying!\")\n```\n\n**Benefits of This Approach:**\n- Different logic for different categories (high school vs. lower grades)\n- Clear separation of concerns\n- Easy to modify rules for one category without affecting others\n- More readable than one giant if/elif chain"
+      },
+      {
+        "title": "Multiple Levels of Nesting",
+        "content": "Sometimes you need to nest conditionals more than one level deep. While this is powerful, be careful not to make your code too complex.\n\n**Three Levels Deep - Login System:**\n```python\nusername = input(\"Enter username: \")\npassword = input(\"Enter password: \")\n\nif username == \"admin\":\n    if password == \"secret123\":\n        print(\"Admin login successful!\")\n        action = input(\"What would you like to do? (view/edit/delete): \")\n        if action == \"view\":\n            print(\"Viewing data...\")\n        elif action == \"edit\":\n            print(\"Editing data...\")\n        elif action == \"delete\":\n            print(\"Deleting data...\")\n        else:\n            print(\"Unknown action.\")\n    else:\n        print(\"Incorrect admin password.\")\nelse:\n    if username == \"guest\":\n        if password == \"guest123\":\n            print(\"Guest login successful!\")\n            print(\"Limited access granted.\")\n        else:\n            print(\"Incorrect guest password.\")\n    else:\n        print(\"Unknown username.\")\n```\n\n**When to Use Multiple Levels:**\n✅ When each level represents a distinct category of decision\n✅ When inner conditions only make sense if outer conditions are true\n✅ When it makes the code more readable than alternatives\n\n**When to Avoid:**\n❌ When nesting goes beyond 3-4 levels (becomes hard to read)\n❌ When logical operators (and, or) would work better\n❌ When you're repeating similar code at different levels\n\n**Better Alternative Using 'and':**\n```python\n# Instead of deep nesting:\nif age >= 18:\n    if has_license:\n        if has_insurance:\n            print(\"Can drive legally\")\n\n# Consider using 'and':\nif age >= 18 and has_license and has_insurance:\n    print(\"Can drive legally\")\n```\n\nYou'll learn more about logical operators (and, or, not) in Day 10, which can sometimes replace nested conditionals!"
+      },
+      {
+        "title": "Code Readability and Best Practices",
+        "content": "While nested conditionals are powerful, they can make code hard to read if not used carefully. Here are best practices to keep your code clean.\n\n**1. Keep Nesting Shallow**\n\nTry to limit nesting to 2-3 levels maximum.\n\n❌ Bad - Too much nesting:\n```python\nif condition1:\n    if condition2:\n        if condition3:\n            if condition4:\n                if condition5:\n                    print(\"Too deep!\")\n```\n\n✅ Better - Flatten when possible:\n```python\nif not condition1:\n    return\nif not condition2:\n    return\nif not condition3:\n    return\nprint(\"All conditions met!\")\n```\n\n**2. Use Clear Variable Names**\n\n```python\n# Clear and readable\nif is_student and has_valid_id:\n    if age < 18:\n        print(\"Student child discount\")\n    else:\n        print(\"Student adult discount\")\n```\n\n**3. Add Comments for Complex Logic**\n\n```python\nif temperature > 90:\n    # Hot weather protocols\n    if humidity > 60:\n        # High heat index - dangerous conditions\n        print(\"Heat warning: Stay indoors\")\n    else:\n        # Hot but dry - manageable\n        print(\"Hot day: Stay hydrated\")\n```\n\n**4. Consider Extracting to Functions**\n\nIf nested conditionals get complex, move them to a function:\n\n```python\ndef get_ticket_price(age, day):\n    \"\"\"Calculate movie ticket price based on age and day.\"\"\"\n    if day == \"weekend\":\n        if age < 12 or age >= 65:\n            return 8\n        else:\n            return 15\n    else:  # weekday\n        if age < 12 or age >= 65:\n            return 6\n        else:\n            return 10\n\nage = int(input(\"Enter age: \"))\nday = input(\"Enter day: \")\nprice = get_ticket_price(age, day)\nprint(f\"Ticket price: ${price}\")\n```\n\n**5. Consistent Indentation**\n\nAlways use 4 spaces per indentation level (Python standard).\n\n**The Rule of Thumb:**\nIf you find yourself nesting more than 3 levels deep, step back and think:\n- Can I use logical operators (and/or) instead?\n- Can I break this into multiple functions?\n- Can I reorganize the logic to be flatter?"
+      },
+      {
+        "title": "Practical Applications and Decision Trees",
+        "content": "Nested conditionals are perfect for implementing decision trees - flowcharts that lead to different outcomes based on a series of yes/no questions.\n\n**Example 1: Career Recommender**\n```python\nprint(\"Career Path Quiz\")\nprint(\"================\\n\")\n\nlikes_math = input(\"Do you like math? (yes/no): \").lower()\n\nif likes_math == \"yes\":\n    likes_computers = input(\"Do you like computers? (yes/no): \").lower()\n    if likes_computers == \"yes\":\n        print(\"\\nRecommended career: Software Engineer or Data Scientist\")\n    else:\n        print(\"\\nRecommended career: Mathematician or Physicist\")\nelse:\n    likes_writing = input(\"Do you like writing? (yes/no): \").lower()\n    if likes_writing == \"yes\":\n        likes_fiction = input(\"Do you prefer fiction or non-fiction? (fiction/non-fiction): \").lower()\n        if likes_fiction == \"fiction\":\n            print(\"\\nRecommended career: Novelist or Screenwriter\")\n        else:\n            print(\"\\nRecommended career: Journalist or Technical Writer\")\n    else:\n        print(\"\\nRecommended career: Artist or Designer\")\n```\n\n**Example 2: Plant Watering Guide**\n```python\nplant_type = input(\"What type of plant? (succulent/tropical/herb): \").lower()\n\nif plant_type == \"succulent\":\n    season = input(\"What season is it? (summer/winter): \").lower()\n    if season == \"summer\":\n        print(\"Water every 2 weeks\")\n    else:\n        print(\"Water once a month\")\nelif plant_type == \"tropical\":\n    humidity = input(\"Is the air humid? (yes/no): \").lower()\n    if humidity == \"yes\":\n        print(\"Water when top inch of soil is dry\")\n    else:\n        print(\"Water every 2-3 days and mist leaves\")\nelif plant_type == \"herb\":\n    location = input(\"Is it indoors or outdoors? (indoors/outdoors): \").lower()\n    if location == \"indoors\":\n        print(\"Water every 3-4 days\")\n    else:\n        print(\"Water daily in hot weather\")\nelse:\n    print(\"Unknown plant type\")\n```\n\n**Example 3: Package Shipping Calculator**\n```python\nweight = float(input(\"Enter package weight in kg: \"))\ndestination = input(\"Domestic or International? (domestic/international): \").lower()\n\nif destination == \"domestic\":\n    if weight <= 1:\n        cost = 5\n        print(\"Shipping cost: $5 (Light package, domestic)\")\n    elif weight <= 5:\n        cost = 15\n        print(\"Shipping cost: $15 (Medium package, domestic)\")\n    else:\n        cost = 30\n        print(\"Shipping cost: $30 (Heavy package, domestic)\")\nelse:  # international\n    if weight <= 1:\n        cost = 20\n        print(\"Shipping cost: $20 (Light package, international)\")\n    elif weight <= 5:\n        cost = 50\n        print(\"Shipping cost: $50 (Medium package, international)\")\n    else:\n        cost = 100\n        print(\"Shipping cost: $100 (Heavy package, international)\")\n\nprint(f\"\\nTotal shipping cost: ${cost}\")\n```\n\n**Real-World Applications:**\n- User authentication systems (username, then password, then permissions)\n- E-commerce pricing (product category, then customer type, then quantity)\n- Game logic (player level, then equipment, then enemy type)\n- Form validation (check field type, then format, then value range)\n- Medical diagnosis systems (symptoms, then test results, then severity)\n\nNested conditionals are everywhere in real applications. Mastering them is essential for any programmer!"
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question": "What is a nested conditional?",
+      "options": [
+        "A conditional statement that uses the 'and' operator",
+        "An if statement placed inside another if statement",
+        "A loop inside an if statement",
+        "Multiple elif statements in a row"
+      ],
+      "correct_answer": 1,
+      "explanation": "A nested conditional is an if statement placed inside another if statement, allowing you to check conditions within conditions."
+    },
+    {
+      "question": "What will this code print if age = 20 and has_ticket = False?\n\nif age >= 18:\n    if has_ticket:\n        print('Enter')\n    else:\n        print('Buy ticket')\nelse:\n    print('Too young')",
+      "options": [
+        "Enter",
+        "Buy ticket",
+        "Too young",
+        "Nothing"
+      ],
+      "correct_answer": 1,
+      "explanation": "Since age >= 18 is True, we enter the outer if block. Then has_ticket is False, so we go to the inner else block and print 'Buy ticket'."
+    },
+    {
+      "question": "How many spaces should each level of indentation add in Python (following PEP 8 standard)?",
+      "options": [
+        "2 spaces",
+        "3 spaces",
+        "4 spaces",
+        "8 spaces"
+      ],
+      "correct_answer": 2,
+      "explanation": "Python's PEP 8 style guide recommends using 4 spaces for each level of indentation."
+    },
+    {
+      "question": "When should you consider using logical operators (and, or) instead of nested if statements?",
+      "options": [
+        "Never, nested if is always better",
+        "When you need to check multiple conditions that are all equally important",
+        "Only when you have more than 5 conditions",
+        "When working with strings"
+      ],
+      "correct_answer": 1,
+      "explanation": "If you're checking multiple conditions that are all equally important (no hierarchy), using 'and' or 'or' can be simpler and more readable than nesting."
+    },
+    {
+      "question": "What is a good maximum depth for nested conditionals to maintain code readability?",
+      "options": [
+        "1 level",
+        "2-3 levels",
+        "5-6 levels",
+        "No limit, nest as much as needed"
+      ],
+      "correct_answer": 1,
+      "explanation": "Generally, it's best to keep nesting to 2-3 levels maximum. Deeper nesting makes code hard to read and maintain. Consider refactoring if you need more levels."
+    }
+  ],
+  "project": {
+    "title": "Amusement Park Ticket System",
+    "description": "Build a ticket pricing system for an amusement park that uses nested conditionals to determine the ticket price based on multiple factors: visitor type (regular/VIP), age category, and day of visit.",
+    "requirements": [
+      "Get visitor type from user: 'regular' or 'vip' (case-insensitive)",
+      "Get age from user as an integer",
+      "Get day type from user: 'weekday' or 'weekend' (case-insensitive)",
+      "Use nested if/elif/else statements to calculate the price based on these rules:",
+      "  - For VIP visitors:",
+      "    - Weekday: Child (under 12): $30, Adult (12-64): $60, Senior (65+): $30",
+      "    - Weekend: Child (under 12): $40, Adult (12-64): $80, Senior (65+): $40",
+      "  - For Regular visitors:",
+      "    - Weekday: Child (under 12): $15, Adult (12-64): $30, Senior (65+): $15",
+      "    - Weekend: Child (under 12): $20, Adult (12-64): $40, Senior (65+): $20",
+      "Display a message showing the visitor type, age category, and price",
+      "The program should handle one ticket calculation and then exit (no loop required)",
+      "Price should be stored in a variable and displayed at the end",
+      "Must use nested conditionals - outer condition checks visitor type or day, inner conditions check age"
+    ],
+    "hints": [
+      "Use .lower() or .strip().lower() to handle case-insensitive input",
+      "Structure: Check visitor_type first, then day, then age categories using elif",
+      "Alternative structure: Check day first, then visitor_type, then age",
+      "Remember: Child is under 12, Adult is 12-64, Senior is 65 and above",
+      "You can use if/elif/else for age categories within each day/type combination",
+      "Test with different combinations: VIP child on weekend, regular senior on weekday, etc."
+    ],
+    "sample_output": "Welcome to Adventure Park Ticket System!\n\nEnter visitor type (regular/vip): vip\nEnter age: 8\nEnter day type (weekday/weekend): weekend\n\nVIP Visitor - Child\nWeekend Rate\nTicket Price: $40",
+    "test_cases": [
+      "VIP child (age 8) on weekend: Should print $40",
+      "VIP adult (age 30) on weekday: Should print $60",
+      "VIP senior (age 70) on weekend: Should print $40",
+      "Regular child (age 10) on weekday: Should print $15",
+      "Regular adult (age 25) on weekend: Should print $40",
+      "Regular senior (age 65) on weekday: Should print $15",
+      "Test case sensitivity: 'VIP', 'Vip', 'vip' should all work",
+      "Test case sensitivity: 'WEEKEND', 'Weekend', 'weekend' should all work"
+    ]
+  }
+}

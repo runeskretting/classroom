@@ -276,9 +276,10 @@ def get_student_progress(student_name: str) -> Dict:
     # Get all module progress
     modules = _db_manager.get_all_module_progress(student['id'])
 
-    # If no modules exist yet (fresh student), initialize them
-    if not modules:
-        module_count = get_module_count()
+    # Check if we need to initialize any missing modules
+    # (This handles the case where new modules are added after student creation)
+    module_count = get_module_count()
+    if not modules or len(modules) < module_count:
         _db_manager.initialize_student_modules(student['id'], module_count)
         modules = _db_manager.get_all_module_progress(student['id'])
 

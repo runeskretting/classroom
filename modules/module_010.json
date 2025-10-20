@@ -1,0 +1,151 @@
+{
+  "id": 10,
+  "day": 10,
+  "title": "Day 10: Logical Operators",
+  "objectives": [
+    "Understand how to use the 'and', 'or', and 'not' logical operators",
+    "Learn to combine multiple conditions in a single if statement",
+    "Master truth tables for each logical operator",
+    "Apply logical operators to simplify complex conditional logic",
+    "Recognize when to use logical operators vs. nested conditionals"
+  ],
+  "topics": [
+    "The 'and' Operator",
+    "The 'or' Operator",
+    "The 'not' Operator",
+    "Combining Multiple Logical Operators",
+    "Operator Precedence and Parentheses",
+    "Practical Applications of Logical Operators"
+  ],
+  "instructional_content": {
+    "sections": [
+      {
+        "title": "Introduction to Logical Operators",
+        "content": "In Day 9, you learned about nested conditionals - checking conditions within conditions. But sometimes, you need to check multiple conditions at the same level. That's where **logical operators** come in.\n\n**What are Logical Operators?**\nLogical operators allow you to combine multiple Boolean expressions (conditions that evaluate to True or False) into a single, more complex condition. Python has three logical operators:\n\n1. **`and`** - Returns True only if BOTH conditions are True\n2. **`or`** - Returns True if AT LEAST ONE condition is True\n3. **`not`** - Inverts the Boolean value (True becomes False, False becomes True)\n\n**Why Use Logical Operators?**\n- To check multiple conditions in a single if statement\n- To make code more readable and concise\n- To avoid deep nesting of if statements\n- To express complex logic naturally\n\n**Simple Example - Without Logical Operators:**\n```python\nage = 25\nhas_license = True\n\n# Using nested conditionals\nif age >= 18:\n    if has_license:\n        print(\"You can drive!\")\n```\n\n**Same Example - With Logical Operators:**\n```python\nage = 25\nhas_license = True\n\n# Using 'and' operator - cleaner and more readable\nif age >= 18 and has_license:\n    print(\"You can drive!\")\n```\n\nBoth examples do the same thing, but the second is shorter and easier to understand.\n\n**Key Concept - Boolean Values:**\nRemember that comparison operators (==, !=, <, >, <=, >=) return Boolean values:\n```python\nprint(5 > 3)        # True\nprint(10 == 10)     # True\nprint(7 < 2)        # False\nprint(\"hi\" == \"Hi\") # False (case sensitive)\n```\n\nLogical operators work with these Boolean values to create more complex conditions."
+      },
+      {
+        "title": "The 'and' Operator",
+        "content": "The **`and`** operator returns True only when ALL conditions connected by `and` are True. If even one condition is False, the entire expression is False.\n\n**Truth Table for 'and':**\n```\nCondition A | Condition B | A and B\n------------|-------------|--------\n   True     |    True     |  True\n   True     |    False    |  False\n   False    |    True     |  False\n   False    |    False    |  False\n```\n\nOnly when both are True does `and` return True.\n\n**Syntax:**\n```python\nif condition1 and condition2:\n    # This code runs only if BOTH conditions are True\n    print(\"Both conditions are true\")\n```\n\n**Example 1 - Age and Height Requirement:**\n```python\nage = int(input(\"Enter your age: \"))\nheight = int(input(\"Enter your height in cm: \"))\n\nif age >= 12 and height >= 140:\n    print(\"You can ride the roller coaster!\")\nelse:\n    print(\"Sorry, you don't meet the requirements.\")\n```\n\nIn this example, you need BOTH to be 12+ years old AND 140cm+ tall to ride.\n\n**Example 2 - Login System:**\n```python\nusername = input(\"Enter username: \")\npassword = input(\"Enter password: \")\n\nif username == \"admin\" and password == \"secret123\":\n    print(\"Login successful!\")\nelse:\n    print(\"Invalid credentials.\")\n```\n\nBoth username AND password must be correct.\n\n**Example 3 - Multiple Conditions:**\n```python\nage = 30\nincome = 50000\nhas_job = True\n\nif age >= 25 and income >= 30000 and has_job:\n    print(\"Loan approved!\")\nelse:\n    print(\"Loan denied.\")\n```\n\nYou can chain multiple `and` operators. ALL conditions must be True.\n\n**Example 4 - Range Checking:**\n```python\nscore = 85\n\n# Check if score is between 80 and 100\nif score >= 80 and score <= 100:\n    print(\"Grade: A\")\n```\n\nThis is a common pattern for checking if a value falls within a range.\n\n**Short-Circuit Evaluation:**\nPython evaluates `and` from left to right. If the first condition is False, Python doesn't even check the second condition (because the result will be False anyway). This is called \"short-circuit evaluation.\"\n\n```python\n# If age < 18, Python won't even check has_license\nif age >= 18 and has_license:\n    print(\"Can drive\")\n```\n\n**Common Mistake:**\n```python\n# WRONG - This doesn't work!\nif age >= 18 and < 65:\n    print(\"Working age\")\n\n# RIGHT - You need to repeat the variable\nif age >= 18 and age < 65:\n    print(\"Working age\")\n```"
+      },
+      {
+        "title": "The 'or' Operator",
+        "content": "The **`or`** operator returns True if AT LEAST ONE of the conditions is True. It only returns False when ALL conditions are False.\n\n**Truth Table for 'or':**\n```\nCondition A | Condition B | A or B\n------------|-------------|---------\n   True     |    True     |  True\n   True     |    False    |  True\n   False    |    True     |  True\n   False    |    False    |  False\n```\n\nIf any condition is True, `or` returns True.\n\n**Syntax:**\n```python\nif condition1 or condition2:\n    # This code runs if AT LEAST ONE condition is True\n    print(\"At least one condition is true\")\n```\n\n**Example 1 - Weekend Checker:**\n```python\nday = input(\"Enter the day: \").lower()\n\nif day == \"saturday\" or day == \"sunday\":\n    print(\"It's the weekend!\")\nelse:\n    print(\"It's a weekday.\")\n```\n\nIf the day is Saturday OR Sunday, it's the weekend.\n\n**Example 2 - VIP Access:**\n```python\nis_admin = False\nis_premium_member = True\n\nif is_admin or is_premium_member:\n    print(\"You have VIP access!\")\nelse:\n    print(\"Regular access only.\")\n```\n\nYou get VIP access if you're an admin OR a premium member (or both).\n\n**Example 3 - Age Discounts:**\n```python\nage = int(input(\"Enter your age: \"))\n\nif age < 12 or age >= 65:\n    print(\"You qualify for a discount!\")\nelse:\n    print(\"Regular price applies.\")\n```\n\nChildren (under 12) OR seniors (65+) get discounts.\n\n**Example 4 - Emergency Conditions:**\n```python\ntemperature = 95\nair_quality_index = 180\n\nif temperature > 100 or air_quality_index > 150:\n    print(\"Health advisory: Stay indoors!\")\nelse:\n    print(\"Conditions are safe.\")\n```\n\nA warning is issued if EITHER condition is met (excessive heat OR poor air quality).\n\n**Example 5 - Multiple Options:**\n```python\nresponse = input(\"Continue? (yes/y/ok): \").lower()\n\nif response == \"yes\" or response == \"y\" or response == \"ok\":\n    print(\"Continuing...\")\nelse:\n    print(\"Cancelled.\")\n```\n\nUser can enter any of several acceptable responses.\n\n**Short-Circuit Evaluation:**\nWith `or`, if the first condition is True, Python doesn't check the remaining conditions (because the result will be True anyway).\n\n```python\nif is_admin or is_premium_member:\n    # If is_admin is True, is_premium_member is not checked\n    print(\"VIP access\")\n```\n\n**Combining 'or' with Comparison Operators:**\n```python\n# Check if grade is A, B, or C\ngrade = \"B\"\n\nif grade == \"A\" or grade == \"B\" or grade == \"C\":\n    print(\"Passing grade!\")\n```\n\n**Common Pattern - Validation:**\n```python\nusername = input(\"Enter username: \")\n\n# Check if username is empty or too short\nif username == \"\" or len(username) < 3:\n    print(\"Username must be at least 3 characters.\")\nelse:\n    print(\"Valid username!\")\n```"
+      },
+      {
+        "title": "The 'not' Operator",
+        "content": "The **`not`** operator inverts (flips) a Boolean value. If a condition is True, `not` makes it False. If it's False, `not` makes it True.\n\n**Truth Table for 'not':**\n```\nCondition | not Condition\n----------|---------------\n  True    |    False\n  False   |    True\n```\n\n**Syntax:**\n```python\nif not condition:\n    # This code runs if condition is False\n    print(\"Condition is false\")\n```\n\n**Example 1 - Opposite Check:**\n```python\nis_raining = False\n\nif not is_raining:\n    print(\"No need for an umbrella!\")\nelse:\n    print(\"Take an umbrella!\")\n```\n\nThis is clearer than `if is_raining == False:`.\n\n**Example 2 - Checking for Empty Input:**\n```python\nname = input(\"Enter your name: \")\n\nif not name:  # Empty strings are False in Python\n    print(\"You must enter a name!\")\nelse:\n    print(f\"Hello, {name}!\")\n```\n\nAn empty string evaluates to False, so `not name` is True when name is empty.\n\n**Example 3 - Membership Check:**\n```python\nallowed_users = [\"alice\", \"bob\", \"charlie\"]\nusername = input(\"Enter username: \").lower()\n\nif username not in allowed_users:\n    print(\"Access denied: User not authorized.\")\nelse:\n    print(\"Access granted!\")\n```\n\nThe `not in` operator checks if something is NOT in a list.\n\n**Example 4 - Negating Comparisons:**\n```python\nage = 20\n\n# These are equivalent:\nif not (age < 18):\n    print(\"Adult\")\n\nif age >= 18:  # This is clearer\n    print(\"Adult\")\n```\n\nGenerally, use the positive form when possible for clarity.\n\n**Example 5 - Game Logic:**\n```python\ngame_over = False\nhas_lives = True\n\nif not game_over and has_lives:\n    print(\"Keep playing!\")\nelse:\n    print(\"Game Over\")\n```\n\nCombining `not` with other logical operators.\n\n**Boolean Values in Python:**\nSome values are \"truthy\" or \"falsy\" in Python:\n\n**Falsy values** (evaluate to False):\n- `False`\n- `0` (zero)\n- `\"\"` (empty string)\n- `[]` (empty list)\n- `None`\n\n**Truthy values** (everything else):\n- `True`\n- Any non-zero number\n- Any non-empty string\n- Any non-empty list\n\n```python\nmy_list = []\n\nif not my_list:\n    print(\"List is empty!\")\n```\n\n**Using 'not' with Functions:**\n```python\npassword = \"abc\"\n\nif not password.isdigit():\n    print(\"Password must contain numbers!\")\n```\n\n**Double Negative (Avoid!):**\n```python\n# BAD - Confusing\nif not (not is_active):\n    print(\"Active\")\n\n# GOOD - Clear\nif is_active:\n    print(\"Active\")\n```\n\n**Common Pattern - Validation:**\n```python\nage = int(input(\"Enter age: \"))\n\nif not (18 <= age <= 65):\n    print(\"Age must be between 18 and 65.\")\nelse:\n    print(\"Valid age!\")\n```"
+      },
+      {
+        "title": "Combining Multiple Logical Operators",
+        "content": "You can combine `and`, `or`, and `not` in complex expressions. Understanding operator precedence and using parentheses is crucial.\n\n**Operator Precedence (Highest to Lowest):**\n1. `not` (evaluated first)\n2. `and` (evaluated second)\n3. `or` (evaluated last)\n\n**Without Parentheses:**\n```python\n# not is evaluated first, then and, then or\nif condition1 or condition2 and not condition3:\n    # This is evaluated as:\n    # condition1 or (condition2 and (not condition3))\n    print(\"Complex condition met\")\n```\n\n**Using Parentheses for Clarity:**\nAlways use parentheses when combining multiple operators to make your intent clear!\n\n```python\nage = 30\nincome = 50000\nhas_cosigner = True\ncredit_score = 650\n\n# Complex loan approval logic\nif (age >= 25 and income >= 40000) or (has_cosigner and credit_score > 600):\n    print(\"Loan approved!\")\nelse:\n    print(\"Loan denied.\")\n```\n\nThis approves the loan if:\n- (Person is 25+ AND earns 40k+) OR\n- (Person has a cosigner AND credit score > 600)\n\n**Example 1 - Store Hours:**\n```python\nday = \"Saturday\"\nhour = 14  # 2 PM\n\n# Open on weekdays 9-5, weekends 10-6\nif (day in [\"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\"] and 9 <= hour < 17) or \\\n   (day in [\"Saturday\", \"Sunday\"] and 10 <= hour < 18):\n    print(\"Store is open!\")\nelse:\n    print(\"Store is closed.\")\n```\n\n**Example 2 - Access Control:**\n```python\nis_employee = True\nhas_badge = True\nis_weekend = False\nis_emergency = False\n\n# Access granted if:\n# (Employee with badge on a weekday) OR (Emergency situation)\nif (is_employee and has_badge and not is_weekend) or is_emergency:\n    print(\"Access granted!\")\nelse:\n    print(\"Access denied.\")\n```\n\n**Example 3 - Discount Eligibility:**\n```python\nage = 70\nis_student = False\nis_veteran = True\nis_member = False\n\n# Discount if: (Student OR Senior) AND (Veteran OR Member)\nif (is_student or age >= 65) and (is_veteran or is_member):\n    print(\"You qualify for a 20% discount!\")\nelse:\n    print(\"Regular pricing applies.\")\n```\n\n**Example 4 - Form Validation:**\n```python\nemail = \"user@example.com\"\npassword = \"SecurePass123\"\nterms_agreed = True\n\nif email and \"@\" in email and \\\n   len(password) >= 8 and \\\n   terms_agreed:\n    print(\"Registration successful!\")\nelse:\n    print(\"Please complete all required fields correctly.\")\n```\n\n**Example 5 - Game Winning Condition:**\n```python\nscore = 1000\nlevel = 10\nhas_special_item = True\ntime_remaining = 30\n\n# Win if: (High score AND high level) OR (Special item AND time left)\nif (score >= 1000 and level >= 10) or (has_special_item and time_remaining > 0):\n    print(\"You win!\")\nelse:\n    print(\"Keep trying!\")\n```\n\n**Best Practices:**\n1. **Use parentheses liberally** - They make complex logic clear\n2. **Break complex conditions into variables** for readability:\n   ```python\n   is_qualified = age >= 25 and income >= 40000\n   has_guarantee = has_cosigner and credit_score > 600\n   \n   if is_qualified or has_guarantee:\n       print(\"Loan approved!\")\n   ```\n3. **Don't make conditions too complex** - If you have more than 3-4 operators, consider refactoring\n4. **Comment complex logic**:\n   ```python\n   # Approve if user meets standard requirements OR has special bypass\n   if (age >= 21 and has_id) or admin_override:\n       print(\"Approved\")\n   ```\n\n**Common Pattern - Range Exclusions:**\n```python\ntemperature = 75\n\n# Comfortable if between 65-75 and NOT humid\nis_humid = False\n\nif 65 <= temperature <= 75 and not is_humid:\n    print(\"Perfect weather!\")\n```\n\n**De Morgan's Laws (Advanced):**\nThese are useful for simplifying complex logic:\n- `not (A and B)` is the same as `(not A) or (not B)`\n- `not (A or B)` is the same as `(not A) and (not B)`\n\n```python\n# These are equivalent:\nif not (is_raining and is_cold):\n    print(\"Good day for a walk\")\n\nif (not is_raining) or (not is_cold):\n    print(\"Good day for a walk\")\n```"
+      },
+      {
+        "title": "Logical Operators vs. Nested Conditionals",
+        "content": "Now that you know both nested conditionals (Day 9) and logical operators (Day 10), when should you use each?\n\n**Use Logical Operators When:**\n✅ Checking multiple conditions that are equally important\n✅ All conditions are at the same level (no hierarchy)\n✅ You want to keep code flat and readable\n✅ Conditions are simple checks that can be combined\n\n**Example - Simple AND:**\n```python\n# GOOD - Using logical operator\nif age >= 18 and has_license:\n    print(\"Can drive\")\n\n# BAD - Unnecessarily nested\nif age >= 18:\n    if has_license:\n        print(\"Can drive\")\n```\n\n**Use Nested Conditionals When:**\n✅ There's a hierarchy of decisions\n✅ Inner conditions only make sense if outer conditions are true\n✅ Different actions are needed at different levels\n✅ You need to provide feedback at each decision level\n\n**Example - Hierarchical Decision:**\n```python\n# GOOD - Nested shows clear hierarchy\nif account_exists:\n    print(\"Account found.\")\n    if password_correct:\n        print(\"Password accepted.\")\n        if account_active:\n            print(\"Login successful!\")\n        else:\n            print(\"Account is suspended.\")\n    else:\n        print(\"Incorrect password.\")\nelse:\n    print(\"Account not found.\")\n\n# This could use logical operators, but nested is clearer here\n# because we want different messages at each level\n```\n\n**Example - Combining Both Approaches:**\n```python\nday = \"Saturday\"\ntime = 14\nis_member = True\nhas_reservation = True\n\n# Check day type first (nested)\nif day in [\"Saturday\", \"Sunday\"]:\n    # Then use logical operators for multiple conditions\n    if (is_member or has_reservation) and 10 <= time < 20:\n        print(\"Welcome! Restaurant is open.\")\n    else:\n        print(\"Sorry, you need a reservation or membership on weekends.\")\nelse:  # Weekday\n    if 11 <= time < 22:\n        print(\"Welcome! No reservation needed on weekdays.\")\n    else:\n        print(\"Sorry, we're closed.\")\n```\n\n**Comparison Example 1 - Eligibility Check:**\n\n*Using Only Logical Operators:*\n```python\nage = 25\nincome = 50000\ncredit_score = 700\n\nif age >= 21 and income >= 30000 and credit_score >= 650:\n    print(\"Loan approved!\")\nelse:\n    print(\"Loan denied.\")\n```\nGood when you just need a yes/no answer.\n\n*Using Nested Conditionals:*\n```python\nage = 25\nincome = 50000\ncredit_score = 700\n\nif age >= 21:\n    print(\"Age requirement met.\")\n    if income >= 30000:\n        print(\"Income requirement met.\")\n        if credit_score >= 650:\n            print(\"Credit score requirement met.\")\n            print(\"Loan approved!\")\n        else:\n            print(\"Credit score too low.\")\n    else:\n        print(\"Insufficient income.\")\nelse:\n    print(\"Age requirement not met.\")\n```\nGood when you want to tell the user exactly what failed.\n\n**Comparison Example 2 - Simple Check:**\n\n*Logical Operators (Better):*\n```python\nif username == \"admin\" and password == \"secret\":\n    print(\"Login successful\")\n```\n\n*Nested (Unnecessarily Complex):*\n```python\nif username == \"admin\":\n    if password == \"secret\":\n        print(\"Login successful\")\n```\n\n**Refactoring from Nested to Logical:**\n\nBefore (nested):\n```python\nif age >= 18:\n    if has_id:\n        if not is_banned:\n            print(\"Entry allowed\")\n```\n\nAfter (logical operators):\n```python\nif age >= 18 and has_id and not is_banned:\n    print(\"Entry allowed\")\n```\n\nMuch cleaner!\n\n**When to Mix Both:**\n```python\n# Check category first (nested), then combine conditions (logical)\nif user_type == \"premium\":\n    if (years_subscribed >= 2 or referral_count >= 10) and not payment_overdue:\n        print(\"Premium benefits active!\")\nelif user_type == \"regular\":\n    if not payment_overdue:\n        print(\"Regular access granted.\")\n```\n\n**The Golden Rule:**\n- Use logical operators for **AND/OR relationships**\n- Use nested conditionals for **hierarchical decisions** or when you need **intermediate feedback**\n- Choose the approach that makes your code most **readable and maintainable**\n\n**Real-World Guideline:**\nIf you find yourself writing 2-3 levels of nested ifs that don't have intermediate actions or messages, try using logical operators instead. Your code will be cleaner and easier to understand."
+      }
+    ]
+  },
+  "quiz": [
+    {
+      "question": "What does the 'and' operator return if one condition is True and the other is False?",
+      "options": [
+        "True",
+        "False",
+        "None",
+        "It causes an error"
+      ],
+      "correct_answer": 1,
+      "explanation": "The 'and' operator returns True only when ALL conditions are True. If even one condition is False, it returns False."
+    },
+    {
+      "question": "What will this code print?\n\nage = 10\nheight = 150\n\nif age >= 12 or height >= 140:\n    print('Can ride')\nelse:\n    print('Cannot ride')",
+      "options": [
+        "Can ride",
+        "Cannot ride",
+        "Nothing",
+        "Error"
+      ],
+      "correct_answer": 0,
+      "explanation": "The 'or' operator returns True if AT LEAST ONE condition is True. Here, age >= 12 is False, but height >= 140 is True, so the overall condition is True and it prints 'Can ride'."
+    },
+    {
+      "question": "What does 'not True' evaluate to?",
+      "options": [
+        "True",
+        "False",
+        "None",
+        "1"
+      ],
+      "correct_answer": 1,
+      "explanation": "The 'not' operator inverts the Boolean value. 'not True' becomes False, and 'not False' becomes True."
+    },
+    {
+      "question": "Which logical operator has the highest precedence (is evaluated first)?",
+      "options": [
+        "and",
+        "or",
+        "not",
+        "They all have equal precedence"
+      ],
+      "correct_answer": 2,
+      "explanation": "The precedence order is: 'not' (highest), then 'and', then 'or' (lowest). However, it's best to use parentheses for clarity."
+    },
+    {
+      "question": "When should you prefer logical operators over nested conditionals?",
+      "options": [
+        "Always use logical operators, nested conditionals are obsolete",
+        "When checking multiple conditions at the same level with no hierarchy",
+        "When you need to check more than 5 conditions",
+        "Only when working with numbers"
+      ],
+      "correct_answer": 1,
+      "explanation": "Logical operators are ideal when checking multiple conditions that are equally important and at the same level. Nested conditionals are better when there's a hierarchy of decisions or you need intermediate feedback."
+    }
+  ],
+  "project": {
+    "title": "Loan Eligibility System",
+    "description": "Build a loan eligibility checker that uses logical operators (and, or, not) to determine if an applicant qualifies for a loan based on multiple criteria. The system should check various combinations of conditions using all three logical operators.",
+    "requirements": [
+      "Get the following inputs from the user:",
+      "  - Age (integer)",
+      "  - Annual income (integer)",
+      "  - Credit score (integer, 300-850)",
+      "  - Employment status: 'employed', 'self-employed', or 'unemployed' (case-insensitive)",
+      "  - Has cosigner: 'yes' or 'no' (case-insensitive)",
+      "Implement the following loan eligibility rules using logical operators:",
+      "  Standard Path: Approved if (age >= 21 AND age <= 65) AND income >= 30000 AND credit_score >= 650",
+      "  Alternative Path: Approved if has_cosigner AND credit_score >= 600 AND income >= 20000",
+      "  Disqualification: Denied if employment_status is 'unemployed' AND NOT has_cosigner",
+      "  Additional requirement: If approved, check if employment is NOT 'unemployed' OR has_cosigner is True",
+      "Your program must use:",
+      "  - At least one 'and' operator",
+      "  - At least one 'or' operator",
+      "  - At least one 'not' operator",
+      "Display a clear message indicating whether the loan is approved or denied",
+      "If denied, give a brief reason (e.g., 'Age requirement not met' or 'Income too low')",
+      "If approved, display the approval message with the applicant's information"
+    ],
+    "hints": [
+      "Use .lower() to handle case-insensitive string input",
+      "Store boolean values in variables for has_cosigner (convert 'yes'/'no' to True/False)",
+      "Break complex conditions into intermediate boolean variables for readability",
+      "Example: standard_eligible = (age >= 21 and age <= 65) and income >= 30000 and credit_score >= 650",
+      "Check disqualification conditions first using 'not'",
+      "Use parentheses to group conditions clearly",
+      "Test with different combinations to verify all logical operators work correctly"
+    ],
+    "sample_output": "Welcome to the Loan Eligibility System!\n\nEnter your age: 30\nEnter your annual income: 45000\nEnter your credit score (300-850): 700\nEnter employment status (employed/self-employed/unemployed): employed\nDo you have a cosigner? (yes/no): no\n\nChecking eligibility...\n\n✓ LOAN APPROVED!\n\nApproval Details:\n- Age: 30 (within eligible range)\n- Income: $45,000 (meets requirement)\n- Credit Score: 700 (meets requirement)\n- Employment: Employed\n- Cosigner: Not needed",
+    "test_cases": [
+      "Age=30, Income=45000, Credit=700, Employed, No cosigner: Should APPROVE (standard path)",
+      "Age=25, Income=25000, Credit=620, Employed, Yes cosigner: Should APPROVE (alternative path)",
+      "Age=20, Income=50000, Credit=750, Employed, No cosigner: Should DENY (age < 21)",
+      "Age=30, Income=25000, Credit=680, Unemployed, No cosigner: Should DENY (unemployed without cosigner)",
+      "Age=30, Income=25000, Credit=620, Unemployed, Yes cosigner: Should APPROVE (cosigner compensates)",
+      "Age=70, Income=50000, Credit=700, Employed, No cosigner: Should DENY (age > 65)",
+      "Age=30, Income=29000, Credit=700, Employed, No cosigner: Should DENY (income < 30000)",
+      "Age=30, Income=45000, Credit=640, Employed, No cosigner: Should DENY (credit < 650)",
+      "Test case insensitivity: 'EMPLOYED', 'Employed', 'employed' should all work",
+      "Test case insensitivity: 'YES', 'Yes', 'yes' for cosigner should all work"
+    ]
+  }
+}

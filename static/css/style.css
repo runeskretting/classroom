@@ -920,6 +920,66 @@ input[type="file"] {
     margin-top: 0.5rem;
 }
 
+/* Collapsible Module Groups */
+.current-module-section {
+    margin-bottom: 2rem;
+}
+
+.module-group {
+    margin-bottom: 2rem;
+}
+
+.module-group summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 1rem 1.5rem;
+    background: var(--light-bg);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s;
+    user-select: none;
+}
+
+.module-group summary:hover {
+    background: #e2e6ea;
+}
+
+.module-group summary::-webkit-details-marker {
+    display: none;
+}
+
+.expand-icon {
+    font-size: 0.9rem;
+    transition: transform 0.3s;
+    display: inline-block;
+}
+
+.module-group[open] summary .expand-icon {
+    transform: rotate(90deg);
+}
+
+.module-group-content {
+    margin-top: 1rem;
+    display: grid;
+    gap: 1rem;
+}
+
+/* Current Module Highlight */
+.module-progress-card.current-module {
+    border-left: 5px solid var(--secondary-color);
+    background: #fffbf0;
+    box-shadow: 0 4px 15px rgba(255, 212, 59, 0.2);
+}
+
+.module-progress-card.current-module .module-number-badge {
+    background: var(--secondary-color);
+    color: var(--dark-text);
+}
+
 /* Footer */
 footer {
     background: var(--primary-color);
